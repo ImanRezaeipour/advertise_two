@@ -1,0 +1,38 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Product.ProductListViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Model.IsMine != true ? Admin.ListProduct : Admin.ListMyProducts;
+    ViewBag.PageName = Model.IsMine != true ? "productList" : "myproductList";
+    ViewBag.HasSearchbar = true;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+        @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+        @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize)
+        @SearchItem.State(Model.StateTypeList, Model.SearchRequest.State)
+        @SearchItem.GridView()
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true) {<text>@Admin.ListProduct</text>} else {<text>@Admin.ListMyProducts</text>}</h1>
+    </div>
+
+    <div class="landing-items-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @if (User.IsInRole(PermissionConst.CanProductCreate))
+                {
+                    @Html.Partial(MVC.Product.Views._AddItem)
+                }
+                @Html.Partial(MVC.Product.Views._ListMore, Model.Products)
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views._Paging, Model.SearchRequest)
+    </div>
+</div>

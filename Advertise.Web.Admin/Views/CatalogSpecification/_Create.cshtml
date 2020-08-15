@@ -1,0 +1,78 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@model IEnumerable<Advertise.Core.Models.ProductSpecification.ProductSpecificationCreateViewModel>
+@{
+    var indexItem = 0;
+    foreach (var productSpecification in Model)
+    {
+        switch (productSpecification.Type)
+        {
+            case SpecificationType.Droplist:
+                <div class="input-container">
+                    <label class="rl-label">@productSpecification.Title</label>
+                    <select name="Specifications[@indexItem].SpecificationOptionIdList">
+                        @foreach (var option in productSpecification.Options)
+                        {
+                            <option value="@option.Id">@option.Title</option>
+                        }
+                    </select>
+                </div>
+                break;
+
+            case SpecificationType.String:
+                <div class="input-container">
+                    <label class="rl-label">@productSpecification.Title</label>
+                    <input type="text" name="Specifications[@indexItem].Value" />
+                </div>
+                break;
+
+            case SpecificationType.Checkbox:
+                <div class="input-container">
+                    <label class="rl-label">@productSpecification.Title</label>
+                    @{
+                        var indexRadioList = 0;
+                        foreach (var option in productSpecification.Options)
+                        {
+                            <div class="checkbox-inline">
+                                <label class="rl-label">
+                                    <input type="hidden" name="Specifications[@indexItem].SpecificationOptionIdList.Index" value="@indexRadioList">
+                                    <input type="checkbox" name="Specifications[@indexItem].SpecificationOptionIdList[@indexRadioList]" value="@option.Id" />
+                                    <span>@option.Title</span>
+                                </label>
+                            </div>
+                            indexRadioList = indexRadioList + 1;
+                        }
+                    }
+                </div>
+                break;
+
+            case SpecificationType.Color:
+                break;
+
+            case SpecificationType.Radiobox:
+                <div class="input-container">
+                    <label class="rl-label">@productSpecification.Title</label>
+                    @{
+                        var indexCheckbox = 0;
+                        foreach (var option in productSpecification.Options)
+                        {
+                            <div class="checkbox-inline">
+                                <label class="rl-label">
+                                    <input type="radio" name="Specifications[@indexItem].SpecificationOptionIdList" value="@option.Id" />
+                                    <span>@option.Title</span>
+                                </label>
+                            </div>
+                        }
+                        indexCheckbox = indexCheckbox + 1;
+                    }
+                </div>
+                break;
+
+            case SpecificationType.Currency:
+                break;
+        }
+        <input type="hidden" name="Specifications[@indexItem].Id" value="@productSpecification.Id" />
+        <hr class="line-separator" />
+        indexItem = indexItem + 1;
+    }
+}

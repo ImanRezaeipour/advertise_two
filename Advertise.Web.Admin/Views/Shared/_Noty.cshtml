@@ -1,0 +1,8 @@
+﻿@* Generator: MvcHelper GeneratePrettyNames: true *@
+@using Advertise.Web.Framework.Noty
+@using Advertise.Web.Views.Shared
+@if (TempData.ContainsKey(NotyAlert.TempDataKey))
+{
+    var noty = TempData[NotyAlert.TempDataKey] as NotyAlert;
+    @NotyBuilder.ShowNotyMessages(noty)
+}

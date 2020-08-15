@@ -1,0 +1,18 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.ProductComment.ProductCommentViewModel
+<div class="comment-wrap-each">
+    <a href="javascript:void(0)">
+        <figure class="user-avatar medium">
+            <img src="@if (Model.UserAvatar != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.UserAvatar)</text>} else {<text>@FileConst.NoAvatarPth</text>}" alt="@Model.UserDisplayName">
+        </figure>
+    </a>
+    <div class="comment">
+        <p class="text-header">@Model.UserFullName</p>
+        <p class="timestamp">@Model.CreatedOn.CastToRegularDate()</p>
+        <a href="#" class="report">@Admin.Report</a>
+        <p>@Model.Body</p>
+    </div>
+</div>
+<hr class="line-separator">

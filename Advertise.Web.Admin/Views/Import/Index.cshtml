@@ -1,0 +1,59 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.ExportImport.ImportIndexViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "درون ریزی";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>درون ریزی</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="sendImport" method="Post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <div class="msg-box regular round-corners-five">
+                        <p>
+                            <i class="fa fa-quote-right"></i>
+                            <span>@Admin.ItShowsCompanyDomain</span>
+                            <i class="fa fa-quote-left"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="" class="rl-label">ارسال دسته ها بصورت اکسل</label>
+                    <input name="file" id="file" type="file"/>
+                    <button form="sendImport" type="submit" class="form-button ok-button round-corners-five" onclick="javascript: form.action = '@Url.Action(MVC.Import.CategoryExcel())';">درون ریزی</button>
+                </div>
+                
+                <div class="msg-container">
+                    <div class="msg-box regular round-corners-five">
+                        <p>
+                            <i class="fa fa-quote-right"></i>
+                            <span>@Admin.ItShowsCompanyDomain</span>
+                            <i class="fa fa-quote-left"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="" class="rl-label">ارسال کاتالوگ ها بصورت اکسل</label>
+                    <input name="catalogFile" id="catalogFile" type="file"/>
+                    <select id="categoryId" name="categoryId">
+                        @foreach (var category in Model.CategoryList)
+                        {
+                            <option value="@category.Value">@category.Text</option>
+                        }
+                    </select>
+                    <button form="sendImport" type="submit" class="form-button ok-button round-corners-five" onclick="javascript: form.action = '@Url.Action(MVC.Import.CatalogExcel())';">درون ریزی</button>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+    </div>
+</div>

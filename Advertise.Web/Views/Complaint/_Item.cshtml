@@ -1,0 +1,94 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Complaint.ComplaintViewModel
+<div class="landing-items nov-item-height-021">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(PermissionConst.CanComplaintDeleteAjax))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanComplaintDeleteAjax))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.Complaint.DeleteAjax(Model.Id))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a href="javascript:void(0)" data-on-click="openShadow" data-type="modal">
+                            <div class="item-preview-image">
+                                <img src="@FileConst.Complaint" alt="@Model.Title.PlusWord(" ").PlusWord(Admin.Complaints)">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="javascript:void(0)"  data-on-click="openShadow" data-type="modal">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <p class="empty-top"></p>
+                </div>
+                <div class="middle-part">
+                    <p><i class="fa fa-calendar-check-o"></i> <span>@Admin.InsertDate.PlusWord(":")</span></p>
+                </div>
+                <div class="bottom-part">
+                    <p>@Model.CreatedOn.CastToRegularDate()</p>
+                </div>
+            </div>
+        </div>
+        <div class="nov-item-footer">
+            <hr class="line-separator item-footer">
+            <div class="overview-section">
+                <div class="image-part">
+                    <figure class="user-avatar small">
+                        <a @if (Model.UserAvatar != null) { <text> href="@Url.Action(MVC.User.Detail(Model.UserUserName))" </text> }>
+                            <div class="novinak-image">
+                                <img src="@if (Model.UserAvatar != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.UserAvatar)</text>} else {<text>@FileConst.NoAvatarPth</text>}" alt="@($"{Model.UserFullName} {Admin.User}")">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+                <div class="caption-part">
+                    <a href="@Url.Action(MVC.User.Detail(Model.UserUserName))" class="tooltipster">
+                        <p class="text-header tiny">@Model.UserFullName</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-shadow"></div>
+    <div class="slider-shadow">
+        <div class="slide-file-preview">
+            <div class="inner-preview">
+                <h3 class="modal-item-title">@Model.Title</h3>
+                <h5 class="modal-item-content">@Model.Body</h5>
+                <div class="slide-files-actions">
+                    <div class="slide-action-wrapper slide-file-close"  data-on-click="closeShadow">
+                        <i class="fa fa-times"></i>
+                        <i class="fa fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearboth"></div>
+</div>

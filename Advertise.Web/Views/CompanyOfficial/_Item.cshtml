@@ -1,0 +1,51 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Services.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.CompanyOfficial.CompanyOfficialViewModel
+@{
+    Layout = null;
+}
+<div class="landing-items nov-item-height-032">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(PermissionConst.CanCompanyOfficialApprove))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanCompanyOfficialApprove))
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.CompanyOfficial.Edit(Model.Id))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                           
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a @if (Model.BusinessLicenseFileName != null) { <text> href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.Replace(" ","-")))" </text> }>
+                            <div class="item-preview-image">
+                                <img src="@if (Model.BusinessLicenseFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.BusinessLicenseFileName)</text>} else {<text>@FileConst.NoPreview</text>}" alt="@Model.CompanyTitle">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+           
+           
+        </div>
+        
+        <div class="clearboth"></div>
+    </div>
+</div>

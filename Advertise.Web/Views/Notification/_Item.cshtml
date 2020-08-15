@@ -1,0 +1,40 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Core.Types
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.Notification.NotificationViewModel
+<div class="notif-item-wrapper">
+    <a href="@if(Model.Type == NotificationType.NewProduct) {@(Url.Action(MVC.Product.Detail(Model.Code, Model.TargetTitle.CastToSlug())))}">
+        <figure class="notif-item-img">
+            @if (Model.TargetImage != null)
+            {
+                <img src="@FileConst.ImagesWebPath.PlusWord(Model.TargetImage)" alt="notification image">
+            }
+            else
+            {
+                <img src="@FileConst.LogoAvatar" alt="notification image">
+            }
+        </figure>
+    </a>
+    <ul class="notif-item-texts">
+        <li>
+            <a href="@if (Model.Type == NotificationType.NewProduct) {@(Url.Action(MVC.Product.Detail(Model.Code,Model.TargetTitle.CastToSlug())))}">
+                <p class="notif-item-title">@Model.TargetTitle</p>
+            </a>
+        </li>
+        <li>
+            <p class="notif-item-message">@Model.Message</p>
+        </li>
+        <li>
+            <p class="notif-item-date">@Model.CreatedOn.CastToRegularDate()</p>
+        </li>
+    </ul>
+    <div class="notif-item-btn-wrapper">
+        <div class="notif-item-btn">
+            <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.Notification.DeleteAjax(Model.Id))">
+                <span>@Admin.Delete</span>
+                <i class="fa fa-trash"></i>
+            </a>
+        </div>
+    </div>
+</div>

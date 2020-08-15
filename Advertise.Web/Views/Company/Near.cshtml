@@ -1,0 +1,15 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+}
+@section scripts {
+    <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDsVAy5ATsGkBA11NPQWSakpy0BiNuBPTc&callback=mapGetCluster'></script>
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.StoresNearMe</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <div id="getClusterMap" class="map-holder"></div>
+    </div>
+</div>

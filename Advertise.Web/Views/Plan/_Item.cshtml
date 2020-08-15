@@ -1,0 +1,31 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Plan.PlanViewModel
+<div>
+    @Model.Title
+</div>
+<div>
+    @Model.Price
+</div>
+<div>
+    @Model.CreatedOn.CastToRegularDate()
+</div>
+@if (User.IsInRole(PermissionConst.CanPlanDeleteAjax))
+{
+    <li>
+        <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.Plan.DeleteAjax(Model.Id))">
+            <span>@Admin.Delete</span>
+            <i class="fa fa-trash"></i>
+        </a>
+    </li>
+}
+@if (User.IsInRole(PermissionConst.CanPlanEdit))
+{
+    <li>
+        <a href="@Url.Action(MVC.Plan.Edit(Model.Id))">
+            <span>@Admin.Edit</span>
+            <i class="fa fa-pencil fa-flip-horizontal"></i>
+        </a>
+    </li>
+}

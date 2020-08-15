@@ -1,0 +1,76 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.SeoUrl.SeoUrlViewModel
+<div class="landing-items nov-item-height-030">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(PermissionConst.CanSeoUrlEdit) || User.IsInRole(PermissionConst.CanSeoUrlDeleteAjax))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanSeoUrlEdit))
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.SeoUrl.Edit(Model.Id))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanSeoUrlDeleteAjax))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.SeoUrl.DeleteAjax(Model.Id))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="rectangle-section">
+                <span>
+                    @Admin.Code :
+                    <span> @Model.Redirection.ToInt32()</span>
+                </span>
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a>
+                            <div class="item-preview-image">
+                                <img src="@FileConst.Redirect" alt="@Admin.Redirection">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link">
+                    <p class="novinak-title text-header">@Model.Redirection</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a>
+                        <p>@if (Model.IsActive){<text>@Admin.Active</text>}else{<text>@Admin.Inactive</text>}</p>
+                    </a>
+                </div>
+                <div class="middle-part">
+                    <p class="small-state ltr-text">@Model.AbsoulateUrl</p>
+                </div>
+                <div class="bottom-part">
+                    <p class="small-state ltr-text">@Model.CurrentUrl</p>
+                </div>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

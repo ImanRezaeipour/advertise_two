@@ -1,0 +1,84 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.PlanDiscount.PlanDiscountCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "ایجاد کد تخفیف";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>ایجاد کد تخفیف</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="buyPlan" action="@Url.Action(MVC.PlanDiscount.Create())" method="post" data-on-load="validatePlanDiscount">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Percent" class="rl-label">
+                        <span>* درصد تخفیف</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="Percent" name="Percent" placeholder="درصد تخفیف"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Code" class="rl-label">
+                        <span>کد تخفیف</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="Code" name="Code" placeholder="کد تخفیف"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Max" class="rl-label">
+                        <span>حداکثر مبلغ تخفیف</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="Max" name="Max" placeholder="حداکثر مبلغ تخفیف"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Count" class="rl-label">
+                        <span>تعداد</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="Count" name="Count" placeholder="تعداد"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Count" class="rl-label">
+                        <span>تاریخ انقضاء</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="Expire" name="Expire" placeholder="تاریخ انقضاء"/>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button type="submit" form="buyPlan" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

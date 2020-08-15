@@ -1,0 +1,38 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.CompanyBalance.CompanyBalanceViewModel
+@if (HttpContext.Current.User.IsInRole(PermissionConst.CanCompanyBalanceDeleteAjax))
+{
+    <li>
+        <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.CompanyBalance.DeleteAjax(Model.Id))">
+            <span>@Admin.Delete</span>
+            <i class="fa fa-trash"></i>
+        </a>
+    </li>
+}
+@if (HttpContext.Current.User.IsInRole(PermissionConst.CanCompanyBalanceEdit))
+{
+    <li>
+        <a href="@Url.Action(MVC.CompanyBalance.Edit(Model.Id))">
+            <span>@Admin.Edit</span>
+            <i class="fa fa-pencil fa-flip-horizontal"></i>
+        </a>
+    </li>
+}
+<div>
+    <span>@Model.Amount</span>
+    <span>@Model.TransactionedOn.CastToRegularDate()</span>
+    <div class="nov-item-body">
+        <div class="image-section">
+            <div class="product-preview-actions">
+                <figure class="product-preview-image">
+                    <div class="item-preview-image">
+                        <img src="@(Model.AttachmentFile != null ? FileConst.ImagesWebPath.PlusWord(Model.AttachmentFile) : FileConst.NoPreview)" alt="">
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </div>
+</div>

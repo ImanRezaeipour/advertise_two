@@ -1,0 +1,87 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Ads.AdsEditViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "ایجاد تبلیغات";
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.ProductRegister</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newBanner" data-on-load="validateAds" method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" name="Id" value="@Model.Id" id="Id" />
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">
+                        <span>@Admin.Title:</span>
+                    </label>
+                    <input type="text" id="Title" name="Title" value="@Model.Title" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Order" class="rl-label">
+                        <span>الویت:</span>
+                    </label>
+                    <input type="text" id="Order" name="Order" value="@Model.Order" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.DurationOfUse: @Model.Duration</span>
+                    </label>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>نام تبلیغ: @Model.AdsOptionName</span>
+                    </label>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.Price: @Model.FinalPrice</span>
+                    </label>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height" id="Image">
+                    <label for="files" class="rl-label tooltipster" title="@Admin.ItChoosesImage">@Admin.UploadImage</label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderBanner" data-param="true"></div>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            <button type="submit" form="newBanner" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.Ads.EditApprove())';">
+                <i class="fa fa-save"></i>
+                <span>تائید و ذخیره</span>
+            </button>
+        </div>
+    </div>
+</div>

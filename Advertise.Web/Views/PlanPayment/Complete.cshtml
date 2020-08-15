@@ -1,0 +1,20 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.SuccessfulPlanPurchase;
+}
+<div class="mp-wrapper">
+    <div class="mp-container">
+        <h1 class="mp-header mp-msg">
+            <i class="fa fa-check-circle-o"></i>
+            <span class="mp-msg">@Admin.SuccessfulPlanPurchase</span>
+        </h1>
+        <h2 class="mp-paragraph">
+            <i class="fa fa-cart-plus fa-flip-horizontal mp-icon"></i>
+            <span>@Admin.MessageSuccessfulPlanPurchase</span>
+            <a href="@Url.Action(MVC.Profile.Dashboard())" class="mp-link">
+                <span>@Admin.ReturnToTheProfiePage</span>
+            </a>
+        </h2>
+    </div>
+</div>

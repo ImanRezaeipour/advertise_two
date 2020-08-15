@@ -1,0 +1,37 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model IEnumerable<Advertise.Core.Models.CompanyReview.CompanyReviewViewModel>
+<div class="headline simple primary">
+    <h4>
+        <i class="fa fa-list-alt"></i>
+        <span>@Admin.Review</span>
+    </h4>
+</div>
+@if (Model == null || Model.Any() != true)
+{
+    <div class="comment-list updating-section">
+        <p>
+            <i class="fa fa-battery-empty fa-flip-horizontal"></i>
+            <span>@Admin.MessageSectionNoReview</span>
+        </p>
+        @if (ViewBag.IsMySelf)
+        {
+            <div class="btn-middle-wrapper">
+                <a href="@Url.Action(MVC.CompanyReview.Create())" class="btn-middle blue-btn-middle round-corners-five">
+                    <i class="fa fa-plus"></i>
+                    <span>@Admin.AddingReviewRequest</span>
+                </a>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="comment-list updating-section">
+        <p>
+            <i class="fa fa-gear fa-spin fa-fw"></i>
+            @Admin.MessageSectionUpdating
+        </p>
+    </div>
+}
+<br>
+<br>

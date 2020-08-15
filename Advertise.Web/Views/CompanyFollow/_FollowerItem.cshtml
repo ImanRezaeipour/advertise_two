@@ -1,0 +1,23 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.CompanyFollow.CompanyFollowViewModel
+<div class="follow-list-item">
+    <a href="@Url.Action(MVC.User.Detail(Model.UserName))">
+        <p class="text-header">@Model.UserName</p>
+        <figure class="user-avatar medium liquid">
+            @if (Model.AvatarFileName != null)
+            {
+                <img class="banner-image" src="@FileConst.ImagesWebPath.PlusWord(Model.AvatarFileName)" alt=""/>
+            }
+            else
+            {
+                <img class="banner-image" src="@FileConst.NoPreview" alt=""/>
+            }
+        </figure>
+    </a>
+    <div class="fl-item-info fl-description">
+        <p class="text-header">@Model.FullName</p>
+        <p>@Model.PhoneNumber</p>
+    </div>
+</div>

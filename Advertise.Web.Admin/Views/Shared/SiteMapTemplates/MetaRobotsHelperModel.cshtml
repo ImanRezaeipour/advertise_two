@@ -1,0 +1,6 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model MetaRobotsHelperModel
+@if (!string.IsNullOrEmpty(Model.CurrentNode?.MetaRobotsContent))
+{
+    <meta name="robots" content="@Model.CurrentNode.MetaRobotsContent"/>
+}

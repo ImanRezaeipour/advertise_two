@@ -1,0 +1,21 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Admin.ConfirmActivation;
+}
+<div class="mp-wrapper">
+    <div class="mp-container">
+        <h1 class="mp-header mp-msg">
+            <i class="fa fa-check-square"></i>
+            <span class="mp-msg">@Admin.ConfirmActivation</span>
+        </h1>
+        <h2 class="mp-paragraph">
+            <i class="fa fa-exclamation-circle mp-icon"></i>
+            <span>@Admin.MessageAccountActivation</span>
+            <a href="@Url.Action(MVC.Account.Login())" class="mp-link">
+                <span>@Admin.Here</span>
+            </a>
+            <span>@Admin.Click</span>
+        </h2>
+    </div>
+</div>

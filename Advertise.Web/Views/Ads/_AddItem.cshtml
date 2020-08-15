@@ -1,0 +1,17 @@
+﻿@using Advertise.Service.Managers.File
+@* Generator: MvcView GeneratePrettyNames: true *@
+<div class="adspayment-item-wrapper new-adspayment round-corners-five">
+    <div class="adspayment-image">
+        <a href="@Url.Action(MVC.Ads.Create())">
+            <figure>
+                <img src="@FileConst.NewItem" alt="@Admin.AdOrder" />
+            </figure>
+        </a>
+    </div>
+    <div class="adspayment-info">
+        <a href="@Url.Action(MVC.Ads.Create())">
+            <p class="adspayment-title"><i class="fa fa-plus-square"></i> @Admin.AdOrder</p>
+        </a>
+        <div class="clearboth"></div>
+    </div>
+</div>

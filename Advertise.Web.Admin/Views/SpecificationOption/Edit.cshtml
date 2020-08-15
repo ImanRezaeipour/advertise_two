@@ -1,0 +1,98 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.SpecificationOption.SpecificationOptionEditViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.EditSpecificationsOption;
+}
+    <div class="dashboard-content">
+        <div class="headline buttons primary">
+            <h4>@Admin.EditSpecificationsOption</h4>
+        </div>
+        <div class="form-box-item profile-form">
+            <form id="editSpecificationOption" action="@Url.Action(MVC.SpecificationOption.Edit())" method="Post" data-on-load ="validateSpecificationOption">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <div class="input-form">
+                    <div class="vertical-dashed"></div>
+                    
+                    <div class="msg-container">
+                        <div class="msg-box regular round-corners-five">
+                            <p>
+                                <i class="fa fa-quote-right"></i>
+                                <span></span>
+                                <i class="fa fa-quote-left"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-container fixed-height">
+                        <label for="CategoryId" class="rl-label">@Admin.Category</label>
+                        <div id="CategoryTree" style="direction: rtl" class="tree" data-on-load="TreeCategoryReview"></div> <input type="hidden" name="CategoryId" id="CategoryId" value="@Model.CategoryId"/>
+                    </div>
+                    
+                    <div class="msg-container">
+                        <div class="msg-box regular round-corners-five">
+                            <p>
+                                <i class="fa fa-quote-right"></i>
+                                <span></span>
+                                <i class="fa fa-quote-left"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-container fixed-height">
+                        <input type="hidden" name="SpecificationId" id="SpecificationId" value="@Model.SpecificationId" data-val="true" data-val-required="@Admin.RequiredSpecification"/>
+                        <label for="SpecificationId" class="rl-label">@Admin.Specification</label>
+                        <select id="specificationContainer" onchange="changeEvent(this)" data-hidden="Model.SpecificationId" data-val="true" data-val-regex="@Admin.RegularSpecification" data-val-regex-pattern="^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$">
+                            <option value="" selected>@Admin.Choose</option>
+                        </select>
+                    </div>
+                    
+                    <div class="msg-container">
+                        <div class="msg-box regular round-corners-five">
+                            <p>
+                                <i class="fa fa-quote-right"></i>
+                                <span></span>
+                                <i class="fa fa-quote-left"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-container fixed-height">
+                        <button type="button" class="btn btn-default" onclick="addSpecOption(event, this)" data-items="#items" data-item="#items #item">
+                            <i class="fa fa-plus-square"></i>
+                            <span>@Admin.Add</span>
+                        </button>
+                    </div>
+                    
+                    <div class="msg-container">
+                        <div class="msg-box regular round-corners-five">
+                            <p>
+                                <i class="fa fa-quote-right"></i>
+                                <span></span>
+                                <i class="fa fa-quote-left"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-container fixed-height">
+                        <label for="Options.Title" class="rl-label">@Admin.Title</label>
+                        <div id="items">
+                            <div id="item" data-index="0">
+                                <div class="input-container">
+                                    <input type="text" id="Options.Title" name="Options.Title" placeholder="@Admin.Title" class="tooltipster" title="@Admin.ItShowsSpecificationOptionTitle" data-val="true" data-val-required="@Admin.RequiredTitle2"/>
+                                    <button type="button" class="btn btn-danger fa fa-trash" onclick="deleteTag(event, 0, '#items #item')"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-container"></div>
+                </div>
+            </form>
+            
+            <div class="form-button-container">
+                <button form="editSpecificationOption" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" >
+                    <i class="fa fa-save"></i>
+                    <span>@Admin.Save</span>
+                </button>
+            </div>
+        </div>
+    </div>

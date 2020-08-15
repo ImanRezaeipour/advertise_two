@@ -1,0 +1,28 @@
+﻿@model Advertise.Core.Models.CompanyQuestion.CompanyQuestionListViewModel
+<div class="headline simple primary">
+    <h4>
+        <i class="fa fa-question-circle"></i> 
+        @Admin.QA
+    </h4>
+</div>
+<div class="comment-list">
+    <p>
+        @Html.Partial(MVC.CompanyQuestion.Views._DetailListMore, Model)
+        <div class="clearfix"></div>
+    </p>
+</div>
+<br>
+@if (User.Identity.IsAuthenticated == false)
+{
+    <h3>
+        @Admin.ForLeaveAComment
+        <a href="@Url.Action(MVC.Account.Login())">@Admin.Enter</a>
+        @Admin.FirstShavid
+    </h3>
+}
+else if (User.Identity.IsAuthenticated   )
+{
+    @Html.Partial(MVC.CompanyQuestion.Views._Create)
+}
+<br>
+<br>

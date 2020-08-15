@@ -1,0 +1,20 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.Receipt.ReceiptViewModel
+<div>
+    @Model.Email
+</div>
+<div>
+    @Model.FirstName  
+    @Model.LastName
+    @Model.Address.Extra
+    @Model.HomeNumber
+    <a href="@Url.Action(MVC.Receipt.Preview(Model.Id))">
+        <span>@Admin.Details</span>
+    </a>
+</div>
+<div>
+    <p class="date-time">@Model.CreatedOn.CastToRegularDate()</p>
+   
+</div>
+

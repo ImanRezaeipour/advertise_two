@@ -1,0 +1,20 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Complaint.ComplaintDetailViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.RegisterComplaints;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.RegisterComplaints</h4>
+    </div>
+    <div class="input-container">
+        <label for="Title" class="rl-label tooltipster" title="@Admin.ItShowsComplaintTitle">@Admin.Title</label>
+        <input type="text" id="Title" rows="1" cols="1" style="height: 50px; width: 400px; " value="@Model.Title" />
+    </div>
+    <div class="input-container">
+        <label for="Body" class="rl-label tooltipster" title="@Admin.ItShowsComplaintText">@Admin.Explanations</label>
+        <input type="text" id="Body" value="@Model.Body" rows="5" cols="20" style="height: 200px; width: 400px;" />
+    </div>
+    <div class="input-container"></div>
+</div>

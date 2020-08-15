@@ -1,0 +1,121 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanyBalance.CompanyBalanceCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "ایجاد تسویه حساب";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>ایجاد تسویه حساب</h4>
+    </div>
+
+    <div class="form-box-item profile-form">
+        <form id="newCompanyBalance" action="@Url.Action(MVC.CompanyBalance.Create())" method="Post" data-on-load="validateCompanyBalance">
+            @Html.AntiForgeryToken()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SettingTransactionId" class="rl-label">
+                        <span>شماره حساب</span>
+                        <i class="fa fa-question-circle tooltipster" title="شرکت"></i>
+                    </label>
+                    <select id="SettingTransactionId" name="SettingTransactionId">
+                        <option>--- @Admin.Choose ---</option>
+                        @foreach (var transaction in Model.SettingTransactionList)
+                        {
+                            <option value="@transaction.Value" @if (Model.SettingTransactionId.ToString() == transaction.Value){<text> selected</text>}>@transaction.Text</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="CompanyId" class="rl-label">
+                        <span>شرکت</span>
+                        <i class="fa fa-question-circle tooltipster" title="شرکت"></i>
+                    </label>
+                    <select id="CompanyId" name="CompanyId">
+                        <option>--- @Admin.Choose ---</option>
+                        @foreach (var company in Model.CompanyList)
+                        {
+                            <option value="@company.Value" @if (Model.CompanyId.ToString() == company.Value){<text> selected</text>}>@company.Text</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="IssueTracking" class="rl-label">شماره پیگیری</label>
+                    <input type="text" id="IssueTracking" name="IssueTracking" placeholder="شماره پیگیری" class="tooltipster" title="شماره پیگیری"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="DocumentNumber" class="rl-label">شماره سند</label>
+                    <input type="text" id="DocumentNumber" name="DocumentNumber" placeholder="شماره سند" class="tooltipster" title="شماره سند"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Depositor" class="rl-label">واریز کننده</label>
+                    <input type="text" id="Depositor" name="Depositor" placeholder="واریز کننده" class="tooltipster" title="واریز کننده"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Amount" class="rl-label">مبلغ تراکنش</label>
+                    <input type="text" id="Amount" name="Amount" placeholder="مبلغ تراکنش" class="tooltipster" title="مبلغ تراکنش"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="TransactionedOn" class="rl-label">تاریخ تراکنش</label>
+                    <input type="text" id="TransactionedOn" name="TransactionedOn" placeholder="تاریخ تراکنش" class="tooltipster" title="تاریخ تراکنش"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Description" class="rl-label">توضیحات</label>
+                    <input type="text" id="Description" name="Description" placeholder="توضیحات" class="tooltipster" title="توضیحات"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="files" class="rl-label tooltipster" title="@Admin.ItChoosesImage">@Admin.UploadImage</label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderCompanyBalance"></div>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="newCompanyBalance" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

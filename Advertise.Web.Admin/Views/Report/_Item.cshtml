@@ -1,0 +1,70 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.Report.ReportViewModel
+<div class="landing-items nov-item-height-030">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (true)
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (true)
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.Report.Edit(Model.Id))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (true)
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.Report.DeleteAjax(Model.Id))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="rectangle-section">
+                <span>@Admin.Code :
+                    <span> @Model.Title</span>
+                </span>
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a href="@Url.Action(MVC.Report.Detail(Model.Id))">
+                            <div class="item-preview-image">
+                                <img src="@FileConst.Redirect" alt="@Admin.Redirection">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part"></div>
+                <div class="middle-part">
+                    <p class="small-state ltr-text">@Model.Title</p>
+                </div>
+                <div class="bottom-part">
+                    <p class="small-state ltr-text">@Model.Description</p>
+                </div>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

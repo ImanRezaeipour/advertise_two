@@ -1,0 +1,57 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.ExportImport.ExportIndexViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "برون ریزی";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>برون ریزی</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="getExport" method="Post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <div class="msg-box regular round-corners-five">
+                        <p>
+                            <i class="fa fa-quote-right"></i>
+                            <span>@Admin.ItShowsCompanyDomain</span>
+                            <i class="fa fa-quote-left"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="" class="rl-label">خروجی دسته ها بصورت اکسل</label>
+                    <button form="getExport" type="submit" class="form-button ok-button round-corners-five" onclick="javascript: form.action = '@Url.Action(MVC.Export.CategoryExcel())';">برون ریزی</button>
+                </div>
+                
+                <div class="msg-container">
+                    <div class="msg-box regular round-corners-five">
+                        <p>
+                            <i class="fa fa-quote-right"></i>
+                            <span>@Admin.ItShowsCompanyDomain</span>
+                            <i class="fa fa-quote-left"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="" class="rl-label">خروجی نمونه کاتالوگ بصورت اکسل</label>
+                    <select id="categoryId" name="categoryId">
+                        @foreach (var category in Model.CategoryList)
+                        {
+                            <option value="@category.Value">@category.Text</option>
+                        }
+                    </select>
+                    <button form="getExport" type="submit" class="form-button ok-button round-corners-five" onclick="javascript: form.action = '@Url.Action(MVC.Export.CatalogTemplateExcel())';">برون ریزی</button>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+    </div>
+</div>

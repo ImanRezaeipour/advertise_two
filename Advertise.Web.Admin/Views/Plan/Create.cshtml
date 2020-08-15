@@ -1,0 +1,127 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Plan.PlanCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "ایجاد پلن";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>تعریف پلن</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="buyPlan" action="@Url.Action(MVC.Plan.Create())" method="post" data-on-load="validatePlan">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">
+                        <span>* @Admin.Title</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="Title" name="Title" placeholder="@Admin.Title"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Code" class="rl-label">
+                        <span>کد پلن</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="Code" name="Code" placeholder="کد پلن"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Price" class="rl-label">
+                        <span>@Admin.Price</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="Price" name="Price" placeholder=@Admin.Price/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="PreviousePrice" class="rl-label">
+                        <span>@Admin.PreviousPrice</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="text" id="PreviousePrice" name="PreviousePrice" placeholder=@Admin.PreviousPrice/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="RoleId" class="rl-label">@Admin.UserRole</label>
+                    <select id="RoleId" name="RoleId">
+                        <option disabled="disabled">@Admin.UserRole</option>
+                        @foreach (var role in Model.RoleList)
+                        {
+                            <option value="@role.Value" @if (Model.RoleId.ToString() == role.Value){<text> selected</text>}>@role.Text</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="PlanDuration" class="rl-label">مدت زمان</label>
+                    <select id="PlanDuration" name="PlanDuration">
+                        <option disabled="disabled">مدت زمان</option>
+                        @foreach (var planDuration in Model.PlanDurationList)
+                        {
+                            <option value="@planDuration.Value" @if (Model.PlanDuration.ToString() == planDuration.Value){<text> selected</text>}>@planDuration.Text</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Color" class="rl-label">رنگ</label>
+                    <select id="Color" name="Color">
+                        <option disabled="disabled">رنگ</option>
+                        @foreach (var color in Model.ColorTypeList)
+                        {
+                            <option value="@color.Value" @if (Model.Color.ToString() == color.Value){<text> selected</text>}>@color.Text</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="IsActive" class="rl-label">
+                        <span>فعال</span>
+                        <i class="fa fa-question-circle tooltipster" title=""></i>
+                    </label>
+                    <input type="checkbox" id="IsActive" name="IsActive" placeholder="فعال" checked="checked"/>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button type="submit" form="buyPlan" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

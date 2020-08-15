@@ -1,0 +1,231 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.PlanPayment.PlanPyamentCreateViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.PlanPurchase;
+}
+<div class="profile-content plan-purchase-content">
+    <div class="form-box-item profile-form">
+        <h1>@Admin.PlanPurchase</h1>
+        <form id="buyPlan" action="@Url.Action(MVC.PlanPayment.Create())" method="post" data-on-load="validatePlanPayment">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <label class="rl-label">@Admin.Plans</label>
+            <ul class="order-plans-wrapper">
+                <li class="title-row">
+                    <ul class="inner-order-plans">
+                        <li>
+                            <span>@Admin.ValidityDuration</span>
+                        </li>
+                        <li>
+                            <span id="planFundamental">@Admin.PlanFundamental</span>
+                        </li>
+                        <li>
+                            <span id="planEconomical">@Admin.PlanEconomical</span>
+                        </li>
+                        <li>
+                            <span id="planSpecial">@Admin.PlanSpecial</span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="bronze-row">
+                    <ul class="inner-order-plans">
+                        <li>
+                            <span id="durationSixMonths">@Admin.MonthsSix</span>
+                        </li>
+                        <li>
+                            <span>.......</span>
+                        </li>
+                        <li>
+                            <div class="outer-month">
+                                <input class="plan-order-radio" type="radio" id="planType2" name="Code" value="Silver6">
+                                <div class="inner-month">
+                                    <span class="plan-pre-price">199,000 @Admin.Toman</span>
+                                    <span class="plan-price">99,000 @Admin.Toman</span>
+                                    <label class="plan-order-link silver-link" for="planType2" data-on-click="calcPlanInvoice">
+                                        <i class="fa fa-shopping-cart fa-flip-horizontal"></i>
+                                        <span>@Admin.PlanSelection</span>
+                                    </label>
+                                    <span class="plan-discount-tag">50%</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="outer-month">
+                                <input class="plan-order-radio" type="radio" id="planType4" name="Code" value="Gold6">
+                                <div class="inner-month">
+                                    <span class="plan-pre-price">299,000 @Admin.Toman</span>
+                                    <span class="plan-price">149,000 @Admin.Toman</span>
+                                    <label class="plan-order-link golden-link" for="planType4" data-on-click="calcPlanInvoice">
+                                        <i class="fa fa-shopping-cart fa-flip-horizontal"></i>
+                                        <span>@Admin.PlanSelection</span>
+                                    </label>
+                                    <span class="plan-discount-tag">50%</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="silver-row">
+                    <ul class="inner-order-plans">
+                        <li>
+                            <span id="durationNineMonths">@Admin.MonthsNine</span>
+                        </li>
+                        <li>
+                            <span>.......</span>
+                        </li>
+                        <li>
+                            <span>.......</span>
+                        </li>
+                        <li>
+                            <div class="outer-month">
+                                <input class="plan-order-radio" type="radio" id="planType5" name="Code" value="Gold9">
+                                <div class="inner-month">
+                                    <span class="plan-pre-price">399,000 @Admin.Toman</span>
+                                    <span class="plan-price">199,000 @Admin.Toman</span>
+                                    <label class="plan-order-link golden-link" for="planType5" data-on-click="calcPlanInvoice">
+                                        <i class="fa fa-shopping-cart fa-flip-horizontal"></i>
+                                        <span>@Admin.PlanSelection</span>
+                                    </label>
+                                    <span class="plan-discount-tag">50%</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="golden-row">
+                    <ul class="inner-order-plans">
+                        <li>
+                            <span id="durationOneYear">@Admin.MonthsYear</span>
+                        </li>
+                        <li>
+                            <div class="outer-month">
+                                <input class="plan-order-radio" type="radio" id="planType1" name="Code" value="Bronze12">
+                                <div class="inner-month">
+                                    <span class="plan-pre-price">99,000 @Admin.Toman</span>
+                                    <span class="plan-price">49,000 @Admin.Toman</span>
+                                    <label class="plan-order-link bronze-link" for="planType1" data-on-click="calcPlanInvoice">
+                                        <i class="fa fa-shopping-cart fa-flip-horizontal"></i>
+                                        <span>@Admin.PlanSelection</span>
+                                    </label>
+                                    <span class="plan-discount-tag">50%</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="outer-month">
+                                <input class="plan-order-radio" type="radio" id="planType3" name="Code" value="Silver12">
+                                <div class="inner-month">
+                                    <span class="plan-pre-price">349,000 @Admin.Toman</span>
+                                    <span class="plan-price">179,000 @Admin.Toman</span>
+                                    <label class="plan-order-link silver-link" for="planType3" data-on-click="calcPlanInvoice">
+                                        <i class="fa fa-shopping-cart fa-flip-horizontal"></i>
+                                        <span>@Admin.PlanSelection</span>
+                                    </label>
+                                    <span class="plan-discount-tag">50%</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="outer-month">
+                                <input class="plan-order-radio" type="radio" id="planType6" name="Code" value="Gold12">
+                                <div class="inner-month">
+                                    <span class="plan-pre-price">499,000 @Admin.Toman</span>
+                                    <span class="plan-price">249,000 @Admin.Toman</span>
+                                    <label class="plan-order-link golden-link" for="planType6" data-on-click="calcPlanInvoice">
+                                        <i class="fa fa-shopping-cart fa-flip-horizontal"></i>
+                                        <span>@Admin.PlanSelection</span>
+                                    </label>
+                                    <span class="plan-discount-tag">50%</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <br><br>
+            <div class="input-container half">
+                <label class="rl-label tooltipster">@Admin.PaymentGateway</label>
+                <div class="gateways-container">
+                    <input type="radio" id="GatewayAP" name="Pay" value="1" class="gateway-radio">
+                    <label class="gateway-label" for="GatewayAP">
+                        <img src="@FileConst.GatewayAp" alt="@Admin.PaymentGatewayAP" />
+                    </label>
+                    <input type="radio" id="GatewayMellat" name="Pay" value="1" class="gateway-radio">
+                    <label class="gateway-label" for="GatewayMellat">
+                        <img src="@FileConst.GatewayMellat" alt="@Admin.PaymentGatewayMellat" />
+                    </label>
+                    <input type="radio" id="GatewayParsian" name="Pay" value="1" class="gateway-radio">
+                    <label class="gateway-label" for="GatewayParsian">
+                        <img src="@FileConst.GatewayParsian" alt="@Admin.PaymentGatewayParsian" />
+                    </label>
+                    <input type="radio" id="GatewayPasargad" name="Pay" value="1" class="gateway-radio">
+                    <label class="gateway-label" for="GatewayPasargad">
+                        <img src="@FileConst.GatewayPasargad" alt="@Admin.PaymentGatewayPasargad" />
+                    </label>
+                    <input type="radio" id="GatewaySaman" name="Pay" value="1" class="gateway-radio">
+                    <label class="gateway-label" for="GatewaySaman">
+                        <img src="@FileConst.GatewaySaman" alt="@Admin.PaymentGatewaySaman" />
+                    </label>
+                    <input type="radio" id="GatewayShaparak" name="Pay" value="1" class="gateway-radio">
+                    <label class="gateway-label" for="GatewayShaparak">
+                        <img src="@FileConst.GatewayShaparak" alt="@Admin.PaymentGatewayShaparak" />
+                    </label>
+                    <input type="radio" id="GatewayZarinpal" name="Pay" value="1" class="gateway-radio">
+                    <label class="gateway-label" for="GatewayZarinpal">
+                        <img src="@FileConst.GatewayZarinpal" alt="@Admin.PaymentGatewayZarinpal" />
+                    </label>
+                </div>
+            </div>
+            <div class="input-container half discount-code-container">
+                <label for="DiscountCode" class="rl-label">@Admin.DiscountCode</label>
+                <input type="text" id="DiscountCode" class="discount-code-input" name="DiscountCode" placeholder="@Admin.DiscountCode" />
+                <a id="DiscountCodeApply" href="javascript:void(0)" class="discount-code-apply" data-on-click="ajaxCheckPlanDiscount">@Admin.ApplyDiscount</a>
+                <span class="discount-code-price"></span>
+            </div>
+            <div class="input-container">
+                <label class="rl-label">@Admin.InvoicePurchase</label>
+                <ul class="plan-invoice-table">
+                    <li>
+                        <span class="plan-invoice-title">@Admin.SelectedPlan</span>
+                        <span id="PlanTitle" class="plan-invoice-value">-----</span>
+                    </li>
+                    <li>
+                        <span class="plan-invoice-title">@Admin.ValidityDuration</span>
+                        <span id="PlanValidity" class="plan-invoice-value">-----</span>
+                    </li>
+                    <li>
+                        <span class="plan-invoice-title">@Admin.Price</span>
+                        <span id="PlanPrice" class="plan-invoice-value">-----</span>
+                    </li>
+                    <li>
+                        <span class="plan-invoice-title">@Admin.DiscountPercent</span>
+                        <span id="PlanDiscountPercent" class="plan-invoice-value">-----</span>
+                    </li>
+                    <li>
+                        <span class="plan-invoice-title">@Admin.Discount</span>
+                        <span id="PlanDiscountPrice" class="plan-invoice-value">-----</span>
+                    </li>
+                    <li>
+                        <span class="plan-invoice-title">@Admin.PaymentPrice</span>
+                        <span id="PlanFinalPrice" class="plan-invoice-value">-----</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearboth"></div>
+        </form>
+
+        <div class="plan-buttons-wrapper">
+            <a class="plan-return-button" href="@Url.Action(MVC.Page.Costs())">
+                <i class="fa fa-arrow-right"></i>
+                <span>@Admin.Return</span>
+            </a>
+            <button type="submit" form="buyPlan" class="plan-cart-button">
+                <i class="fa fa-shopping-cart fa-flip-horizontal"></i>
+                <span>@Admin.PlanPurchase</span>
+            </button>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

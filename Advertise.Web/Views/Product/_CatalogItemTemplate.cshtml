@@ -1,0 +1,75 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@using Advertise.Core.Helpers
+@using EnumHelper = Advertise.Core.Helpers.EnumHelper
+<div class="catalogItem add-product-page round-corners-five" data-index="*">
+    <input type="hidden" name="ProductBulks[*].Index" value="*" />
+    
+    <div class="input-container nov-seven-col nov-col-1">
+        <label for="ProductBulks_*_.CategoryId" class="rl-label catalog-temp-label">
+            <span>@Admin.Category2</span>
+        </label>
+        <select id="ProductBulks_*_.CategoryId" name="ProductBulks[*].CategoryId" data-on-load="*dropdownCategoryList" data-on-change="getCategory"></select>
+    </div>
+
+    <div class="input-container nov-seven-col nov-col-2">
+        <label for="ProductBulks_*_.CatalogId" class="rl-label catalog-temp-label">
+            <span>کالا</span>
+        </label>
+        <select id="ProductBulks_*_.CatalogId" name="ProductBulks[*].CatalogId" data-on-load="*dropdownCatalogList"></select>
+    </div>
+
+    <div class="input-container nov-seven-col nov-col-3">
+        <label for="ProductBulks_*_.Color" class="rl-label catalog-temp-label">
+            <span>@Admin.Color</span>
+        </label>
+        <select id="ProductBulks_*_.Color" name="ProductBulks[*].Color" data-on-load="*dropdownSimple">
+            @foreach (var color in Model.ColorList)
+            {
+                <option value="@color.Value" style="background-color: @color.Text">@color.Text (@(EnumHelper.GetText<ColorType>(Convert.ToInt32(color.Value))))</option>
+            }
+        </select>
+    </div>
+
+    <div class="input-container nov-seven-col nov-col-4">
+        <label for="ProductBulks_*_.GuaranteeId" class="rl-label catalog-temp-label">
+            <span>@Admin.Guarantee</span>
+        </label>
+        <select id="ProductBulks_*_.GuaranteeId" name="ProductBulks[*].GuaranteeId" data-on-load="*dropdownProductBulk">
+            @foreach (var guarantee in Model.GuaranteeList)
+            {
+                <option value="@guarantee.Value">@guarantee.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="input-container nov-seven-col nov-col-5">
+        <label for="ProductBulks_*_.Price" class="rl-label catalog-temp-label">
+            <span>@Admin.Price</span>
+        </label>
+        <input type="text" id="ProductBulks_*_.Price" name="ProductBulks[*].Price"/>
+    </div>
+
+    <div class="input-container nov-seven-col nov-col-6">
+        <label for="ProductBulks_*_.AvailableCount" class="rl-label catalog-temp-label">
+            <span>@Admin.Available</span>
+        </label>
+        <input type="text" id="ProductBulks_*_.AvailableCount" name="ProductBulks[*].AvailableCount"/>
+    </div>
+
+    <div class="input-container nov-seven-col nov-col-7">
+        <label for="ProductBulks_*_.IsSecondHand" class="rl-label catalog-temp-label">
+            <span>@Admin.State</span>
+        </label>
+        <select id="ProductBulks_*_.IsSecondHand" name="ProductBulks[*].IsSecondHand" data-on-change="*toggleCatalogSecondHand">
+            <option value="0" selected>نو</option>
+            <option value="1">کار کرده</option>
+        </select>
+    </div>
+
+    <div class="catalog-product-delete round-corners-five" data-on-click="*removeCatalogCreate">
+        <div class="catalog-delete-container"></div>
+        <i class="fa fa-times"></i>
+    </div>
+
+</div>

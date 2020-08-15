@@ -1,0 +1,83 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.User.UserHeaderViewModel
+<div class="side-menu-header">
+    <div class="user-quickview">
+        <ul class="user-board-option">
+            <li>
+                <a href="@Url.Action(MVC.Profile.Dashboard())" class="outer-avatar-ring tooltipster" title="@Admin.ProfilePage">
+                    <div class="inner-avatar-ring">
+                        <figure class="user-header-avatar">
+                            @if (Model.AvatarFileName != null)
+                            {
+                                <img src="@FileConst.ImagesWebPath.PlusWord(Model.AvatarFileName)" class="header-avatar-top" alt="user avatar image" />
+                            }
+                            else
+                            {
+                                <img src="@FileConst.NoAvatarPth" class="header-avatar-top" alt="user without avatar image" />
+                            }
+                        </figure>
+                    </div>
+                </a>
+                @if (Model.IsSetUserName != true)
+                {
+                    <a href="@Url.Action(MVC.User.MyEdit())" class="avatar-username-sticker tooltipster" title="@Admin.PickAUserName">
+                        <i class="fa fa-user-secret"></i>
+                    </a>
+                }
+                @if (Model.IsSetSubdomain != true)
+                {
+                    <a href="@Url.Action(MVC.Company.MyEdit())" class="avatar-domainname-sticker tooltipster" title="@Admin.ChooseADomain">
+                        <i class="fa fa-globe"></i>
+                    </a>
+                }
+            </li>
+            <li class="quick-name">
+                <a href="@Url.Action(MVC.Profile.Dashboard())">
+                    <p class="header-quick-name">@Model.DisplayName</p>
+                </a>
+            </li>
+        </ul>
+        <div class="option-cart-view">
+            <a href="@Url.Action(MVC.Bag.List())">
+                <span class="fa fa-shopping-cart fa-3x fa-flip-horizontal header-cart-icon"></span>
+            </a>
+            <div class="count-outer">
+                <div class="count-inner"></div>
+            </div>
+            <a href="@Url.Action(MVC.Bag.List())">
+                <span id="HeaderCartCounter" class="option-cart-counter">@Model.BagCount</span>
+            </a>
+        </div>
+        <ul class="option-menu-widget">
+            @if (true)
+            {
+                <li class="widget-bag">
+                    <a href="@Url.Action(MVC.Receipt.MyList())">
+                        <i class="fa fa-shopping-bag fa-2x widget-icon"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="widget-bag">
+                    <a href="@Url.Action(MVC.Page.Costs())">
+                        <i class="fa fa-briefcase fa-2x widget-icon"></i>
+                    </a>
+                </li>
+            }
+            <li class="widget-language">
+                <i class="fa fa-language fa-2x widget-icon"></i>
+                <a href="@Url.Action(MVC.Home.SetLang("fa"))">فارسی</a>
+                <a href="@Url.Action(MVC.Home.SetLang("en"))">English</a>
+            </li>
+            <li class="widget-logout">
+                <a href="@Url.Action(MVC.Account.SignOut())">
+                    <i class="fa fa-sign-out fa-2x fa-flip-horizontal widget-icon"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

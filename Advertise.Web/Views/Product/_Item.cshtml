@@ -1,0 +1,262 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Core.Types
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@using Advertise.Service.Services.Products
+@model Advertise.Core.Models.Product.ProductViewModel
+<div class="landing-items nov-item-height-031">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section">
+                @if ((Model.Id.CanEditThisProduct() && User.IsInRole(PermissionConst.CanProductMyDeleteAjax)) || User.IsInRole(PermissionConst.CanProductDeleteAjax) || User.IsInRole(PermissionConst.CanProductEditApprove) || User.IsInRole(PermissionConst.CanProductEditReject))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (Model.Id.CanEditThisProduct())
+                            {
+                                <li>
+                                    @if (Model.IsCatalog == true)
+                                    {
+                                        <a href="@Url.Action(MVC.Product.EditCatalog(Model.Code))">
+                                            <span>@Admin.Edit</span>
+                                            <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@(Model.IsMine ? Url.Action(MVC.Product.MyEdit(Model.Code)) : Url.Action(MVC.Product.Edit(Model.Code)))">
+                                            <span>@Admin.Edit</span>
+                                            <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                        </a>
+                                    }
+                                </li>
+                            }
+                            @if (Model.IsCatalog != true && ((Model.Id.CanEditThisProduct() && User.IsInRole(PermissionConst.CanProductMyDeleteAjax)) || User.IsInRole(PermissionConst.CanProductDeleteAjax)))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@(Model.IsMine ? Url.Action(MVC.Product.MyDeleteAjax(Model.Code)) : Url.Action(MVC.Product.DeleteAjax(Model.Code)))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanProductEditApprove))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.Product.ApproveAjax(Model.Id))">
+                                        <span>@Admin.Approve</span>
+                                        <i class="fa fa-check-circle"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanProductEditReject))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.Product.RejectAjax(Model.Id))">
+                                        <span>@Admin.Ignore</span>
+                                        <i class="fa fa-times-circle"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="share-section">
+                <div class="sharing-item-li">
+                    <i class="fa fa-share-alt-square"></i>
+                    <ul class="item-share-list">
+                        <li>
+                            <a href="@Url.Action(MVC.Product.Detail(Model.Code, Model.Title.CastToSlug())).PlusWord("&text=").PlusWord(Model.Title).BeforeWord("https://telegram.me/share/url?url=https://novinak.com")">
+                                <span>@Admin.Telegram</span>
+                                <i class="sharings fa fa-telegram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Product.Detail(Model.Code, Model.Title.CastToSlug())).BeforeWord("https://plus.google.com/share?url=https://novinak.com")">
+                                <span>@Admin.GPlus</span>
+                                <i class="sharings fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Product.Detail(Model.Code, Model.Title.CastToSlug())).BeforeWord("https://www.facebook.com/sharer/sharer.php?u=https://novinak.com")">
+                                <span>@Admin.Facebook2</span>
+                                <i class="sharings fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Product.Detail(Model.Code, Model.Title.CastToSlug())).BeforeWord("https://twitter.com/home?status=https://novinak.com")">
+                                <span>@Admin.Twitter2</span>
+                                <i class="sharings fa fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="rectangle-section">
+                @if (Model.IsCatalog != true && Model.DiscountPercent != null && Model.PreviousPrice > Model.Price)
+                {
+                    <span>
+                        %@Model.DiscountPercent
+                        <span>OFF</span>
+                    </span>
+                }
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a href="@Url.Action(MVC.Product.Detail(Model.Code, Model.Title.CastToSlug()))">
+                            <div class="item-preview-image">
+                                <noscript>
+                                    <img src="@if (Model.ImageFileName != null && Model.IsCatalog != true) {<text>@FileConst.ImagesWebPath.PlusWord(Model.ImageFileName)</text>} else if (Model.ImageFileName != null && Model.IsCatalog == true) {<text>@FileConst.ImagesCatalogWebPath.PlusWord(Model.ImageFileName)</text>} else {<text>@FileConst.NoPreview</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.Description)">
+                                </noscript>
+                                <img class="lazyload" data-src="@if (Model.ImageFileName != null && Model.IsCatalog != true) {<text>@FileConst.ImagesWebPath.PlusWord(Model.ImageFileName)</text>} else if (Model.ImageFileName != null && Model.IsCatalog == true) {<text>@FileConst.ImagesCatalogWebPath.PlusWord(Model.ImageFileName)</text>} else {<text>@FileConst.NoPreview</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.Description)">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="@Url.Action(MVC.Product.Detail(Model.Code, Model.Title.CastToSlug()))">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a href="@Url.Action(MVC.Category.Detail(Model.CatAlias, Model.CatMetaTitle.CastToSlug()))">
+                        <p>@Model.CategoryTitle</p>
+                    </a>
+                </div>
+                @if (Model.IsCatalog != true)
+                {
+                    <div class="middle-part">
+                        <p class="small-state-deleted">
+                            @if (Model.PreviousPrice != null && Model.PreviousPrice > Model.Price)
+                            {
+                                <text>
+                                    @Model.PreviousPrice.Value.CastToRegularCurrency()
+                                    <span>@Admin.Toman</span>
+                                </text>
+                            }
+                        </p>
+                    </div>
+                    <div class="bottom-part">
+                        @if (Model.Price != null && Model.Price != 0)
+                        {
+                            <p>
+                                @Model.Price.CastToRegularCurrency()
+                                <span>@Admin.Toman</span>
+                            </p>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="middle-part">
+                        <p class="highest-price">
+                            @if (Model.HighestPrice != 0 && Model.HighestPrice != null)
+                            {
+                                <text>
+                                    <i class="fa fa-sort-up"></i>
+                                    @Model.HighestPrice.CastToRegularCurrency()
+                                    <span>@Admin.Toman</span>
+                                </text>
+                            }
+                        </p>
+                    </div>
+                    <div class="bottom-part">
+                        <p class="lowest-price">
+                            @if (Model.LowestPrice != 0 && Model.LowestPrice != null)
+                            {
+                                <text>
+                                    <i class="fa fa-sort-down"></i>
+                                    @Model.LowestPrice.CastToRegularCurrency()
+                                    <span>@Admin.Toman</span>
+                                </text>
+                            }
+                        </p>
+                    </div>
+                }
+            </div>
+        </div>
+        @if (Model.IsCatalog != true)
+        {
+            <div class="nov-item-footer">
+                <hr class="line-separator item-footer">
+                <div class="overview-section">
+                    <div class="image-part">
+                        <figure class="user-avatar small">
+                            <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.CastToSlug()))">
+                                <div class="novinak-image">
+                                    <noscript>
+                                        <img src="@if (Model.CompanyLogoFileName != null){<text>@FileConst.ImagesWebPath.PlusWord(Model.CompanyLogoFileName)</text>}else{<text>@FileConst.NoLogo</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.CompanyTitle)">
+                                    </noscript>
+                                    <img class="lazyload" data-src="@if (Model.CompanyLogoFileName != null){<text>@FileConst.ImagesWebPath.PlusWord(Model.CompanyLogoFileName)</text>}else{<text>@FileConst.NoLogo</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.CompanyTitle)">
+                                </div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="caption-part">
+                        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.CastToSlug()))" class="tooltipster" title="@Model.CompanyTitle">
+                            <p class="text-header tiny">@Model.CompanyTitle</p>
+                        </a>
+                    </div>
+                </div>
+                @if (Model.Price != null && Model.Price != 0)
+                {
+                    <div class="toggle-section">
+                        <div class="li-item-cart">
+                            <div class="item-carts-wrapper">
+                                <div class="item-carts @if (User.Identity.IsAuthenticated && Model.IsExist)
+                                                       {
+                                                           <text>item-carts-buy</text>
+                                                       }">
+                                    @switch (Model.Sell)
+                                    {
+                                        case SellType.Available:
+                                            <i class="item-cart cart tooltipster fa fa-cart-plus" title="@Admin.AddToCart" @if (User.Identity.IsAuthenticated)
+                                                                                                                           {
+                                                                                                                               <text>data-on-click="ajaxBagCreate" data-param="@Model.Id" data-state="unbuy"</text>
+                                                                                                                           }></i>
+                                            if (User.Identity.IsAuthenticated)
+                                            {
+                                                <i class="item-cart bag tooltipster fa fa-shopping-bag" title="@Admin.RemoveFromCart" data-on-click="ajaxBagDelete" data-param="@Model.Id" data-state="buy"></i>
+                                            }
+                                            break;
+                                        case SellType.Unavailable:
+                                            <i class="item-cart unavailabel tooltipster fa fa-times-circle-o" title="@Admin.ProductStateUnavailabel"></i>
+                                            break;
+                                        case SellType.Soon:
+                                            <i class="item-cart soon tooltipster fa fa-clock-o" title="@Admin.ProductStateSoon"></i>
+                                            break;
+                                        case SellType.Hidden:
+                                            <i class="item-cart unsell tooltipster fa fa-ban" title="@Admin.ProductStateUnsell"></i>
+                                            break;
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="nov-item-footer">
+                <hr class="line-separator item-footer">
+                <div class="overview-section">
+                    <div class="caption-part">
+                        <a>
+                            <p class="text-header tiny catalog-companies">@if (Model.CatalogCompanyCount !=0) {<text>@Admin.Stores.PlusWord(" : ").PlusWord(Model.CatalogCompanyCount.ToString())</text>} else {<text><i class="fa fa-times"></i> @Admin.ProductStateUnavailabel</text>}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="clearboth"></div>
+    </div>
+</div>

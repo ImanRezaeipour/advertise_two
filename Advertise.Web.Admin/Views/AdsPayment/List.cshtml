@@ -1,0 +1,38 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using System.Web.Mvc.Html
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.AdsPayment.AdsPaymentListViewModel
+@{
+    Layout = Model.IsMine != true ? MVC.Shared.Views.SiteLayout.Panel._PanelLayout : MVC.Shared.Views.SiteLayout.Profile._ProfileLayout;
+    ViewBag.Title = Model.IsMine != true ? "لیست تبلیغات" : "لیست تبلیغات من";
+    ViewBag.PageName = Model.IsMine ? "myAdsPaymentList" : "AdsPaymentList";
+    ViewBag.HasSearchbar = true;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+        @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+        @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize)
+        @SearchItem.GridView()
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true){<text>لیست تبلیغات</text>}else{<text>لیست تبلیغات</text>}</h1>
+    </div>
+
+    <div class="landing-items-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @if (User.IsInRole(PermissionConst.CanCategoryCreate))
+                {
+                    @Html.Partial(MVC.Ads.Views._AddItem)
+                }
+                @Html.Partial(MVC.AdsPayment.Views._ListMore, Model.Adses)
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+    </div>
+</div>

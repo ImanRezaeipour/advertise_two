@@ -1,0 +1,188 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Receipt.ReceiptPreviewViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.InvoicePreview;
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        @if (HttpContext.Current.User.IsInRole(PermissionConst.CanReceiptList))
+        {
+            <h4>@Admin.Return</h4>
+            <a href="@Url.Action(MVC.Receipt.MyList())" class="button primary">
+                <i class="fa fa-money"></i>
+                <span>بازگشت به لیست</span>
+            </a>
+        }
+        <h4>@Admin.InvoicePreview</h4>
+        <a href="@Url.Action(MVC.ReceiptPayment.Create())" class="button primary">
+            <i class="fa fa-money"></i>
+            <span>@Admin.FinalPayment</span>
+        </a>
+        <a class="button primary" href="@Url.Action(MVC.Receipt.CheckOut())">
+            <i class="fa fa-undo"></i>
+            <span>@Admin.Return</span>
+        </a>
+    </div>
+    <div class="form-box-item">
+        <div class="proforma-wrapper">
+            <div class="proforma-row row-colored">
+                <div class="proforma-item nov-xs">
+                    <span class="proforma-title">@Admin.Date: </span>
+                    <span class="proforma-text">@Model.CurrentDate</span>
+                </div>
+            </div>
+            <div class="proforma-row">
+                <div class="proforma-item nov-xs">
+                    <span class="proforma-title">@Admin.TrackingCode: </span>
+                    <span class="proforma-text">@Model.TrackingCode</span>
+                </div>
+            </div>
+            <div class="proforma-row row-colored">
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.FullName: </span>
+                    <span class="proforma-text">@Model.FirstName @Model.LastName</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.NationalCode: </span>
+                    <span class="proforma-text">@Model.NationalCode</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.TransfereeName: </span>
+                    <span class="proforma-text">@Model.TransfereeName</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.Email: </span>
+                    <span class="proforma-text">@Model.Email</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.Phone: </span>
+                    <span class="proforma-text">@Model.HomeNumber</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.Mobile: </span>
+                    <span class="proforma-text">@Model.PhoneNumber</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.Province: </span>
+                    <span class="proforma-text">@Model.ProvinceName</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.City: </span>
+                    <span class="proforma-text">@Model.Address.City.Name</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-2 nov-lg-3">
+                    <span class="proforma-title">@Admin.PostalCode: </span>
+                    <span class="proforma-text">@Model.Address.PostalCode</span>
+                </div>
+                <div class="proforma-item nov-xs">
+                    <span class="proforma-title">@Admin.Address: </span>
+                    <span class="proforma-text">@Model.Address.Extra</span>
+                </div>
+            </div>
+            <div class="products-row">
+                @foreach (var option in Model.ReceiptOptions)
+                {
+                    <div class="proforma-row">
+                        <div class="proforma-item nov-xs nov-sm-2 nov-lg-4">
+                            <p class="proforma-title">@option.Title</p>
+                            <p>
+                                <span class="proforma-title">@Admin.ProductCode: </span>
+                                <span class="proforma-text">@option.Code</span>
+                            </p>
+                        </div>
+                        <div class="proforma-item nov-xs nov-sm-2 nov-lg-4">
+                            <p class="proforma-title">@option.CategoryTitle</p>
+                            <p>
+                                <span class="proforma-title">@Admin.Company: </span>
+                                <span class="proforma-text">@option.CompanyTitle</span>
+                            </p>
+                            <p>
+                                <span class="proforma-title">@Admin.CompanyCode: </span>
+                                <span class="proforma-text">@option.CompanyCode</span>
+                            </p>
+                        </div>
+                        <div class="proforma-item nov-xs nov-sm-2 nov-lg-4">
+                            <p>
+                                <span class="proforma-title">@Admin.PreviousPrice: </span>
+                                <span class="proforma-text">
+                                    @option.PreviousPrice.CastToRegularCurrency()
+                                    <span class="proforma-toman"> @Admin.Toman</span>
+                                </span>
+                            </p>
+                            <p>
+                                <span class="proforma-title">@Admin.DiscountPercent: </span>
+                                <span class="proforma-text">@option.DiscountPercent%</span>
+                            </p>
+                            <p>
+                                <span class="proforma-title">@Admin.UnitPrice: </span>
+                                <span class="proforma-text">
+                                    @option.Price.CastToRegularCurrency()
+                                    <span class="proforma-toman"> @Admin.Toman</span>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="proforma-item nov-xs nov-sm-2 nov-lg-4">
+                            <p>
+                                <span class="proforma-title">@Admin.Amount: </span>
+                                <span class="proforma-text">@option.Count</span>
+                            </p>
+                            <p>
+                                <span class="proforma-title">@Admin.TotalPrice: </span>
+                                <span class="proforma-text">
+                                    @option.TotalPrice.CastToRegularCurrency()
+                                    <span class="proforma-toman"> @Admin.Toman</span>
+                                </span>
+                            </p>
+                        </div>
+                        <hr class="proforma-hr">
+                    </div>
+                }
+            </div>
+            <div class="proforma-row row-colored">
+                <div class="proforma-item nov-xs">
+                    <div>
+                        <span class="proforma-title">@Admin.CartPrice: </span>
+                        <span class="proforma-text">
+                            @Model.TotalProductsPrice.CastToRegularCurrency()
+                            <span class="proforma-toman"> @Admin.Toman</span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="proforma-title">@Admin.DiscountCodePrice: </span>
+                        <span class="proforma-text">
+                            @Model.DiscountCodePrice
+                            <span class="proforma-toman"> @Admin.Toman</span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="proforma-title">@Admin.TransportationCost: </span>
+                        <span class="proforma-text">
+                            @Model.TransportationCost.CastToRegularCurrency()
+                            <span class="proforma-toman"> @Admin.Toman</span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="proforma-title">@Admin.PaymentPrice: </span>
+                        <span class="proforma-text">
+                            @Model.TotalProductsPrice.CastToRegularCurrency()
+                            <span class="proforma-toman"> @Admin.Toman</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="proforma-row">
+                <div class="proforma-item nov-xs nov-sm-1 nov-lg-2">
+                    <span class="proforma-title">@Admin.PaymentType: </span>
+                    <span class="proforma-text">@Model.Payment.ToString()</span>
+                </div>
+                <div class="proforma-item nov-xs nov-sm-1 nov-lg-2">
+                    <span class="proforma-title">@Admin.PostageDate: </span>
+                    <span class="proforma-text">@Admin.TwoToSevenDaysAfter</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

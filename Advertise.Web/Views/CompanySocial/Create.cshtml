@@ -1,0 +1,78 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanySocial.CompanySocialCreateViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.CreateSocialNetworks;
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.CreateSocialNetworks</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newCompanySocial" action="@Url.Action(MVC.CompanySocial.Create())" method="Post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="FacebookLink" class="rl-label">@Admin.Facebook</label>
+                    <input type="text" id="FacebookLink" name="FacebookLink" placeholder="@Admin.Facebook" class="tooltipster" title="@Admin.FacebookAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="InstagramLink" class="rl-label">@Admin.Instagram</label>
+                    <input type="text" id="InstagramLink" name="InstagramLink" placeholder="@Admin.Instagram" class="tooltipster" title="@Admin.InstagramAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="TelegramLink" class="rl-label">@Admin.Telegram</label>
+                    <input type="text" id="TelegramLink" name="TelegramLink" placeholder="@Admin.Telegram" class="tooltipster" title="@Admin.TelegramAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="GooglePlusLink" class="rl-label">@Admin.GooglePlus</label>
+                    <input type="text" id="GooglePlusLink" name="GooglePlusLink" placeholder="@Admin.GooglePlus" class="tooltipster" title="@Admin.GooglePlusAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="TwitterLink" class="rl-label">@Admin.Twitter</label>
+                    <input type="text" id="TwitterLink" name="TwitterLink" placeholder="@Admin.Twitter" class="tooltipster" title="@Admin.TwitterAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="YoutubeLink" class="rl-label">@Admin.YouTube</label>
+                    <input type="text" id="YoutubeLink" name="YoutubeLink" placeholder="@Admin.YouTube" class="tooltipster" title="@Admin.YouTubeAccount"/>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="newCompanySocial" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled"  onclick="javascript: form.action = '@Url.Action(MVC.CompanySocial.Create())';">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

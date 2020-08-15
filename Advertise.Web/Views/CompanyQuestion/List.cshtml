@@ -1,0 +1,33 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanyQuestion.CompanyQuestionListViewModel
+@{
+    Layout = Model.IsMine ? MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Model.IsMine ? Admin.ListMyConversations : Admin.ListConversations;
+    ViewBag.PageName = Model.IsMine != true ? "Conversations" : "myConversations";
+    ViewBag.HasSearchbar = true;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+        @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+        @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize)
+        @SearchItem.State(Model.StateTypeList, Model.SearchRequest.State)
+        @SearchItem.GridView()
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true){<text>لیست پرسش و پاسخ کمپانی ها</text>}else{<text>لیست پرسش و پاسخ کمپانی ها</text>}</h1>
+    </div>
+
+    <div class="landing-grids-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @Html.Partial(MVC.CompanyQuestion.Views._ListMore, Model.CompanyQuestions)
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+    </div>
+</div>

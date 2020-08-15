@@ -1,0 +1,91 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Core.Types
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.AdsPayment.AdsPaymentViewModel
+<div class="adspayment-item-wrapper round-corners-five">
+    @if (User.IsInRole(PermissionConst.CanAdsEdit) || User.IsInRole(PermissionConst.CanAdsEditApprove))
+    {
+        <div class="item-action">
+            <div class="item-edit-wrapper">
+                <i class="fa fa-pencil-square"></i>
+                <ul class="item-edit-list">
+                    @if (User.IsInRole(PermissionConst.CanAdsEdit))
+                    {
+                        <li>
+                            <a href="@Url.Action(MVC.Ads.Edit(Model.AdsId))">
+                                <span>@Admin.Edit</span>
+                                <i class="fa fa-pencil fa-flip-horizontal"></i>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanAdsEditApprove))
+                    {
+                        <li>
+                            <a data-on-click="ajaxSimple" data-param="@Url.Action(MVC.Ads.ApproveAjax(Model.AdsId))">
+                                <span>@Admin.Approve</span>
+                                <i class="fa fa-check-circle"></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+    <div class="adspayment-image">
+        <figure>
+            <img src="@(Model.AdsImage != null ? FileConst.ImagesWebPath.PlusWord(Model.AdsImage) : FileConst.NoPreview)" alt="@($"{Admin.Advertise} {Model.AdsTitle}")" />
+        </figure>
+    </div>
+    <div class="adspayment-info">
+        <p class="adspayment-title">@Model.AdsTitle</p>
+        <p>
+            <span>@Admin.TypeAd:</span>
+            <span>@(Model.AdsType == AdsType.Banner ? Admin.Banner : Admin.Slide)</span>
+        </p>
+        <p>
+            <span>@Admin.Position2:</span>
+            <a href="@(Model.AdsPositionType == AdsPositionType.AdsLandingPage ? Url.Action(MVC.Home.LandingPage()) : Url.Action(MVC.Category.Detail(Model.CategoryAlias,Model.CategoryMetaTitle.CastToSlug())))">
+                <span>@(Model.AdsPositionType == AdsPositionType.AdsLandingPage ? Admin.MainPage : Model.CategoryTitle)</span>
+            </a>
+        </p>
+        <p>
+            <span>@Admin.Client2:</span>
+            <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias,Model.CompanyTitle.CastToSlug()))">
+                <span>@Model.CompanyTitle</span>
+            </a>
+        </p>
+        <p>
+            <span>@Admin.AdvertiseFor:</span>
+            <a>
+                <span>این آگهی برای کجا استفاده میشود ؟!</span>
+            </a>
+        </p>
+        <p>
+            <span>@Admin.Priority:</span>
+            <span>@Model.AdsOrder</span>
+        </p>
+        <p>
+            <span>@Admin.ValidityDuration:</span>
+            <span>@Model.AdsDuration</span>
+        </p>
+        <p>
+            <span>@Admin.StartDay:</span>
+            <span>@Model.StartDay</span>
+        </p>
+        <p>
+            <span>@Admin.PurchaseDate:</span>
+            <span>@Model.CreatedOn.CastToRegularDate()</span>
+        </p>
+        <p>
+            <span>@Admin.PaymentPrice:</span>
+            <span>@Model.Amount.CastToRegularCurrency()</span>
+        </p>
+        <p>
+            <span>@Admin.TrackingCode:</span>
+            <span>@Model.ReferenceCode</span>
+        </p>
+    </div>
+    <div class="clearboth"></div>
+</div>

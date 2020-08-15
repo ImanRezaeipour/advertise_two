@@ -1,0 +1,29 @@
+﻿@using Advertise.Service.Managers.File
+<div class="landing-items nov-item-height-030">
+    <div class="product-item column landing-column">
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a href="@Url.Action(MVC.CompanyVideo.Create())">
+                            <div class="item-preview-image">
+                                <img src="@FileConst.NewItem" alt="@Admin.NewGalleryVideos">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="info-section">
+                <div class="middle-part">
+                    <a href="@Url.Action(MVC.CompanyVideo.Create())" class="middle-part-link">
+                        <p class="new-item-add">
+                            <i class="fa fa-plus-square"></i>
+                            <span>@Admin.NewGalleryVideos</span>
+                         </p>
+                     </a>
+                 </div>
+             </div>
+         </div>
+         <div class="clearboth"></div>
+     </div>
+ </div>

@@ -1,0 +1,151 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@using Advertise.Core.Helpers
+@using EnumHelper = Advertise.Core.Helpers.EnumHelper
+@model Advertise.Core.Models.Product.ProductBulkEditViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = "بروزرسانی محصولات";
+}
+@section scripts{
+    <script>
+        var categoryListJson = @Html.Raw(Model.CategoryListJson);
+        var catalogListJson = @Html.Raw(Model.CatalogListJson);
+    </script>
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>بروزرسانی محصولات</h4>
+    </div>
+    <div class="form-box-item product-catalog-form">
+        <form id="editProductBulk" action="@Url.Action(MVC.Product.BulkEdit())" method="post" data-on-load="validateProductBulk">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="catalogContainer">
+                @{ var indexProduct = 0; }
+                @foreach (var product in Model.ProductBulks)
+                {
+                    <div class="catalogItem round-corners-five" data-index="@indexProduct">
+                        <input type="hidden" id="ProductBulks_@(indexProduct)_.Id" name="ProductBulks[@indexProduct].Id" value="@product.Id"/>
+                        <input type="hidden" name="ProductBulks[@(indexProduct)].Index" value="@(indexProduct)" />
+                        <input type="hidden" id="categoryDefault" value="b55ee720-f0bc-7dc0-e160-39e0903ebbce" />
+                        
+                        <div class="input-container nov-seven-col nov-col-1">
+                            <label for="ProductBulks_@(indexProduct)_.CategoryId" class="rl-label @if (indexProduct != 0) {<text>catalog-temp-label</text>}">
+                                <span>@Admin.Category2</span>
+                            </label>
+                            <select id="ProductBulks_@(indexProduct)_.CategoryId" name="ProductBulks[@indexProduct].CategoryId" data-on-load="dropdownCategoryList" value="@product.CategoryId" disabled></select>
+                        </div>
+
+                        <div class="input-container nov-seven-col nov-col-2">
+                            <label for="ProductBulks_@(indexProduct)_.CatalogId" class="rl-label @if (indexProduct != 0) {<text>catalog-temp-label</text>}">
+                                <span>کالا</span>
+                            </label>
+                            @if (product.CatalogId == null)
+                            {
+                                <input type="text" value="محصول" disabled/>
+                            }
+                            else
+                            {
+                                <select id="ProductBulks_@(indexProduct)_.CatalogId" name="ProductBulks[@indexProduct].CatalogId" data-on-load="dropdownCatalogList" value="@product.CatalogId" disabled></select>
+                            }
+                        </div>
+
+                        <div class="input-container nov-seven-col nov-col-3">
+                            <label for="ProductBulks_@(indexProduct)_.Color" class="rl-label @if (indexProduct != 0) {<text>catalog-temp-label</text>}">
+                                <span>@Admin.Color</span>
+                            </label>
+                            <select id="ProductBulks_@(indexProduct)_.Color" name="ProductBulks[@indexProduct].Color" data-on-load="dropdownSimple">
+                                @foreach (var color in Model.ColorList)
+                                {
+                                    <option value="@color.Value" @if (color.Value == product.Color.ToInt32().ToString()) {<text>selected</text>}>@color.Text (@(EnumHelper.GetText<ColorType>(color.Value.ToInt32())))</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="input-container nov-seven-col nov-col-4">
+                            <label for="ProductBulks_@(indexProduct)_.GuaranteeId" class="rl-label @if (indexProduct != 0) {<text>catalog-temp-label</text>}">
+                                <span>@Admin.Guarantee</span>
+                            </label>
+                            <select id="ProductBulks_@(indexProduct)_.GuaranteeId" name="ProductBulks[@indexProduct].GuaranteeId" value="@product.GuaranteeId" data-on-load="dropdownProductBulk">
+                                @if (product.GuaranteeTitle.IsNotNullOrEmpty())
+                                {
+                                    <option value="@product.GuaranteeTitle" selected>@product.GuaranteeTitle</option>
+                                }
+                                @foreach (var guarantee in Model.GuaranteeList)
+                                {
+                                    <option value="@guarantee.Value" selected="@(guarantee.Value == product.GuaranteeId)">@guarantee.Text</option>
+                                }
+                            </select> 
+                        </div>
+
+                        <div class="input-container nov-seven-col nov-col-5">
+                            <label for="ProductBulks_@(indexProduct)_.Price" class="rl-label @if (indexProduct != 0) {<text>catalog-temp-label</text>}">
+                                <span>@Admin.Price (@Admin.Toman)</span>
+                            </label>
+                            <input type="text" id="ProductBulks_@(indexProduct)_.Price" name="ProductBulks[@indexProduct].Price" value="@product.Price"/>
+                        </div>
+
+                        <div class="input-container nov-seven-col nov-col-6">
+                            <label for="ProductBulks_@(indexProduct)_.AvailableCount" class="rl-label @if (indexProduct != 0) {<text>catalog-temp-label</text>}">
+                                <span>@Admin.Available</span>
+                            </label>
+                            <input type="text" id="ProductBulks_@(indexProduct)_.AvailableCount" name="ProductBulks[@(indexProduct)].AvailableCount" value="@product.AvailableCount"/>
+                        </div>
+
+                        <div class="input-container nov-seven-col nov-col-7">
+                            <label for="ProductBulks_@(indexProduct)_.IsSecondHand" class="rl-label @if (indexProduct != 0) {<text>catalog-temp-label</text>}">
+                                <span>@Admin.State</span>
+                            </label>
+                            <select id="ProductBulks_@(indexProduct)_.IsSecondHand" name="ProductBulks[@(indexProduct)].IsSecondHand" value="@product.IsSecondHand.ToInt32()" data-on-load="dropdownSimple" data-on-change="toggleCatalogSecondHand">
+                                <option value="0">نو</option>
+                                <option value="1">کار کرده</option>
+                            </select>
+                        </div>
+                        
+                        @if (product.IsSecondHand == true)
+                        {
+                            <div class="catalogExtra">
+                                <div class="input-container">
+                                    <label for="ProductBulks_@(indexProduct)_.SecondHandCode" class="rl-label">
+                                        <span>@Admin.Code</span>
+                                    </label>
+                                    <input type="text" id="ProductBulks_@(indexProduct)_.SecondHandCode" name="ProductBulks[@(indexProduct)].SecondHandCode" value="@product.SecondHandCode"/>
+                                </div>
+
+                                <div class="input-container">
+                                    <label for="ProductBulks_@(indexProduct)_.Description" class="rl-label">
+                                        <span>@Admin.Description</span>
+                                    </label>
+                                    <textarea type="text" id="ProductBulks_@(indexProduct)_.Description" name="ProductBulks[@(indexProduct)].Description">@product.Description</textarea>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="clearboth"></div>
+                    </div>
+                    indexProduct = indexProduct + 1;
+                }
+            </div>
+            <div class="catalogItemExtra">
+                @Html.Partial(MVC.Product.Views._CatalogItemExtra)
+            </div>
+            @if (ViewBag.IsEditCatalog != true)
+            {
+                <div class="catalogItemTemplate">
+                    @Html.Partial(MVC.Product.Views._CatalogItemTemplate)
+                </div>
+                @Html.Partial(MVC.Product.Views._CatalogAddButton)
+            }
+            <div class="form-button-container">
+                <button type="submit" form="editProductBulk" class="form-button ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                    <i class="fa fa-check-circle"></i>
+                    <span>ویرایش و ذخیره نهایی</span>
+                </button>
+            </div>
+
+            <div class="input-container"></div>
+        </form>
+    </div>
+</div>

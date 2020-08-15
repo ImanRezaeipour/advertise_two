@@ -1,0 +1,77 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.CompanyAttachment.CompanyAttachmentDetailViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Model.Title;
+    ViewBag.Keywords = "";
+    ViewBag.Description = "";
+}
+@*@section og {
+    <meta property="og:image" content="@Model.Files.First().FileIcon">
+}*@
+@section sitemap {
+    <div class="site-map">
+        <div id="SiteMap">
+            @*@Html.Action(MVC.Category.BreadCrumb(Model.Id, null, true))*@
+        </div>
+    </div>
+}
+<div class="detail-wrapper">
+    <div class="main-content">
+        <div class="gallery-container">
+            <div class="headline primary">
+                <h4><i class="fa fa-paperclip fa-flip-horizontal"></i> @Model.Title</h4>
+            </div>
+            <div class="attachment-items-wrapper">
+                @foreach (var file in Model.Files)
+                {
+                    <div class="attachment-item-wrapper">
+                        <div class="attachment-item">
+                            <figure>
+                                <img src="@file.FileIcon" alt="@file.FileExtension icon" />
+                            </figure>
+                            <span class="file-title">@file.Title</span>
+                            <span class="file-format"><b>@Admin.Format: </b>@file.FileExtension</span>
+                            <span class="file-size"><b>@Admin.SizeVolume:</b> @file.FileSize</span>
+                            <a href="@FileConst.ImagesWebPath.PlusWord(file.FileName)" target="_blank">
+                                <span class="file-download"><i class="fa fa-download"></i> @Admin.Download</span>
+                            </a>
+                        </div>
+                    </div>
+                }
+                <div class="clearboth"></div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias,Model.CompanyTitle.CastToSlug()))">
+            <figure class="company-logo">
+                <img src="@if (Model.CompanyLogo !=null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.CompanyLogo)</text>} else {<text>@FileConst.NoLogo</text>}" alt="@Model.CompanyTitle.PlusWord(Admin.Logo)" />
+            </figure>
+        </a>
+        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias,Model.CompanyTitle.CastToSlug()))">
+            <h4>@Model.CompanyTitle</h4>
+        </a>
+    </div>
+    <div class="side-content">
+        <div class="headline primary">
+            <h4><i class="fa fa-plus-circle"></i> @Admin.ListAttachmnt</h4>
+        </div>
+        <div class="product-showcase detail-case">
+            <div id="productlistContainer" class="landing-items-wrapper landing-items-disp">
+                <div class="product-list grid">
+                    <div class="landing-column-wrapper">
+                        @*@Html.Partial(MVC.CompanyAttachments.Views._ListMore, Model.Attachments)*@
+                        @if (Model.IsMyself)
+                        {
+                            @Html.Partial(MVC.CompanyAttachment.Views._AddItem)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearboth"></div>
+</div>

@@ -1,0 +1,119 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.SeoSetting.SeoSettingEditViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "تنظیمات سئو";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>تنظیمات سئو</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editSeoSetting" action="@Url.Action(MVC.SeoSetting.Edit())" method="Post" data-on-load="validateSeoSetting">
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+            
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="IsCssBundlingEnabled" class="rl-label">آیا استایل ها فشرده شوند</label>
+                    <input type="checkbox" id="IsCssBundlingEnabled" name="IsCssBundlingEnabled" @if (Model.IsCssBundlingEnabled){<text> checked</text>} placeholder="آیا استایل ها فشرده شوند" class="tooltipster" title="آیا استایل ها فشرده شوند"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="IsJsBundlingEnabled" class="rl-label">آیا اسکریپت ها فشرده شوند</label>
+                    <input type="checkbox" id="IsJsBundlingEnabled" name="IsJsBundlingEnabled" @if (Model.IsJsBundlingEnabled){<text> checked</text>} placeholder="آیا اسکریپت ها فشرده شوند" class="tooltipster" title="آیا اسکریپت ها فشرده شوند"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="PageTitleSeparator" class="rl-label">جدا کننده عنوان صفحات</label>
+                    <input type="text" id="PageTitleSeparator" name="PageTitleSeparator" placeholder="جدا کننده عنوان صفحات" value="@Model.PageTitleSeparator" class="tooltipster" title="جدا کننده عنوان صفحات"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="WwwRequirement" class="rl-label">
+                        <span>وضعیت www</span>
+                        <i class="fa fa-question-circle tooltipster" title="وضعیت www"></i>
+                    </label>
+                    <select id="WwwRequirement" name="WwwRequirement">
+                        <option>--- @Admin.Choose ---</option>
+                        @foreach (var wwwRequirement in Model.WwwRequirementList)
+                        {
+                            <option value="@wwwRequirement.Value" @if (Model.WwwRequirement.ToString() == wwwRequirement.Value){<text> selected</text>}>@wwwRequirement.Text</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="IsCanonicalUrlEnabled" class="rl-label">آیا آدرس یکتا فعال باشد</label>
+                    <input type="checkbox" id="IsCanonicalUrlEnabled" name="IsCanonicalUrlEnabled" @if (Model.IsCanonicalUrlEnabled){<text> checked</text>} placeholder="آیا آدرس یکتا فعال باشد" class="tooltipster" title="آیا آدرس یکتا فعال باشد"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="HasTwitterMetaTags" class="rl-label">آیا دارای متاتگ توییتر باشد</label>
+                    <input type="checkbox" id="HasTwitterMetaTags" name="HasTwitterMetaTags" @if (Model.HasTwitterMetaTags){<text> checked</text>} placeholder="آیا دارای متاتگ توییتر باشد" class="tooltipster" title="آیا دارای متاتگ توییتر باشد"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="HasOpenGraphMetaTags" class="rl-label">آیا دارای متاتگ اوپن گراف باشد</label>
+                    <input type="checkbox" id="HasOpenGraphMetaTags" name="HasOpenGraphMetaTags" @if (Model.HasOpenGraphMetaTags){<text> checked</text>} placeholder="آیا دارای متاتگ اوپن گراف باشد" class="tooltipster" title="آیا دارای متاتگ اوپن گراف باشد"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="DefaultTitle" class="rl-label">عنوان پیش فرض صفحات</label>
+                    <input type="text" id="DefaultTitle" name="DefaultTitle" placeholder="عنوان پیش فرض صفحات" value="@Model.DefaultTitle" class="tooltipster" title="عنوان پیش فرض صفحات"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="DefaultMetaKeywords" class="rl-label">عنوان پیش فرض کلمات کلیدی</label>
+                    <input type="text" id="DefaultMetaKeywords" name="DefaultMetaKeywords" placeholder="عنوان پیش فرض کلمات کلیدی" value="@Model.DefaultMetaKeywords" class="tooltipster" title="عنوان پیش فرض کلمات کلیدی"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="DefaultMetaDescription" class="rl-label">عنوان پیش فرض توضیحات متا</label>
+                    <input type="text" id="DefaultMetaDescription" name="DefaultMetaDescription" placeholder="عنوان پیش فرض توضیحات متا" value="@Model.DefaultMetaDescription" class="tooltipster" title="عنوان پیش فرض توضیحات متا"/>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="newSeoUrl" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

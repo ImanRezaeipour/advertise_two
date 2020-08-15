@@ -1,0 +1,207 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.Product.ProductCreateViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.ProductRegister;
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.ProductRegister</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newProduct" action="@Url.Action(MVC.Product.Create())" method="post" data-on-load="validateProduct">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="CategoryId" class="rl-label">
+                        <span>@Admin.Category2</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductCategory"></i>
+                    </label>
+                    <div id="CategoryTree" style="direction: rtl" class="tree" data-on-load="treeCategoryProduct"></div>
+                    <input type="hidden" id="CategoryId" name="CategoryId" value="@Model.CategoryId" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">
+                        <span>@Admin.Title</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.Title"></i>
+                    </label>
+                    <input type="text" title="@Admin.ItShowsProductName" id="Title" name="Title" class="tooltipster" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="PreviousPrice" class="rl-label">
+                        <span>@Admin.PreviousPrice.PlusWord(" (").PlusWord(Admin.Toman).PlusWord(")")</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsPreviousPrice"></i>
+                    </label>
+                    <input type="text" id="PreviousPrice" name="PreviousPrice" placeholder="@Admin.PreviousPrice" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Price" class="rl-label">
+                        <span>@Admin.Price.PlusWord(" (").PlusWord(Admin.Toman).PlusWord(")")</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsPrice"></i>
+                    </label>
+                    <input type="text" id="Price" name="Price" placeholder="@Admin.Price" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="sell" class="rl-label">
+                        <span>@Admin.State</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductState"></i>
+                    </label>
+                    <select id="sell" name="sell">
+                        @foreach (var sellType in Model.SellTypeList)
+                        {
+                            <option value="@sellType.Value">@sellType.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="description" class="rl-label">
+                        <span>@Admin.Explanations</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItDescribesProduct"></i>
+                    </label>
+                    <textarea type="text" id="description" name="Description" data-on-load="editorProductDescription" rows="4"></textarea>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="files" class="rl-label">
+                        <span>@Admin.Preview</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsPreviewImage"></i>
+                    </label>
+                    @Html.Partial(MVC.Shared.Views._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderProductImage"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="files2" class="rl-label">
+                        <span>@Admin.Galery</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsImagesGallery"></i>
+                    </label>
+                    @Html.Partial(MVC.Shared.Views._FineUploaderTemplate)
+                    <div name="files2" id="files2" data-on-load="uploaderProductImages"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>کلمات کلیدی</span>
+                        <i class="fa fa-question-circle tooltipster" title="کلمات کلیدی"></i>
+                    </label>
+                    <select id="ProductKeywords" name="ProductKeywords[]" data-on-load="dropdownMulti">
+                        @foreach (var keyword in Model.KeywordList)
+            {
+                            <option value="@keyword.Value">@keyword.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.Tags</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductTags"></i>
+                    </label>
+                    <div>
+                        @{
+                            var index = 0;
+                            foreach (var tag in Model.Tags)
+                            {
+                                <label style="display: inline-block;">
+                                    <input type="hidden" name="ProductTags.Index" value="@index" />
+                                    <input type="checkbox" class="" name="ProductTags[@index].TagId" value="@tag.Id" />
+                                    <span>@tag.Title</span>
+                                </label>
+                                index = index + 1;
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="clearboth"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.Specification</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductSpecifications"></i>
+                    </label>
+                    <div id="specificationContainer">
+                        <span>@Admin.RequiredCategory</span>
+                    </div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.Features</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductFeatures"></i>
+                    </label>
+                    <div class="tree">
+                        <div id="items">
+                            <div id="item" data-index="0">
+                                <input type="hidden" name="Features.Index" value="0" />
+                                <input type="text" id="Features[0].Title" name="Features[0].Title" style="width: 85%; display: inline-block; margin-bottom: 10px;" />
+                                <button type="button" class="button primary" data-on-click="removeFeatures" data-param="0" style="width: 10%; display: inline-block; height: 40px; margin-bottom: 10px;">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="button primary" type="button" data-on-click="addFeatures" style="height: 40px; margin-bottom: 10px;">
+                            <i class="fa fa-plus-square"></i>
+                            <span>@Admin.AddNewFeature</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            <button type="submit" form="newProduct" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

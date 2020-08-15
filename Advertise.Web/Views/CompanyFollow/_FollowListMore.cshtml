@@ -1,0 +1,6 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model IEnumerable<Advertise.Core.Models.CompanyFollow.CompanyFollowViewModel>
+@foreach (var item in Model)
+{
+    @Html.Partial(MVC.CompanyFollow.Views._FollowItem, item)
+}

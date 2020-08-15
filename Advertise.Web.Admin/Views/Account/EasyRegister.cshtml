@@ -1,0 +1,149 @@
+﻿@* Generator: MvcHelper GeneratePrettyNames: true *@
+@model Advertise.Core.Models.UserOperator.UserOperatorCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.CreateAccount;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.Register</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="register" method="Post" data-on-load="validateUserOperator">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-envelope register-icon"></i>
+                    <label for="Email" class="rl-label register-label">@Admin.Email</label>
+                    <input type="text" id="Email" name="Email" class="register-input">
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-envelope register-icon"></i>
+                    <label for="FirstName" class="rl-label register-label">@Admin.FirstName</label>
+                    <input type="text" id="FirstName" name="FirstName" class="register-input">
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-envelope register-icon"></i>
+                    <label for="LastName" class="rl-label register-label">@Admin.LastName</label>
+                    <input type="text" id="LastName" name="LastName" class="register-input">
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-envelope register-icon"></i>
+                    <label for="CompanyTitle" class="rl-label register-label">@Admin.CompanyName</label>
+                    <input type="text" id="CompanyTitle" name="CompanyTitle" class="register-input">
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-envelope register-icon"></i>
+                    <label for="Alias" class="rl-label register-label">@Admin.AliasTitle</label>
+                    <label id="CompanyAliasCheck" class="rl-label register-label"></label>
+                    <input type="text" id="Alias" name="Alias" class="register-input" placeholder="@Admin.DomainName" />
+                    <button id="checkAliasButton" type="button" class="button mid-short" data-on-click="ajaxCheckAlias">
+                        <span class="primary">چک کردن</span>
+                    </button>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-envelope register-icon"></i>
+                    <label for="MobileNumber" class="rl-label register-label">@Admin.Mobile</label>
+                    <input type="text" id="MobileNumber" name="MobileNumber" class="register-input" placeholder="@Admin.ExampleMobileNumber">
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-envelope register-icon"></i>
+                    <label for="Amount" class="rl-label register-label">مبلغ پنل</label>
+                    <input type="text" id="Amount" name="Amount" class="register-input">
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-envelope register-icon"></i>
+                    <label for="Description" class="rl-label register-label">@Admin.Description</label>
+                    <input type="text" id="Description" name="Description" class="register-input">
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <i class="fa fa-asterisk register-icon"></i>
+                    <label for="Password" class="rl-label register-label">@Admin.PassWord</label>
+                    <input type="text" id="Password" name="Password" class="register-input">
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="RoleId" class="rl-label">@Admin.AddRole</label>
+                    <select id="RoleId" name="RoleId">
+                        @foreach (var type in Model.RoleList)
+                        {
+                            <option value="@type.Value" @if (Model.RoleId.ToString() == type.Value) { <text> selected</text>}>@type.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="PaymentType" class="rl-label">@Admin.PaymentType</label>
+                    <select id="PaymentType" name="PaymentType">
+                        @foreach (var type in Model.PaymentTypeList)
+                        {
+                            <option value="@type.Value" @if (Model.PaymentType.ToString() == type.Value) { <text> selected</text>}>@type.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="CategoryId" class="rl-label">@Admin.FieldOfActivity</label>
+                    <input type="hidden" id="CategoryId" name="CategoryId" value="@Model.CategoryId" data-val="true" data-val-required="@Admin.RequiredCategory" />
+                    <div id="CategoryTree" style="direction: rtl" class="tree" data-on-load="treeCategoryCompany"></div>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            <button form="register" type="submit" id="registerbutt" name="registerbutt" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" onclick="javascript: form.action = '@Url.Action(MVC.Account.EasyRegister())';">
+                <span class="primary">@Admin.Register</span>
+            </button>
+        </div>
+    </div>
+</div>

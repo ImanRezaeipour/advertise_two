@@ -1,0 +1,94 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Specification.SpecificationViewModel
+<div class="landing-items nov-item-height-031">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(PermissionConst.CanSpecificationEdit) || User.IsInRole(PermissionConst.CanSpecificationDeleteAjax))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanSpecificationEdit))
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.Specification.Edit(Model.Id))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanSpecificationDeleteAjax))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.Specification.DeleteAjax(Model.Id))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>    
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <div class="item-preview-image">
+                            <img src="@FileConst.Specification" alt="@Admin.Specification.PlusWord(" ").PlusWord(Model.Title)">
+                        </div>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="javascript:void(0)">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a>
+                        <p>
+                            <span>@Admin.Priority.PlusWord(": ")</span>
+                            <span>@Model.Order</span>
+                        </p>
+                    </a>
+                </div>
+                <div class="middle-part">
+                    <p>
+                        <i class="fa fa-calendar-check-o"></i>
+                        <span>@Admin.InsertDate.PlusWord(":")</span>
+                    </p>
+                </div>
+                <div class="bottom-part">
+                    <p>@Model.CreatedOn.CastToRegularDate()</p>
+                </div>
+            </div>
+        </div>
+        <div class="nov-item-footer">
+            <hr class="line-separator item-footer">
+            <div class="overview-section">
+                <div class="image-part">
+                    <figure class="user-avatar small">
+                        <a @if (Model.CategoryImageFileName != null) { <text> href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias, Model.CategoryMetaTitle.CastToSlug()))" </text> }>
+                            <div class="novinak-image">
+                                <img src="@if (Model.CategoryImageFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.CategoryImageFileName)</text>} else {<text>@FileConst.NoPreview</text>}" alt="@Model.CategoryTitle">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+                <div class="caption-part">
+                    <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias, Model.CategoryMetaTitle))" class="tooltipster" title="@Model.CategoryTitle">
+                        <p class="part-five text-header tiny">@Model.CategoryTitle</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

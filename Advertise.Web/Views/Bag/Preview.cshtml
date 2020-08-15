@@ -1,0 +1,37 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.Cart;
+}
+<div class="dashboard-content">
+    <div class="headline purchases primary">
+        <h4>@Admin.Cart</h4>
+    </div>
+    <div class="purchases-list">
+        <p class="purchases-no-item">@Admin.YourCartIsEmpty</p>
+        <div class="purchases-list-header">
+            <div class="purchases-list-header-date">
+                <p class="text-header small">@Admin.DateAndTime</p>
+            </div>
+            <div class="purchases-list-header-details">
+                <p class="text-header small">@Admin.ProductDetails</p>
+            </div>
+            <div class="purchases-list-header-info">
+                <p class="text-header small">@Admin.AdditionalInfo</p>
+            </div>
+            <div class="purchases-list-header-download">
+                <p class="text-header small">@Admin.UnitPrice</p>
+            </div>
+            <div class="purchases-list-header-price">
+                <p class="text-header small">@Admin.Amount</p>
+            </div>
+            <div class="purchases-list-header-recommend">
+                <p class="text-header small">@Admin.TotalPrice</p>
+            </div>
+        </div>
+        <div class="bag-total-list-wrapper">
+            <div class="bagListContainer" data-on-load="loadBagList" data-param="@Model.Id"></div>
+        </div>
+        <p class="total-price"></p>
+    </div>
+</div>

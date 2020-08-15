@@ -1,0 +1,94 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Home.ProfileViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.ProfilePage;
+}
+<div class="profile-content">
+    @if (Model.IsSetCompanyAlias != true && User.IsInRole(PermissionConst.CanCompanyMyEdit) != true)
+    {
+        <div class="profile-page profile-regular-message">
+            <p class="profile-message-title">
+                <i class="fa fa-briefcase"></i> 
+                @Admin.GetBusinessManagemnetPanel
+            </p>
+            <p class="profile-message-text">@Admin.MessageGetBusinessManagementPanel</p>
+            <div class="profile-message-btn-container">
+                <a href="@Url.Action(MVC.Page.Costs())" class="profile-message-link">
+                    <span>@Admin.GetBusinessManagemnetPanel</span>
+                </a>
+            </div>
+        </div>
+    }
+    @if (Model.IsSetCompanyAlias != true && User.IsInRole(PermissionConst.CanCompanyMyEdit))
+    {
+        <div class="profile-page profile-warning-message">
+            <p class="profile-message-title">
+                <i class="fa fa-exclamation-circle"></i> 
+                @Admin.ChoosingDomainName
+            </p>
+            <p class="profile-message-text">@Admin.WarningChoosingDomainNameMessage</p>
+            <div class="profile-message-btn-container">
+                <a href="@Url.Action(MVC.Company.MyEdit())" class="profile-message-link">
+                    <span>@Admin.ChoosingDomainName</span>
+                </a>
+            </div>
+        </div>
+    }
+    @if (Model.IsSetUsername != true)
+    {
+        <div class="profile-page profile-warning-message">
+            <p class="profile-message-title">
+                <i class="fa fa-exclamation-circle"></i> 
+                @Admin.ChoosingUsername
+            </p>
+            <p class="profile-message-text">@Admin.WarningChoosingUsernameMessage</p>
+            <div class="profile-message-btn-container">
+                <a href="@Url.Action(MVC.User.MyEdit())" class="profile-message-link">
+                    <span>@Admin.ChoosingUsername</span>
+                </a>
+            </div>
+        </div>
+    }
+    @if (Model.IsSetCompanyAlias)
+    {
+        <div class="profile-statistics-box profile-statistics-products">
+            <p class="profile-statistics-title">
+                <i class="fa fa-cubes"></i> 
+                @Admin.Products.PlusWord(":")
+            </p>
+            <div class="profile-statistics-count-wrapper">
+                <p class="profile-statistics-count">@Model.ProductApprovedCount.ToString()</p>
+            </div>
+        </div>
+        <div class="profile-statistics-box profile-statistics-followers">
+            <p class="profile-statistics-title">
+                <i class="fa fa-users"></i> 
+                @Admin.Followers.PlusWord(":")
+            </p>
+            <div class="profile-statistics-count-wrapper">
+                <p class="profile-statistics-count">@Model.FollowersCount.ToString()</p>
+            </div>
+        </div>
+    }
+    @if (Model.IsSetCompanyAlias && User.IsInRole(PermissionConst.CanProductCreate))
+    {
+        <div class="profile-statistics-box profile-create-product">
+            <p class="profile-statistics-title">
+                <i class="fa fa-cube"></i> 
+                @Admin.AddProduct.PlusWord(":")
+            </p>
+            <div class="profile-statistics-count-wrapper">
+                <a href="@Url.Action(MVC.Product.Create())">
+                    <p class="profile-statistics-count">
+                        <i class="fa fa-plus"></i>
+                    </p>
+                </a>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    }
+</div>
+

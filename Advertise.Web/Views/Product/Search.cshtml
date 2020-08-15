@@ -1,0 +1,123 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@using Advertise.Core.Utilities
+@using EnumHelper = Advertise.Core.Helpers.EnumHelper
+@model Advertise.Core.Models.Product.ProductSearchViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Admin.SearchProducts;
+    ViewBag.PageName = "searchProductList";
+}
+<div class="search-page">
+    <div class="search-page-main">
+        <div class="search-page-content search-fields-container">
+            <div class="search-field">
+                <label class="search-field-title"><span><span id="SearchCategory" class="search-category-title">گوشی موبایل </span>(<span id="SearchResultCount" class="search-result-count">0 </span>نتیجه)</span></label>
+            </div>
+            <div class="search-field">
+                <div id="searchboxContainer" class="input-container lists-header searchbar-header-container">
+                    <input type="text" class="searchbar-lists-header" name="term" value="@(Request.QueryString["term"])" id="searchProduct" placeholder="جستجو در نتایج ..." data-on-keyPress="changeSearchTerm" />
+                    <button class="button secondary" type="button" data-on-click="changeSearchInputTerm">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="search-field">
+                <label class="search-field-title"><span>مرتب سازی:</span></label>
+                <div class="search-field-input">
+                    <select>
+                        <option>کمترین قیمت</option>
+                        <option>بیشترین قیمت</option>
+                        <option>آخرین بروز رسانی</option>
+                        <option>جدیدترین</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-field">
+                <label class="search-field-title">نحوه نمایش:</label>
+                <div class="view-types-wrapper">
+                    <div class="grid-view-holder tooltipster" title="@Admin.ListView" data-on-click="renderView" data-param="grid">
+                        <i class="fa fa-th-list fa-flip-horizontal"></i>
+                    </div>
+                    <div class="item-view-holder tooltipster" title="@Admin.GridView" data-on-click="renderView" data-param="item">
+                        <i class="fa fa-th"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-page-side-wrapper" data-expand="collapse">
+        <div class="search-page-side" data-expand="collapse">
+            <h6 class="search-filter-button" data-on-click="searchFilterButtonToggle"><i class="fa fa-filter"></i> فیلتر‌های جستجو <i id="searchSideAngle" class="fa fa-angle-down left-angle-icon"></i></h6>
+            <ul class="search-filter-list" data-on-load="searchFilterToggleExpand">
+                <li class="search-filter-item" data-expand="expand">
+                    <h6 class="search-filter-title">انتخاب‌های شما<i class="fa fa-angle-up left-angle-icon"></i></h6>
+                    <div class="search-filter">
+                        <div class="search-tag-container">
+                            @foreach (var item in Model.RequestValues)
+                            {
+                                <div class="search-tag round-corners-three">
+                                    <span class="search-tag-text">@item.Description</span>
+                                    <a href="javascript:void(0)" class="search-tag-delete" data-on-click="removeQueryString" name="@item.Value" value="@item.Text">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </li>
+                <li class="search-filter-item" data-expand="expand">
+                    <h6 class="search-filter-title">@Admin.Category2<i class="fa fa-angle-up left-angle-icon"></i></h6>
+                    <div class="search-filter">
+                        <div id="SearchTree" style="direction: rtl" data-on-load="treeSearch" data-param="@Model.SearchRequest.CategoryAlias"></div>
+                    </div>
+                </li>
+                <li class="search-filter-item" data-expand="expand">
+                    <h6 class="search-filter-title">@Admin.Price<i class="fa fa-angle-up left-angle-icon"></i></h6>
+                    <div class="search-filter price-range-filter">
+                        <input id="price" name="price" class="hide-none" value="@Model.SearchRequest.Price" type="text" data-on-load="ionRangeSlider" data-min="@Model.MinPrice" data-max="@Model.MaxPrice">
+                        <a href="javascript:void(0)" class="normal-button blue-button round-corners-five" data-on-click="addPriceToQueryString">
+                            <span>اعمال فیلتر قیمت</span>
+                        </a>
+                    </div>
+                </li>
+                @Html.Partial(MVC.Product.Views._ListSpecification, Model.Specifications)
+                <li class="search-filter-item" data-expand="collapse">
+                    <h6 class="search-filter-title">@Admin.Color<i class="fa fa-angle-down left-angle-icon"></i></h6>
+                    <div class="search-filter">
+                        @foreach (var color in Model.Colors)
+                        {
+                            <div class="color-box-wrapper tag-@(EnumHelper.GetText<ColorType>(color.Value.ToInt32())) @if(color.Selected) {<text>hasSelected</text>} tooltip" title="@(EnumHelper.GetText<ColorType>(color.Value.ToInt32()))" name="color" value="@color.Value" data-on-click="navigateSearch"></div>
+                        }
+                    </div>
+                </li>
+                <li class="search-filter-item" data-expand="collapse">
+                    <h6 class="search-filter-title">@Admin.City<i class="fa fa-angle-down left-angle-icon"></i></h6>
+                    <div class="search-filter">
+                        <select name="StateId" id="StateId" data-on-change="navigate">
+                            <option value="" selected>-- @Admin.All --</option>
+                            @foreach (var city in Model.CityList)
+                            {
+                                <option value="@city.Value" @if (city.Value == Model.SearchRequest.StateId.ToString()) { <text> selected</text>}>@city.Text</option>
+                            }
+                        </select>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="search-page-main">
+        <div class="search-page-content">
+            <div class="landing-items-wrapper">
+                <div class="product-list grid">
+                    <div class="landing-column-wrapper">
+                        @Html.Partial(MVC.Product.Views._ListMore, Model.Products)
+                    </div>
+                </div>
+            </div>
+            <div class="pager">
+                @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+            </div>
+        </div>
+    </div>
+</div>

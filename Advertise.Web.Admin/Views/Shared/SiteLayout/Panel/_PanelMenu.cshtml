@@ -1,0 +1,565 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Services.Permissions
+
+<div id="dashboard-options-menu" class="side-menu dashboard left closed">
+    <svg class="svg-plus">
+        <use xlink:href="#svg-plus"></use>
+    </svg>
+    @Html.Action(MVC.Panel.Header())
+    <ul class="dropdown dark hover-effect interactive">
+        @if (User.IsInRole(PermissionConst.CanHomeBoardPage))
+        {
+            <li class="dropdown-item interactive">
+                <a href="@Url.Action(MVC.Panel.Board())">
+                    <span class="sl-icon fa fa-archive"></span>
+                    <span>@Admin.ManagementPanel</span>
+                </a>
+            </li>
+        }
+
+        @if (true)
+        {
+            <li class="dropdown-item interactive">
+                <a href="#">
+                    <span class="sl-icon fa fa-list-ul fa-flip-horizontal"></span>
+                    <span>@Admin.ManageCategories</span>
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                </a>
+                <ul class="inner-dropdown">
+                    @if (User.IsInRole(PermissionConst.CanCategoryList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Category.List())">
+                                <i class="fa fa-list-ol"></i>
+                                <span>@Admin.ListCategories</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanSpecificationList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Specification.List())">
+                                <i class="fa fa-list"></i>
+                                <span>@Admin.ListSpecifications</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCategoryReviewList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.CategoryReview.List())">
+                                <i class="fa fa-comments-o"></i>
+                                <span>@Admin.ListReviews</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCatalogList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Catalog.List())">
+                                <i class="fa fa-comments-o"></i>
+                                <span>لیست کاتالوگ ها</span>
+                            </a>
+                        </li>
+                    }
+                    
+                    @if (User.IsInRole(PermissionConst.CanManufacturerList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Manufacturer.List())">
+                                <i class="fa fa-comments-o"></i>
+                                <span>لیست برند ها</span>
+                            </a>
+                        </li>
+                    } 
+                    @if (User.IsInRole(PermissionConst.CanGuaranteeCreate))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Guarantee.List())">
+                                <i class="fa fa-comments-o"></i>
+                                <span>لیست گارانتی ها</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+
+        @if (true)
+        {
+            <li class="dropdown-item interactive">
+                <a href="#">
+                    <span class="sl-icon fa fa-briefcase"></span>
+                    <span>@Admin.ManageCompanies</span>
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                </a>
+                <ul class="inner-dropdown">
+                    @if (User.IsInRole(PermissionConst.CanCompanyList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Company.List())">
+                                <i class="fa fa-list-ol"></i>
+                                <span>@Admin.ListCompany</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCompanyAttachmentList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.CompanyAttachment.List())">
+                                <i class="fa fa-columns"></i>
+                                <span>@Admin.ListFiles</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCompanyImageList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.CompanyImage.List())">
+                                <i class="fa fa-image"></i>
+                                <span>@Admin.ListGalleryImages</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCompanyVideoList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.CompanyVideo.List())">
+                                <i class="fa fa-video-camera fa-flip-horizontal"></i>
+                                <span>@Admin.ListGalleryVideos</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCompanyQustionList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.CompanyQuestion.List())">
+
+                                <i class="fa fa-comments-o"></i>
+                                <span>@Admin.ListQA</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCompanyConversationList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.CompanyConversation.List())">
+                                <i class="fa fa-comments"></i>
+                                <span>@Admin.ListConversations</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCompanyReviewList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.CompanyReview.List())">
+                                <i class="fa fa-list"></i>
+                                <span>@Admin.ListReviews</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanCompanySocialList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.CompanySocial.List())">
+                                <i class="fa fa-sitemap"></i>
+                                <span>@Admin.ListSocial</span>
+                            </a>
+                        </li>
+                    }
+                    @if (true)
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="#">
+                                <i class="fa fa-sitemap"></i>
+                                <span>لیست درخواست های رسمی</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+
+        @if (true)
+        {
+            <li class="dropdown-item interactive">
+                <a href="#">
+                    <span class="sl-icon fa fa-dropbox"></span>
+                    <span>@Admin.ManageProducts</span>
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                </a>
+                <ul class="inner-dropdown">
+                    @if (User.IsInRole(PermissionConst.CanProductList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Product.List())">
+                                <i class="fa fa-cubes"></i>
+                                <span>@Admin.ListProduct</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanProductCommentList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.ProductComment.List())">
+                                <i class="fa fa-comment"></i>
+                                <span>@Admin.ListComments</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanProductReviewList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.ProductReview.List())">
+                                <i class="fa fa-comments-o"></i>
+                                <span>@Admin.ListReviews</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanTagList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Tag.List())">
+                                <i class="fa fa-tags"></i>
+                                <span>@Admin.ListTags</span>
+                            </a>
+                        </li>
+                    }
+                    @if (true)
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="#">
+                                <i class="fa fa-tags"></i>
+                                <span>لیست کلمات کلیدی</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+
+        @if (true)
+        {
+            <li class="dropdown-item interactive">
+                <a href="#">
+                    <span class="sl-icon fa fa-user-o"></span>
+                    <span>@Admin.ManageUser</span>
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                </a>
+                <ul class="inner-dropdown">
+                    @if (User.IsInRole(PermissionConst.CanUserList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.User.List())">
+                                <i class="fa fa-users"></i>
+                                <span>@Admin.ListUsers</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanRoleList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Role.List())">
+                                <i class="fa fa-drivers-license-o"></i>
+                                <span>@Admin.ListRole</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanUserViolationList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.UserViolation.List())">
+                                <i class="fa fa-list-alt"></i>
+                                <span>@Admin.ListViolationReports</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanComplaintList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Complaint.List())">
+                                <i class="fa fa-indent"></i>
+                                <span>@Admin.ListComplaintReports</span>
+                            </a>
+                        </li>
+                    }
+                   
+                    @if (User.IsInRole(PermissionConst.CanNewsList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.News.List())">
+                                <i class="fa fa-newspaper-o"></i>
+                                <span>@Admin.ListNews</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole(PermissionConst.CanNewsletterList))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Newsletter.List())">
+                                <i class="fa fa-file-text-o fa-flip-horizontal"></i>
+                                <span>@Admin.ListNewsletters</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+
+        @if (true)
+        {
+            <li class="dropdown-item interactive">
+                <a href="#">
+                    <span class="sl-icon fa fa-money"></span>
+                    <span>@Admin.ManageTransactions</span>
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                </a>
+                <ul class="inner-dropdown">
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.Plan.List())">
+                            <i class="fa fa-money"></i>
+                            <span>لیست طرح ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.PlanPayment.List())">
+                            <i class="fa fa-money"></i>
+                            <span>لیست تراکنش طرح ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.PlanDiscount.List())">
+                            <i class="fa fa-money"></i>
+                            <span>لیست کد تخفیف ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.Receipt.List())">
+                            <i class="fa fa-money"></i>
+                            <span>لیست رسید ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.ReceiptPayment.List())">
+                            <i class="fa fa-money"></i>
+                            <span>لیست تراکنش رسیدها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.ReceiptOption.List())">
+                            <i class="fa fa-money"></i>
+                            <span>لیست فروش محصولات</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.CompanyBalance.List())">
+                            <i class="fa fa-money"></i>
+                            <span>لیست تسویه حساب ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="#">
+                            <i class="fa fa-money"></i>
+                            <span>لیست بودجه کاربران</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.Bag.List())">
+                            <i class="fa fa-money"></i>
+                            <span>لیست سبدهای خرید</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+
+        @if (true)
+        {
+            <li class="dropdown-item interactive">
+                <a href="#">
+                    <span class="sl-icon fa fa-envelope"></span>
+                    <span>مدیریت پیام ها</span>
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                </a>
+                <ul class="inner-dropdown">
+                    <li class="inner-dropdown-item">
+                        <a href="#">
+                            <i class="fa fa-envelope"></i>
+                            <span>لیست پیامک ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="#">
+                            <i class="fa fa-envelope"></i>
+                            <span>لیست ایمیل ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="#">
+                            <i class="fa fa-paper-plane"></i>
+                            <span>لیست تلگرام ها</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+
+        @if (true)
+        {
+            <li class="dropdown-item interactive">
+                <a href="#">
+                    <span class="sl-icon fa fa-search"></span>
+                    <span>مدیریت بهینه سازی سئو</span>
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                </a>
+                <ul class="inner-dropdown">
+                    <li class="inner-dropdown-item">
+                        <a href="#">
+                            <i class="fa fa-search"></i>
+                            <span>لیست موجودیت ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.SeoUrl.List())">
+                            <i class="fa fa-search"></i>
+                            <span>لیست لینک ها</span>
+                        </a>
+                    </li>
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.SeoSetting.Edit())">
+                            <i class="fa fa-search"></i>
+                            <span>تنظیمات سئو</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+    @if (User.IsInRole(PermissionConst.CanAdsPaymentList))
+    {
+        <li class="dropdown-item interactive">
+            <a href="#">
+                <span class="sl-icon fa fa-gear"></span>
+                <span>مدیریت تبلیغات</span>
+                <span class="fa fa-angle-down"></span>
+            </a>
+            <ul class="inner-dropdown">
+                @if (User.IsInRole(PermissionConst.CanAdsPaymentList))
+                {
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.AdsPayment.List())">
+                            <i class="fa fa-user"></i>
+                            <span>لیست تبلیغات خریداری شده</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanAdsOptionList))
+                {
+                    <li class="inner-dropdown-item">
+                        <a href="@Url.Action(MVC.AdsOption.List())">
+                            <i class="fa fa-user"></i>
+                            <span>لیست گزینه های تبلیغات</span>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </li>
+    }
+    
+        
+    @if (true)
+    {
+        <li class="dropdown-item interactive">
+            <a href="#">
+                <span class="sl-icon fa fa-search"></span>
+                <span>مدیریت اطلاعات</span>
+                <svg class="svg-arrow">
+                    <use xlink:href="#svg-arrow"></use>
+                </svg>
+            </a>
+            <ul class="inner-dropdown">
+                <li class="inner-dropdown-item">
+                    <a href="@Url.Action(MVC.Export.Index())">
+                        <i class="fa fa-search"></i>
+                        <span>عملیات برون ریزی</span>
+                    </a>
+                </li>
+                <li class="inner-dropdown-item">
+                    <a href="@Url.Action(MVC.Import.Index())">
+                        <i class="fa fa-search"></i>
+                        <span>عملیات درون ریزی</span>
+                    </a>
+                </li>
+                <li class="inner-dropdown-item">
+                    <a href="#">
+                        <i class="fa fa-search"></i>
+                        <span>عملیات پرینت</span>
+                    </a>
+                </li>
+                <li class="inner-dropdown-item">
+                    <a href="@Url.Action(MVC.Report.List())">
+                        <i class="fa fa-search"></i>
+                        <span>عملیات گزارش گیری</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    }
+
+    @if (true)
+        {
+            <li class="dropdown-item interactive">
+                <a href="#">
+                    <span class="sl-icon fa fa-database"></span>
+                    <span>@Admin.ManageSystem</span>
+                    <svg class="svg-arrow">
+                        <use xlink:href="#svg-arrow"></use>
+                    </svg>
+                </a>
+                <ul class="inner-dropdown">
+                    @if (User.IsInRole(PermissionConst.CanUserSettingEdit))
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Setting.Edit())">
+                                <i class="fa fa-cog"></i>
+                                <span>@Admin.SystemSettings</span>
+                            </a>
+                        </li>
+                    }
+                    @if (true)
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="@Url.Action(MVC.Statistic.List())">
+                                <i class="fa fa-eye"></i>
+                                <span>@Admin.ViewersStatistics</span>
+                            </a>
+                        </li>
+                    }
+                    @if (true)
+                    {
+                        <li class="inner-dropdown-item">
+                            <a href="/Elmah.axd">
+                                <i class="fa fa-exclamation-triangle"></i>
+                                <span>@Admin.ListErrors</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>

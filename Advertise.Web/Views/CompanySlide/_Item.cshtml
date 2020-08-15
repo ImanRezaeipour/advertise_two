@@ -1,0 +1,46 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanySlide.CompanySlideViewModel
+@using Advertise.Service.Services.Permissions
+<div class="landing-items nov-item-height-031">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section">
+                @if (true)
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            <li>
+                                <a href="@Url.Action(MVC.CompanySlide.Edit(Model.Id))">
+                                    <span>@Admin.Edit</span>
+                                    <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                </a>
+                            </li>
+                            @if (true)
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.CompanySlide.DeleteAjax(Model.Id))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="#">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

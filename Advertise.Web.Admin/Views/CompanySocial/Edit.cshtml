@@ -1,0 +1,80 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanySocial.CompanySocialEditViewModel
+@{
+    Layout = Model.IsMine != true ? MVC.Shared.Views.SiteLayout.Panel._PanelLayout : MVC.Shared.Views.SiteLayout.Profile._ProfileLayout;
+    ViewBag.Title = Admin.SocialNetworksEdit;
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.SocialNetworksEdit</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editCompanySocial" action="@if (Model.IsMine != true){<text>@Url.Action(MVC.CompanySocial.Edit())</text>} else {<text>@Url.Action(MVC.CompanySocial.MyEdit())</text>}" method="Post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="Id" name="Id" value="@Model.Id"/>
+            <input type="hidden" id="CompanyId" name="CompanyId" value="@Model.CompanyId"/>
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="FacebookLink" class="rl-label">@Admin.Facebook</label>
+                    <input type="text" id="FacebookLink" name="FacebookLink" value="@Model.FacebookLink" placeholder="@Admin.Facebook" class="tooltipster" title="@Admin.FacebookAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="InstagramLink" class="rl-label">@Admin.Instagram</label>
+                    <input type="text" id="InstagramLink" name="InstagramLink" value="@Model.InstagramLink" placeholder="@Admin.InstagramId" class="tooltipster" title="@Admin.InstagramAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="TelegramLink" class="rl-label">@Admin.Telegram</label>
+                    <input type="text" id="TelegramLink" name="TelegramLink" value="@Model.TelegramLink" placeholder="@Admin.TelegramId" class="tooltipster" title="@Admin.TelegramAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="GooglePlusLink" class="rl-label">@Admin.GooglePlus</label>
+                    <input type="text" id="GooglePlusLink" name="GooglePlusLink" value="@Model.GooglePlusLink" placeholder="@Admin.GooglePlus" class="tooltipster" title="@Admin.GooglePlusAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="TwitterLink" class="rl-label">@Admin.Twitter</label>
+                    <input type="text" id="TwitterLink" name="TwitterLink" value="@Model.TwitterLink" placeholder="@Admin.Twitter" class="tooltipster" title="@Admin.TwitterAccount"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="YoutubeLink" class="rl-label">@Admin.YouTube</label>
+                    <input type="text" id="YoutubeLink" name="YoutubeLink" value="@Model.YoutubeLink" placeholder="@Admin.YouTube" class="tooltipster" title="@Admin.YouTubeAccount"/>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="editCompanySocial" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" >
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

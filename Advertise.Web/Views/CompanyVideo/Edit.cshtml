@@ -1,0 +1,71 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanyVideo.CompanyVideoEditViewModel
+@using Auth = Advertise.Service.Services.Permissions.PermissionConst
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = "ویرایش فیلم";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4> ویرایش فیلم</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editCompanyVideo" action="" method="Post" data-on-load="validateCompanyVideo" >
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">@Admin.Title</label>
+                    <input type="text" id="Title" name="Title" value="@Model.Title" placeholder="@Admin.Title" class="tooltipster" title="@Admin.ItShowsImageName"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Order" class="rl-label">اولویت</label>
+                    <input type="text" id="Order" name="Order" value="@Model.Order" placeholder="الویت" class="tooltipster" title="@Admin.ItShowsImageName"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="files" class="rl-label tooltipster" title="@Admin.UploadingPhoto">بارگذاری فیلم</label>
+                    @Html.Partial(MVC.Shared.Views._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderCompanyVideo" data-param="edit"></div>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            @if (User.IsInRole(Auth.CanCompanyVideoEditApprove) && Model.IsMine != true)
+            {
+                <button form="editCompanyVideo" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.CompanyVideo.EditApprove())';">
+                    <i class="fa fa-check-circle"></i>
+                    <span>@Admin.OkAndClose</span>
+                </button>
+                <button form="editCompany" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.CompanyVideo.EditReject())';">
+                    <i class="fa fa-times-circle"></i>
+                    <span>@Admin.CancelAndClose</span>
+                </button>
+            }
+            else
+            {
+                <button form="editCompanyVideo" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.CompanyVideo.MyEdit())';">
+                    <i class="fa fa-save"></i>
+                    <span>@Admin.Save</span>
+                </button>
+            }
+        </div>
+    </div>
+</div>

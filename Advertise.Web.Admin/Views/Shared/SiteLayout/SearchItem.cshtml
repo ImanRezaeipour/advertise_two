@@ -1,0 +1,103 @@
+﻿@* Generator: MvcHelper GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+
+@helper SortDirection(IEnumerable<Advertise.Core.Models.Common.SelectListItem> sortDirections, string sortDirection)
+{
+    <div class="input-container lists-header">
+        <select id="SortDirection" name="SortDirection" class="selectbar-lists-header" data-on-change="navigate">
+            <option disabled="disabled">@Admin.SortDirection</option>
+            @foreach (var item in sortDirections)
+            {
+                <option value="@item.Value" @if (item.Value == sortDirection) { <text> selected</text>}>@item.Text</option>
+            }
+        </select>
+    </div>
+}
+
+@helper PageSize(IEnumerable<Advertise.Core.Models.Common.SelectListItem> pagesizes, int pageSize)
+{
+    <div class="input-container lists-header">
+        <select id="PageSize" name="PageSize" class="selectbar-lists-header" data-on-change="navigate">
+            <option disabled="disabled">@Admin.PageSize</option>
+            @foreach (var item in pagesizes)
+            {
+                <option value="@item.Value" @if (item.Value == pageSize.ToString()) { <text> selected</text>}>@item.Text</option>
+            }
+        </select>
+    </div>
+}
+
+@helper IsActive(IEnumerable<Advertise.Core.Models.Common.SelectListItem> isActives, bool? isActive)
+{
+    <div class="input-container lists-header">
+        <select id="IsActive" name="IsActive" class="selectbar-lists-header" data-on-change="navigate">
+            <option disabled="disabled">@Admin.ActiveList</option>
+            @foreach (var item in isActives)
+            {
+                <option value="@item.Value" @if (item.Value == isActive.ToString()) { <text> selected</text>}>@item.Text</option>
+            }
+        </select>
+    </div>
+}
+
+@helper State(IEnumerable<Advertise.Core.Models.Common.SelectListItem> states, StateType? state)
+{
+    <div class="input-container lists-header">
+        <select id="State" name="State" class="selectbar-lists-header" data-on-change="navigate">
+            <option disabled="disabled">@Admin.ActiveList</option>
+            @foreach (var item in states)
+            {
+                <option value="@item.Value" @if (item.Value == state.ToInt32().ToString()) { <text> selected</text>}>@item.Text</option>
+            }
+        </select>
+    </div>
+}
+
+@helper GridView()
+{
+    <div class="view-types-wrapper">
+        <div class="grid-view-holder tooltipster" title="@Admin.ListView" data-on-click="renderView"  data-param="grid">
+            <i class="fa fa-th-list fa-flip-horizontal"></i>
+        </div>
+        <div class="item-view-holder tooltipster" title="@Admin.GridView" data-on-click="renderView" data-param="item">
+            <i class="fa fa-th"></i>
+        </div>
+    </div>
+}
+
+@helper IsBan(IEnumerable<Advertise.Core.Models.Common.SelectListItem> isBans, bool? isBan)
+{
+    <div class="input-container lists-header">
+        <select id="IsBan" name="IsBan" class="selectbar-lists-header" data-on-change="navigate">
+            @foreach (var item in isBans)
+            {
+                <option value="@item.Value" @if (item.Value == isBan.ToString()) { <text> selected</text>}>@item.Text</option>
+            }
+        </select>
+    </div>
+}
+
+@helper IsVerify(IEnumerable<Advertise.Core.Models.Common.SelectListItem> isVerifys, bool? isVerify)
+{
+    <div class="input-container lists-header">
+        <select id="IsVerify" name="IsVerify" class="selectbar-lists-header" data-on-change="navigate">
+            @foreach (var item in isVerifys)
+            {
+                <option value="@item.Value" @if (item.Value == isVerify.ToString()) { <text> selected</text>}>@item.Text</option>
+            }
+        </select>
+    </div>
+}
+
+@helper Term(string value)
+{
+    <div class="input-container lists-header searchbar-header-container">
+        <input type="text" id="Term" name="Term" value="@value" class="searchbar-lists-header" data-on-keypress="searchGrid" placeholder="جستجو" />
+        <button class="button secondary" type="button" data-on-click="navigate">
+            <i class="fa fa-search"></i>
+        </button>
+        <a href="javascript:void(0)" class="list-searchbar-filter" data-on-click="listSearchbarFilterToggle">
+            <i class="fa fa-filter"></i>
+        </a>
+    </div>
+}

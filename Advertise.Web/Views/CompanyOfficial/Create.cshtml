@@ -1,0 +1,49 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@using Advertise.Core.Utilities
+@model Advertise.Core.Models.CompanyOfficial.CompanyOfficialCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.EditReview;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.EditReview</h4>
+        <button form="editCompanyReview" type="submit" class="button primary disabled-btn-link" disabled="disabled" >
+            <i class="fa fa-save"></i>
+            <span>@Admin.Save</span>
+        </button>
+    </div>
+    <div class="form-box-item">
+        <form id="editCompanyReview" action="@Url.Action(MVC.CompanyOfficial.Create())" method="Post"  data-on-load="validateCompanyOfficial">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+           
+            <div class="input-container">
+                <label for="files" class="rl-label">
+                    <span>کپی جواز کسب</span>
+                </label>
+                @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                <div name="files" id="files" data-on-load="uploaderBusinessLicense"></div>
+                <div id="PreviewContainer"></div>
+            </div>
+            
+            <div class="input-container">
+                <label for="files" class="rl-label">
+                    <span>کپی کارت ملی</span>
+                </label>
+                @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                <div name="files1" id="files1" data-on-load="uploaderNationalCard"></div>
+            </div>
+            
+            <div class="input-container">
+                <label for="files" class="rl-label">
+                    <span>آدرس روزنامه رسمی</span>
+                </label>
+                @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                <div name="files2" id="files2" data-on-load="uploaderOfficialNewspaperAddress"></div>
+            </div>
+
+        </form>
+    </div>
+</div>

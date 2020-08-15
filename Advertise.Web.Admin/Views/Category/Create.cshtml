@@ -1,0 +1,89 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Category.CategoryCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.CreateCategory;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.CategoryCreation</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form action="@Url.Action(MVC.Category.Create())" method="Post" data-on-load="validateCategory" id="newCategory">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="Id" name="Id" value="" />
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="ParentId" class="rl-label tooltipster" title="@Admin.CategoryIncludingNewCategory">@Admin.Category</label>
+                    <div id="CategoryTree" style="direction: rtl" class="tree" data-on-load="treeCategory"></div>
+                    <input type="hidden" id="ParentId" name="ParentId"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">@Admin.Title</label>
+                    <input type="text" id="Title" name="Title" placeholder="@Admin.Title" class="tooltipster" title="@Admin.ItShowsCategoryName"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Description" class="rl-label">@Admin.Description</label>
+                    <input type="text" id="Description" name="Description" placeholder="@Admin.Description" class="form-control tooltipster" title="@Admin.ItDescribesCategory"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Order" class="rl-label">@Admin.Priority</label>
+                    <input type="text" id="Order" name="Order" placeholder="@Admin.Priority" class="form-control"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Alias" class="rl-label">@Admin.AliasTitle</label>
+                    <input type="text" id="MetaTitle" name="MetaTitle" placeholder="@Admin.AliasTitle" class="form-control"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Alias" class="rl-label">@Admin.AliasUrl</label>
+                    <input type="text" id="Alias" name="Alias" placeholder="@Admin.AliasUrl" class="form-control"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="files" class="rl-label tooltipster" title="@Admin.ItChoosesImage">@Admin.UploadImage</label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderCategory"></div>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" form="newCategory">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

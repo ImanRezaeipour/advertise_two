@@ -1,0 +1,53 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model IEnumerable<Advertise.Core.Models.Product.ProductViewModel>
+ <div class="headline simple primary">
+    <h4>
+        <i class="fa fa-cubes"></i> 
+        @*@{
+            var product = Model.FirstOrDefault();
+            var name = "";
+            if (product != null)
+            {
+                 name = L(product?.CategoryOptionProducts);
+            }
+
+        }*@
+        @ViewBag.CategoryOptionProducts
+    </h4>
+</div>
+@if (Model == null || Model.Any() != true)
+{
+    <div class="comment-list updating-section">
+        <p>
+            <i class="fa fa-battery-empty fa-flip-horizontal"></i> 
+            هیچ @ViewBag.CategoryOptionProducts ندارد
+        </p>
+        @if (ViewBag.IsMySelf)
+        {
+            <div class="btn-middle-wrapper">
+                <a href="@Url.Action(MVC.Product.Create())" class="btn-middle blue-btn-middle round-corners-five">
+                    <i class="fa fa-plus"></i> 
+                    @Admin.AddProduct
+                </a>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="product-showcase detail-case">
+        <div id="productlistContainer" class="landing-items-wrapper landing-items-disp">
+            <div class="product-list grid">
+                <div class="landing-column-wrapper">
+                    @if (ViewBag.IsMySelf == true)
+                    {
+                        @Html.Partial(MVC.Product.Views._AddItem)
+                    }
+                    @Html.Partial(MVC.Company.Views._ProductItemList, Model)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<br>
+<br>

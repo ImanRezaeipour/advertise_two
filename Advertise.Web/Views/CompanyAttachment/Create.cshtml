@@ -1,0 +1,59 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanyAttachment.CompanyAttachmentCreateViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = "ایجاد فایل";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>ایجاد فایل</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newCompanyAttachment" action="@Url.Action(MVC.CompanyAttachment.Create())" method="Post" data-on-load="validateCompanyAttachment">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">@Admin.Title</label>
+                    <input type="text" id="Title" name="Title" placeholder="@Admin.Title" class="tooltipster" title="@Admin.ItShowsImageName"/>
+                    <span class="field-validation-error" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Order" class="rl-label">اولویت</label>
+                    <input type="text" id="Order" name="Order" placeholder="الویت" class="tooltipster" title="@Admin.ItShowsImageName"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="files" class="rl-label tooltipster" title="آپلود فایل">آپلود فایل</label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderCompanyAttachment"></div>
+
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="newCompanyAttachment" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,103 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Services.Categories
+@model Advertise.Core.Models.Home.MainMenuViewModel
+<div class="main-menu-wrap">
+    <div class="menu-bar">
+        <nav>
+            <ul class="main-menu">
+                <li class="menu-item" data-on-Mouseleave="mainMenuCollapse" >
+                    <a href="javascript:void(0)">
+                        @Admin.Categories
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <ul class="main-menu-categories">
+                        @foreach (var categoryL1 in Model.Categories.GetSubLevelOneByAlias("Category-All"))
+                        {
+                            <li class="sub-cat-first" data-on-Mouseenter="mainMenuExpand">
+                                <a href="@Url.Action(MVC.Category.Detail(categoryL1.Alias, categoryL1.MetaTitle.CastToSlug()))">
+                                    <span>@categoryL1.Title</span>
+                                    @if (categoryL1.HasChild == true)
+                                    {
+                                        <i class="fa fa-chevron-left"></i>
+                                    }
+                                </a>
+                            </li>
+                            if (categoryL1.HasChild == true)
+                            {
+                                <li class="sub-cat-expand">
+                                    <ul class="main-sub-category">
+                                        @foreach (var categoryL2 in Model.Categories.GetSubLevelOneByAlias(categoryL1.Alias))
+                                        {
+                                            <li class="main-sub-categories">
+                                                <a href="@Url.Action(MVC.Category.Detail(categoryL2.Alias, categoryL2.MetaTitle.CastToSlug()))">
+                                                    <span class="sub-category-title">@categoryL2.Title</span>
+                                                </a>
+                                                @if (categoryL2.HasChild == true)
+                                                {
+                                                    <ul class="sub-sub-category">
+                                                        @foreach (var categoryL3 in Model.Categories.GetSubLevelOneByAlias(categoryL2.Alias))
+                                                        {
+                                                            <li class="sub-sub-categories">
+                                                                <a href="@Url.Action(MVC.Product.Search(categoryL3.Alias, null))">
+                                                                    @if (categoryL3.HasChild == true)
+                                                                    {
+                                                                        <i class="fa fa-chevron-left"></i>
+                                                                    }
+                                                                    <span class="sub-category-name">
+                                                                        @categoryL3.Title
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                }
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <div id="MenusShadow"></div>
+                </li>
+                <li class="menu-item right-menu colored-menu">
+                    <a href="@Url.Action(MVC.Product.Search("Category-Digital-Cellphone", null))">
+                        <i class="fa fa-mobile-phone"></i>
+                        انواع گوشی موبایل
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="@Url.Action(MVC.Page.ContactUs())">
+                        <i class="fa fa-phone fa-flip-horizontal"></i>
+                        @Admin.ContactUs
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="@Url.Action(MVC.Page.Policy())">
+                        <i class="fa fa-legal fa-flip-horizontal"></i>
+                        @Admin.RulesAndRegulations
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="@Url.Action(MVC.Page.About())">
+                        <i class="fa fa-info-circle"></i>
+                        @Admin.AboutUs
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav-search-form">
+                <li class="search-area-li">
+                    <input type="text" class="header-search-area" name="term" id="navSearchProduct" placeholder="@Admin.SearchProductsOrServices" value="@(Request.QueryString["term"])" data-on-keyPress="searchTerm">
+                </li>
+                <li class="search-icon-li">
+                    <a href="javascript:void(0)" id="navSearchProductOnLanding" data-on-click="searchInputTerm">
+                        <div class="main-menu-search-wrapper">
+                            <i class="main-menu-search-icon fa fa-search"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

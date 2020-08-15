@@ -1,0 +1,168 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.CompanyImage.CompanyImageViewModel
+<div class="landing-items @(Model.IsMine != true ? "nov-item-height-031" : "nov-item-height-030")">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(PermissionConst.CanCompanyImageEdit) || User.IsInRole(PermissionConst.CanCompanyImageMyEdit) || User.IsInRole(PermissionConst.CanCompanyImageDeleteAjax) || User.IsInRole(PermissionConst.CanCompanyImageMyDeleteAjax) || User.IsInRole(PermissionConst.CanCompanyImageEditApprove))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanCompanyImageMyEdit) || User.IsInRole(PermissionConst.CanCompanyImageEdit))
+                            {
+                                <li>
+                                    <a href="@(Model.IsMine ? Url.Action(MVC.CompanyImage.MyEdit(Model.Id)) : Url.Action(MVC.CompanyImage.Edit(Model.Id)))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanCompanyImageDeleteAjax) || User.IsInRole(PermissionConst.CanCompanyImageMyDeleteAjax))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@(Model.IsMine ? Url.Action(MVC.CompanyImage.MyDeleteAjax(Model.Id)) : Url.Action(MVC.CompanyImage.DeleteAjax(Model.Id)))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanCompanyImageEditApprove))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.CompanyImage.ApproveAjax(Model.Id))">
+                                        <span>@Admin.Approve</span>
+                                        <i class="fa fa-check-circle"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanCompanyImageEditApprove))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.CompanyImage.RejectAjax(Model.Id))">
+                                        <span>@Admin.Ignore</span>
+                                        <i class="fa fa-times-circle"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="rectangle-section">
+                <span>
+                    <span>@Model.ImageFiles.Count()</span>
+                    <span>@Admin.Image2</span>
+                </span>
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a href="javascript:void(0)"  data-on-click="openShadow" data-type="gallery">
+                            <div class="item-preview-image">
+                                <img src="@FileConst.Gallery" alt="@Model.Title.PlusWord(" ").PlusWord(Admin.GalleryImages)">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="javascript:void(0)" data-on-click="openShadow" data-type="gallery">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a>
+                        <p>@Admin.Priority.PlusWord(": ").PlusWord(Model.Order.ToString())</p>
+                    </a>
+                </div>
+                <div class="middle-part">
+                    <p class="small-state"><i class="fa fa-calendar-check-o"></i> <span>@Admin.InsertDate.PlusWord(":")</span></p>
+                </div>
+                <div class="bottom-part">
+                    <p>@Model.CreatedOn.CastToRegularDate()</p>
+                </div>
+            </div>
+        </div>
+        <div class="nov-item-footer">
+            @if (Model.IsMine != true)
+            {
+                <hr class="line-separator item-footer">
+                <div class="overview-section">
+                    <div class="image-part">
+                        <figure class="user-avatar small">
+                            <a @if (Model.CompanyLogoFileName != null) { <text> href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle))" </text>  }>
+                                <div class="novinak-image">
+                                    <img src="@if (Model.CompanyLogoFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.CompanyLogoFileName)</text>} else {<text>@FileConst.NoLogo</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.CompanyTitle)">
+                                </div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="caption-part">
+                        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.Replace(" ","-")))" class="tooltipster" title="@Model.CompanyTitle">
+                            <p class="text-header tiny">@Model.CompanyTitle</p>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="bg-shadow"></div>
+    <div class="slider-shadow">
+        <div class="slide-files-wrapper" data-count="@Model.ImageFiles.Count()">
+            <input type="hidden" value="@FileConst.ImagesWebPath" data-iteration="0">
+            @{
+                var index = 1;
+                foreach (var imageFile in Model.ImageFiles)
+                {
+                    <input type="hidden" value="@imageFile.FileName" data-iteration="@index">
+                    index = index + 1;
+                }
+            }
+        </div>
+        <div class="slide-file-preview">
+            <div class="slide-file-count-bg"></div>
+            <div class="slide-file-count">
+                <span class="slide-file-total"></span>
+                <span class="slide-file-number"></span>
+            </div>
+            <figure>
+                <img src="@FileConst.NoPreview">
+            </figure>
+            <div class="slide-files-actions">
+                <div class="slide-action-wrapper slide-file-right" data-on-click="rightGalleryFiles" >
+                    <i class="fa fa-chevron-right"></i>
+                    <i class="fa fa-chevron-right"></i>
+                </div>
+                <div class="slide-action-wrapper slide-file-left" data-on-click="leftGalleryFiles">
+                    <i class="fa fa-chevron-left"></i>
+                    <i class="fa fa-chevron-left"></i>
+                </div>
+                <div class="slide-action-wrapper slide-file-close" data-on-click="closeShadow">
+                    <i class="fa fa-times"></i>
+                    <i class="fa fa-times"></i>
+                </div>
+                <div class="slide-action-wrapper slide-file-save">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-floppy-o"></i>
+                    </a>
+                </div>
+                @if (User.IsInRole(PermissionConst.CanCompanyImageEdit) || User.IsInRole(PermissionConst.CanCompanyImageMyEdit))
+                {
+                    <div class="slide-action-wrapper slide-file-delete">
+                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-trash"></i>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="clearboth"></div>
+</div>

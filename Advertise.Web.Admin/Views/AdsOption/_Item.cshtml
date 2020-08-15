@@ -1,0 +1,69 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Core.Types
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.AdsOption.AdsOptionViewModel
+<div class="landing-items nov-item-height-030">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(PermissionConst.CanAdsOptionEdit))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanAdsOptionEdit))
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.AdsOption.Edit(Model.Id))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="rectangle-section">
+                <span>@Model.Title</span>
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a>
+                            <div class="item-preview-image">
+                                <img src="@(Model.Type == AdsType.Banner ? FileConst.BannerItem : FileConst.Slider)" alt="ads option">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link">
+                    <p class="novinak-title text-header">@Admin.TypeAd: @(Model.Type == AdsType.Banner ? Admin.Banner : Admin.Slide)</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a>
+                        <p>@Admin.Position: @(Model.PositionType == AdsPositionType.AdsLandingPage ? Admin.MainPage : Admin.CategoriesPages)</p>
+                    </a>
+                </div>
+                <div class="middle-part">
+                    <p class="small-state"><span>@Admin.Priority: </span>@Model.Order</p>
+                </div>
+                <div class="bottom-part">
+                    <p>
+                        <span>@Model.Price.CastToRegularCurrency()</span>
+                        <span>@Admin.Toman</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.CompanyAttachment.CompanyAttachmentViewModel
+<div class="landing-items @(Model.IsMine != true ? "nov-item-height-031" : "nov-item-height-030")">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(PermissionConst.CanCompanyAttachmentEdit) || (Model.IsMine && User.IsInRole(PermissionConst.CanCompanyAttachmentMyEdit)) || User.IsInRole(PermissionConst.CanCompanyAttachmentDeleteAjax) || (Model.IsMine && User.IsInRole(PermissionConst.CanCompanyAttachmentMyDeleteAjax)) || User.IsInRole(PermissionConst.CanCompanyAttachmentEditApprove))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanCompanyAttachmentEdit) || (Model.IsMine && User.IsInRole(PermissionConst.CanCompanyAttachmentMyEdit)))
+                            {
+                                <li>
+                                    <a href="@(Model.IsMine ? Url.Action(MVC.CompanyAttachment.MyEdit(Model.Id)) : Url.Action(MVC.CompanyAttachment.Edit(Model.Id)))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanCompanyAttachmentDeleteAjax) || (Model.IsMine && User.IsInRole(PermissionConst.CanCompanyAttachmentMyDeleteAjax)))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@(Model.IsMine ? Url.Action(MVC.CompanyAttachment.MyDeleteAjax(Model.Id)) : Url.Action(MVC.CompanyAttachment.DeleteAjax(Model.Id)))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanCompanyAttachmentEditApprove))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.CompanyAttachment.ApproveAjax(Model.Id))">
+                                        <span>@Admin.Approve</span>
+                                        <i class="fa fa-check-circle"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanCompanyAttachmentEditApprove))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.CompanyAttachment.RejectAjax(Model.Id))">
+                                        <span>@Admin.Ignore</span>
+                                        <i class="fa fa-times-circle"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="rectangle-section">
+                <span>
+                    <span>@Model.AttachmentFiles.Count()</span>
+                    @Admin.File2
+                </span>
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a href="@Url.Action(MVC.CompanyAttachment.Detail(Model.Id))">
+                            <div class="item-preview-image">
+                                <img src="@FileConst.Attachment" alt="@Model.Title.PlusWord(" ").PlusWord(Admin.ListAttachmnt)">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="@Url.Action(MVC.CompanyAttachment.Detail(Model.Id))">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a>
+                        <p>@Admin.Priority.PlusWord(": ").PlusWord(Model.Order.ToString())</p>
+                    </a>
+                </div>
+                <div class="middle-part">
+                    <p class="small-state">
+                        <i class="fa fa-calendar-check-o"></i> 
+                        <span>@Admin.InsertDate.PlusWord(":")</span>
+                    </p>
+                </div>
+                <div class="bottom-part">
+                    <p>@Model.CreatedOn.CastToRegularDate()</p>
+                </div>
+            </div>
+        </div>
+        <div class="nov-item-footer">
+            @if (Model.IsMine != true)
+            {
+                <hr class="line-separator item-footer">
+                <div class="overview-section">
+                    <div class="image-part">
+                        <figure class="user-avatar small">
+                            <a  href="@if (Model.CompanyLogoFileName != null) {@(Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle)))}"}>
+                                <div class="novinak-image">
+                                    <img src="@(Model.CompanyLogoFileName != null ? FileConst.ImagesWebPath.PlusWord(Model.CompanyLogoFileName) : FileConst.NoLogo)" alt="@Model.Title.PlusWord(" ").PlusWord(Model.CompanyTitle)">
+                                </div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="caption-part">
+                        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.CastToSlug()))" class="tooltipster" title="@Model.CompanyTitle">
+                            <p class="text-header tiny">@Model.CompanyTitle</p>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="clearboth"></div>
+</div>

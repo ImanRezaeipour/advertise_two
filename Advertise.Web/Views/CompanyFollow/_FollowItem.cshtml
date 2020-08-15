@@ -1,0 +1,25 @@
+﻿@*Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.CompanyFollow.CompanyFollowViewModel
+<div class="notif-item-wrapper">
+    <a href="@Url.Action(MVC.Company.Detail(Model.Company.Alias,Model.Company.Title.CastToSlug()))">
+        <figure class="notif-item-img">
+            @if (Model.AvatarFileName != null)
+            {
+                <img src="@FileConst.ImagesWebPath.PlusWord(Model.Company.LogoFileName)" alt="notification image">
+            }
+            else
+            {
+                <img src="@FileConst.NoPreview" alt="notification image">
+            }
+        </figure>
+    </a>
+    <ul class="notif-item-texts">
+        <li>
+            <a href="@Url.Action(MVC.Company.Detail(Model.Company.Alias,Model.Company.Title.CastToSlug()))">
+                <p class="notif-item-title">@Model.Company.Title</p>
+            </a>
+        </li>
+    </ul>
+</div>

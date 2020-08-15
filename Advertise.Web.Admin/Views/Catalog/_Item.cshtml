@@ -1,0 +1,61 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Catalog.CatalogViewModel
+<div class="landing-items nov-item-height-010">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(PermissionConst.CanProductDeleteAjax) || User.IsInRole(PermissionConst.CanProductEdit))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanProductEdit))
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.Catalog.Edit(Model.Id))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanProductDeleteAjax))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.Catalog.DeleteAjax(Model.Id))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a href="#">
+                            <div class="item-preview-image">
+                                <noscript>
+                                    <img src="@if (Model.ImageFileName != null) {<text>@FileConst.ImagesCatalogWebPath.PlusWord(Model.ImageFileName)</text>} else {<text>@FileConst.NoPreview</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.Description)">
+                                </noscript>
+                                <img class="lazyload" data-src="@if (Model.ImageFileName != null) {<text>@FileConst.ImagesCatalogWebPath.PlusWord(Model.ImageFileName)</text>} else {<text>@FileConst.NoPreview</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.Description)">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="#">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

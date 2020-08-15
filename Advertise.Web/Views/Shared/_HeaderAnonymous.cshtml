@@ -1,0 +1,86 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+<div class="header-wrap">
+    <header>
+        <a href="@Url.Action(MVC.Home.LandingPage())">
+            <figure class="logo">
+                <img src="@FileConst.LogoSmallPth" alt="logo">
+            </figure>
+        </a>
+        <div class="mobile-menu-handler left primary">
+            <i class="mobile-right-pull fa fa-bars fa-2x"></i>
+        </div>
+        <a href="@Url.Action(MVC.Panel.Board())">
+            <figure class="logo-mobile">
+                <img src="@FileConst.LogoMobilePth" alt="logo-mobile">
+            </figure>
+        </a>
+        <div class="mobile-account-options-handler right secondary">
+            <span class="icon-user-side-right fa fa-user-o"></span>
+        </div>
+        <ul class="user-board-top">
+            <li class="user-quick-avatar">
+                <a href="@Url.Action(MVC.Account.Login().AddRouteValues(new {returnUrl = Request.UrlReferrer}))" class="outer-avatar-ring tooltipster" title="@Admin.Login">
+                    <div class="inner-avatar-ring">
+                        <figure class="user-header-avatar">
+                            <div class="anonymous-avatar-top" alt="guest avatar image" data-param-none="@FileConst.NoAvatarPth"></div>
+                        </figure>
+                    </div>
+                </a>
+            </li>
+            <li class="user-quick-name">
+                <a href="@Url.Action(MVC.Account.Login().AddRouteValues(new {returnUrl = Request.UrlReferrer}))">
+                    <p class="header-quick-name">@Admin.WelcomeToNovinak.PlusWord(" ")<span>@Admin.Enter2</span></p>
+                </a>
+            </li>
+            <li class="user-signin">
+                <i class="fa fa-briefcase header-account-icon business-icon"></i>
+                <a href="@Url.Action(MVC.Page.Costs())" class="header-account-link business-link">@Admin.BusinessManagementPanel</a>
+            </li>
+            <li class="user-register">
+                <i class="fa fa-user-plus header-account-icon"></i>
+                <a href="@Url.Action(MVC.Account.EmailRegister())" class="header-account-link">@Admin.Register2</a>
+            </li>
+            @*<li class="user-language">
+                <i class="fa fa-language header-account-icon"></i>
+                <a href="javascript:viod(0)" class="header-account-link">Language</a>
+                <ul id="LanguageList">
+                    <li>
+                        <a href="@Url.Action(MVC.Home.SetLang("en"))" class="header-account-link">English</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action(MVC.Home.SetLang("fa"))" class="header-account-link">فارسی</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action(MVC.Home.SetLang("ar"))" class="header-account-link">العربية</a>
+                    </li>
+                </ul>
+            </li>*@
+        </ul>
+        <ul class="search-form">
+            <li>
+                <input type="text" class="header-search-area" name="term" id="searchProduct" placeholder="@(Admin.SearchProducts)" value="@(Request.QueryString["term"])" data-on-keyPress="searchTerm">
+            </li>
+            <li>
+                <a href="javascript:void(0)" id="searchProductOnLanding" data-on-click="searchInputTerm">
+                    <div class="main-menu-search-wrapper">
+                        <i class="main-menu-search-icon fa fa-search"></i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="header-cart-view">
+            <a href="@Url.Action(MVC.Account.Login())">
+                <span class="fa fa-shopping-cart fa-3x header-cart-icon tooltipster" title="@Admin.Cart"></span>
+            </a>
+            <div class="count-outer">
+                <div class="count-inner">
+                </div>
+            </div>
+            <a href="@Url.Action(MVC.Account.Login())" class="tooltipster" title="@Admin.Cart">
+                <span class="cart-counter">0</span>
+            </a>
+        </div>
+    </header>
+</div>

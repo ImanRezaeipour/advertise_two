@@ -1,0 +1,30 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Microsoft.AspNet.Identity
+@model Advertise.Core.Models.CompanyConversation.CompanyConversationViewModel
+@{
+    var currentUserId = Guid.Empty;
+    if (HttpContext.Current.User.Identity.GetUserId().HasValue())
+    {
+        currentUserId = Guid.Parse(HttpContext.Current.User.Identity.GetUserId());
+    }
+}
+<div class="post-item @if(currentUserId == Model.CreatedBy.Id) {<text>receive</text>} else {<text>send</text>}">
+    <div class="inverse-rounded-wrapper">
+        <div class="inverse-rounded"></div>
+    </div>
+    <figure class="post-avatar">
+        <img src="@if(Model.AvatarFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.AvatarFileName)</text>} else {<text>@FileConst.NoAvatarPth</text>}" alt="@Model.CreatedBy.UserName" />
+    </figure>
+    <div class="post-container">
+        @if (currentUserId != Model.CreatedBy.Id)
+            {
+            <a href="@Url.Action(MVC.User.Detail(Model.CreatedBy.UserName))">
+                <p class="post-owner">@($"{Model.CreatedBy.UserName} :")</p>
+            </a>
+        }
+        <p class="post-text">@Model.Body</p>
+        <p class="post-date">@Model.CreatedOn.CastToRegularDate()</p>
+    </div>
+</div>

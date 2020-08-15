@@ -1,0 +1,102 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.User.UserDetailViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Admin.ProfilePage.PlusWord(" ").PlusWord(Admin.User).PlusWord(" ").PlusWord(Model.FullName);
+}
+<div class="section-wrap">
+    <div class="section overflowable">
+        <div class="sidebar left user-profile meta-detail">
+            <div class="sidebar-item author-bio">
+                @if (Model.AvatarFileName != null)
+                {
+                    <div class="product-detail company-logo">
+                        <img src="@FileConst.ImagesWebPath.PlusWord(Model.AvatarFileName)" alt="User Avatar Image @Model.AvatarFileName">
+                    </div>
+                }
+                else
+                {
+                    <div class="product-detail company-logo">
+                        <img src="@FileConst.NoAvatarPth" alt="user without avatar image">
+                    </div>
+                }
+                <div data-on-load="ajaxGetUserInformations"  data-param="@Model.UserName"></div>
+                <p class="text-header">@Model.FullName</p>
+                <p class="text-oneline first-load-info">
+                    <i class="fa fa-envelope fa-spin fa-fw fa-2x"></i>
+                </p>
+                <h6>
+                    <br>
+                </h6>
+                @if (Model.CompanyTitle != null)
+                {
+                    <p class="text-oneline">
+                        @Admin.Company.PlusWord(": ")
+                        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias,Model.CompanyTitle)).AddSlug(Model.CompanyTitle)" class="user-meta-company-title">
+                            <span href="#" class="primary">@Model.CompanyTitle</span>
+                        </a>
+                    </p>
+                }
+            </div>
+            <div class="sidebar-item product-info">
+                <h4>@Admin.ContactInfo.PlusWord(": ")</h4>
+                <hr class="line-separator">
+                <div class="information-layout">
+                    @if (Model.HomeNumber != null)
+                    {
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Phone.PlusWord(": ")</p>
+                            <p id="HomeeNumber" class="company-detail side-text first-load-info">
+                                <i class="fa fa-phone fa-spin fa-fw fa-2x"></i>
+                            </p>
+                        </div>
+                    }
+                    @if (Model.PhoneNumber != null)
+                    {
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Mobile.PlusWord(": ")</p>
+                            <p id="PhoneNumber" class="company-detail side-text first-load-info">
+                                <i class="fa fa-mobile fa-spin fa-fw fa-2x"></i>
+                            </p>
+                        </div>
+                    }
+                    @if (Model.Email != null)
+                    {
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Email.PlusWord(": ")</p>
+                            <p id="EmailAddress" class="company-detail side-text first-load-info">
+                                <i class="fa fa-envelope fa-spin fa-fw fa-2x"></i>
+                            </p>
+                        </div>
+                    }
+                    @if (Model.Address != null)
+                    {
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Address.PlusWord(": ")</p>
+                            <p id="AddressPlace" class="company-detail side-address side-text first-load-info">
+                                <i class="fa fa-map-signs fa-spin fa-fw fa-2x"></i>
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="content right meta-detail-content">
+            <div class="headline simple primary">
+                <a name="gallery-section"></a>
+                <h4>
+                    <i class="fa fa-image"></i> 
+                    <span>@Admin.Galery</span>
+                </h4>
+            </div>
+            <div class="comment-list company-images">
+                <div class="company-images-wrapper"></div>
+            </div>
+            <br>
+            <br>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

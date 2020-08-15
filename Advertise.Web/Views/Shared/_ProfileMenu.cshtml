@@ -1,0 +1,343 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Home.ProfileMenuViewModel
+@if (User.IsInRole(PermissionConst.CanHomeDashboardPage))
+{
+    <a href="" class="profile-top-menu-link">
+        <span class="fa fa-user-circle"></span>
+        <span>@Admin.MyProfile</span>
+    </a>
+}
+<ul class="dropdown hover-effect interactive profile-sides">
+    @if (User.IsInRole(PermissionConst.CanCompanyMyEdit) || User.IsInRole(PermissionConst.CanCompanyAttachmentMyList) || User.IsInRole(PermissionConst.CanCompanyImageMyList) || User.IsInRole(PermissionConst.CanCompanyVideoMyList) || User.IsInRole(PermissionConst.CanCompanyQustionMyList) || User.IsInRole(PermissionConst.CanCompanyConversationMyList) || User.IsInRole(PermissionConst.CanHomeDashboardPage))
+    {
+        <li class="dropdown-item interactive">
+            <a href="#">
+                <span class="sl-icon fa fa-briefcase"></span>
+                <span>@L(Model.CategoryOption.CompanyManagement)</span>
+                <span class="fa fa-angle-down"></span>
+            </a>
+            <ul class="inner-dropdown hover-effect meta-menu">
+                @if (User.IsInRole(PermissionConst.CanCompanyMyEdit))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.Company.MyEdit())">
+                            <i class="fa fa-bank"></i>
+                            <span>@L(Model.CategoryOption.MyCompany)</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanCompanyAttachmentMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanySlide.List())">
+                            <i class="fa fa-paperclip"></i>
+                            <span>اسلایدها</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanCompanyAttachmentMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanyAttachment.MyList())">
+                            <i class="fa fa-paperclip"></i>
+                            <span>@Admin.Files</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanCompanyImageMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanyImage.MyList())">
+                            <i class="fa fa-image"></i>
+                            <span>@Admin.GalleryImages</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanCompanyVideoMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanyVideo.MyList())">
+                            <i class="fa fa-video-camera fa-flip-horizontal"></i>
+                            <span>@Admin.GalleryVideos</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanCompanyQustionMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanyQuestion.MyList())">
+
+                            <i class="fa fa-comments-o"></i>
+                            <span>@Admin.QAs</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanCompanyConversationMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanyConversation.MyList())">
+                            <i class="fa fa-comments"></i>
+                            <span>@Admin.MyConversations</span>
+                        </a>
+                    </li>
+                }
+                @if (true)
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanySocial.MyEdit())">
+                            <i class="fa fa-sitemap"></i>
+                            <span>@Admin.SocialNetworks</span>
+                        </a>
+                    </li>
+                }
+                @if (true)
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanyFollow.MyFollowerList())">
+                            <i class="fa fa-users"></i>
+                            <span>@Admin.Followers</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanHomeDashboardPage))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.Company.Near())">
+                            <i class="fa fa-map-marker"></i>
+                            <span>@Admin.BusinessesAroundMe</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    @if (Model.Alias != null)
+    {
+        <li class="dropdown-item interactive">
+            <a href="#">
+                <span class="sl-icon fa fa-dropbox"></span>
+                <span>@L(Model.CategoryOption.ProductsManagement)</span>
+                <span class="fa fa-angle-down"></span>
+            </a>
+            <ul class="inner-dropdown hover-effect meta-menu">
+                @if (User.IsInRole(PermissionConst.CanProductMyList))
+                {
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.Product.MyList())">
+                        <i class="fa fa-cube"></i>
+                        <span>@Admin.ListOfAll</span>
+                    </a>
+                </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanProductMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.Product.BulkCreate())">
+                            <i class="fa fa-cube"></i>
+                            <span>ایجاد انبوه محصول</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanProductMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.Product.BulkEdit())">
+                            <i class="fa fa-cube"></i>
+                            <span>ویرایش انبوه محصول</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanProductLikeMyLikerList))
+                {
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.ProductLike.MyLikerList())">
+                        <i class="fa fa-heart"></i>
+                        <span>@Admin.Likers</span>
+                    </a>
+                </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanProductCommentMyList))
+                {
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.ProductComment.MyList())">
+                        <i class="fa fa-commenting-o"></i>
+                        <span>@Admin.Comments</span>
+                    </a>
+                </li>
+                }
+            </ul>
+        </li>
+    }
+    @if (true)
+    {
+        <li class="dropdown-item interactive">
+            <a href="#">
+                <span class="sl-icon fa fa-money"></span>
+                <span>@Admin.ManageTransactions</span>
+                <span class="fa fa-angle-down"></span>
+            </a>
+            <ul class="inner-dropdown hover-effect meta-menu">
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.PlanPayment.MyList())">
+                        <i class="fa fa-money"></i>
+                        <span>لیست طرح های من</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.Receipt.MyList())">
+                        <i class="fa fa-money"></i>
+                        <span>لیست رسیدهای من</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.ReceiptPayment.MyList())">
+                        <i class="fa fa-money"></i>
+                        <span>لیست تراکنش های من</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.ReceiptOption.MyBuyList())">
+                        <i class="fa fa-money"></i>
+                        <span>لیست خریدهای من</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.ReceiptOption.MySaleList())">
+                        <i class="fa fa-money"></i>
+                        <span>لیست فروش های من</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.CompanyBalance.MyList())">
+                        <i class="fa fa-money"></i>
+                        <span>تسویه حساب های من</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="#">
+                        <i class="fa fa-money"></i>
+                        <span>بودجه من</span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="@Url.Action(MVC.Bag.MyList())">
+                        <i class="fa fa-money"></i>
+                        <span>سبد خرید من</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    }
+
+    @if (User.IsInRole(PermissionConst.CanProductLikeMyLikeList) || User.IsInRole(PermissionConst.CanCategoryFollowMyToggleFollowAjax) || User.IsInRole(PermissionConst.CanCompanyFollowMyFollowList) || User.IsInRole(PermissionConst.CanNotificationMyList))
+    {
+        <li class="dropdown-item interactive">
+            <a href="#">
+                <span class="sl-icon fa fa-heartbeat"></span>
+                <span>@Admin.ManageActivities</span>
+                <span class="fa fa-angle-down"></span>
+            </a>
+            <ul class="inner-dropdown hover-effect meta-menu">
+                @if (User.IsInRole(PermissionConst.CanProductLikeMyLikeList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.ProductLike.MyLikeList())">
+                            <i class="fa fa-heart"></i>
+                            <span>@Admin.MyLikes</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanCategoryFollowMyToggleFollowAjax))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CategoryFollow.MyFollowList())">
+                            <i class="fa fa-th"></i>
+                            <span>@Admin.MyFollowingCategories</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanCompanyFollowMyFollowList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.CompanyFollow.MyFollowList())">
+                            <i class="fa fa-bank"></i>
+                            <span>@Admin.MyFollowingCompanies</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanNotificationMyList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.Notification.MyList())">
+                            <i class="fa fa-sticky-note fa-flip-horizontal"></i>
+                            <span>@Admin.Notifications</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    @if (User.IsInRole(PermissionConst.CanAdsPaymentList) || User.IsInRole(PermissionConst.CanAdsPaymentMyList))
+    {
+        <li class="dropdown-item interactive">
+            <a href="#">
+                <span class="sl-icon fa fa-gear"></span>
+                <span>لیست سفارش تبلیغات</span>
+                <span class="fa fa-angle-down"></span>
+            </a>
+            <ul class="inner-dropdown hover-effect meta-menu">
+                @if (User.IsInRole(PermissionConst.CanAdsPaymentList))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.AdsPayment.MyList())">
+                            <i class="fa fa-user"></i>
+                            <span>لیست همه</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+
+    @if (User.IsInRole(PermissionConst.CanUserMyEdit) || User.IsInRole(PermissionConst.CanAccountChangePassword) || User.IsInRole(PermissionConst.CanUserSettingMyEdit))
+    {
+        <li class="dropdown-item interactive">
+            <a href="#">
+                <span class="sl-icon fa fa-gear"></span>
+                <span>@Admin.Settings</span>
+                <span class="fa fa-angle-down"></span>
+            </a>
+            <ul class="inner-dropdown hover-effect meta-menu">
+                @if (User.IsInRole(PermissionConst.CanUserMyEdit))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.User.MyEdit())">
+                            <i class="fa fa-user"></i>
+                            <span>@Admin.Account</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole(PermissionConst.CanAccountChangePassword))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.Account.ChangePassword())">
+                            <i class="fa fa-asterisk"></i>
+                            <span>@Admin.ChangePassWord</span>
+                        </a>
+                    </li>
+                }
+
+                @if (User.IsInRole(PermissionConst.CanUserSettingMyEdit))
+                {
+                    <li class="dropdown-item">
+                        <a href="@Url.Action(MVC.UserSetting.Edit())">
+                            <i class="fa fa-asterisk"></i>
+                            <span>تنظیمات کاربری</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

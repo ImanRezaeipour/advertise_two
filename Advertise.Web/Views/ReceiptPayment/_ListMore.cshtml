@@ -1,0 +1,6 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model IEnumerable<Advertise.Core.Models.ReceiptPayment.ReceiptPaymentViewModel>
+@foreach (var item in Model)
+{
+    @Html.Partial(MVC.ReceiptPayment.Views._Item, item)
+}

@@ -1,0 +1,27 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Admin.NonMember;
+}
+<div class="mp-wrapper">
+    <div class="mp-container">
+        <h1 class="mp-header mp-msg">
+            <i class="fa fa-sign-in"></i>
+            <span class="mp-msg">@Admin.ErrorUnauthorized</span>
+        </h1>
+        <h2 class="mp-paragraph">
+            <i class="fa fa-exclamation-circle mp-icon"></i>
+            <span>@Admin.ErrorUnauthorizedReason</span>
+            <a href="@Url.Action(MVC.Account.Login())" class="mp-link">
+                <span>@Admin.Here</span>
+            </a>
+            <span>@Admin.Click</span>
+            <br><br>
+            <span>@Admin.NotRegisteredYet</span>
+            <a href="@Url.Action(MVC.Account.EmailRegister())" class="mp-link">
+                <span>@Admin.Here</span>
+            </a>
+            <span>@Admin.Click</span>
+        </h2>
+    </div>
+</div>

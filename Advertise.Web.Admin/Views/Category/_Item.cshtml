@@ -1,0 +1,141 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Category.CategoryViewModel
+<div class="landing-items nov-item-height-032">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section">
+                <input type="hidden" id="Alias" name="Alias" value="@Model.Alias" />
+                @if (User.IsInRole(PermissionConst.CanCategoryEdit) || User.IsInRole(PermissionConst.CanCategoryDeleteAjax))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanCategoryEdit))
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.Category.Edit(Model.Alias))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(PermissionConst.CanCategoryDeleteAjax))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.Category.DeleteAjax(Model.Alias))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="share-section">
+                <div class="sharing-item-li">
+                    <i class="fa fa-share-alt-square"></i>
+                    <ul class="item-share-list">
+                        <li>
+                            <a href="@Url.Action(MVC.Category.Detail(Model.Alias,Model.MetaTitle.Replace(" ","-"))).PlusWord("&text=").PlusWord(Model.Title).BeforeWord("https://telegram.me/share/url?url=https://novinak.com")">
+                                <span>@Admin.Telegram</span>
+                                <i class="sharings fa fa-telegram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Category.Detail(Model.Alias,Model.MetaTitle.Replace(" ","-"))).BeforeWord("https://plus.google.com/share?url=https://novinak.com")">
+                                <span>@Admin.GPlus</span>
+                                <i class="sharings fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Category.Detail(Model.Alias,Model.MetaTitle.Replace(" ","-"))).BeforeWord("https://www.facebook.com/sharer/sharer.php?u=https://novinak.com")">
+                                <span>@Admin.Facebook2</span>
+                                <i class="sharings fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action(MVC.Category.Detail(Model.Alias,Model.MetaTitle.Replace(" ","-"))).BeforeWord("https://twitter.com/home?status=https://novinak.com")">
+                                <span>@Admin.Twitter2</span>
+                                <i class="sharings fa fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a @if (Model.ImageFileName != null) { <text> href="@Url.Action(MVC.Category.Detail(Model.Alias, Model.MetaTitle.Replace(" ","-")))" </text>  }>
+                            <div class="item-preview-image">
+                                <img src="@if (Model.ImageFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.ImageFileName)</text>} else {<text>@FileConst.NoPreview</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.Description)">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="@Url.Action(MVC.Category.Detail(Model.Alias, Model.MetaTitle.CastToSlug()))">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a href="javascript:void(0)">
+                        <p>
+                            <span>@Admin.Priority.PlusWord(": ")</span>
+                            <span>@Model.Order</span>
+                        </p>
+                    </a>
+                </div>
+                <div class="middle-part">
+                    <p>
+                        <span>@Model.CompanyCount.ToString().PlusWord("   ")</span>
+                        <span>@Admin.Businesses2</span>
+                        <i class="fa fa-briefcase"></i>
+                    </p>
+                </div>
+                <div class="bottom-part">
+                    <p>
+                        <span>@Model.ProductCount.ToString().PlusWord("   ")</span>
+                        <span>@Admin.ProductsOrServices</span>
+                        <i class="fa fa-cubes"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="nov-item-footer">
+            <hr class="line-separator item-footer">
+            <div class="overview-section">
+                <div class="image-part">
+                    <figure class="user-avatar small">
+                        <a @if (Model.ParentImageFileName != null) { <text> href="@Url.Action(MVC.Category.Detail(Model.ParentAlias))" </text>  }>
+                            <div class="novinak-image">
+                                <img src="@if (Model.ParentImageFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.ParentImageFileName)</text>} else {<text>@FileConst.NoPreview</text>}" alt="@Model.ParentTitle">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+                <div class="caption-part">
+                    <a href="@Url.Action(MVC.Category.Detail(Model.ParentAlias))" class="tooltipster" title="@Model.ParentTitle">
+                        <p class="text-header tiny">@Model.ParentTitle</p>
+                    </a>
+                </div>
+            </div>
+            <div class="toggle-section follow-section">
+                <div class="follow-button-wrapper">
+                    <input id="categoryId" type="hidden" value="@Model.Id" />
+                    <a @if (User.Identity.IsAuthenticated != true) { <text> href="@Url.Action(MVC.Account.EmailRegister())" </text>  } else { <text> href="javascript:void(0)" data-on-click="ajaxToggleFollowCategory" data-follow="@Admin.Follow" data-unfollow="@Admin.Unfollow" </text> } class="follow-button @if (Model.InitFollow) {<text>followed-btn</text>} else {<text>unfollowed-btn</text>}">
+                        <span>@if (Model.InitFollow){<text>@Admin.Unfollow</text>}else{<text>@Admin.Follow</text>}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

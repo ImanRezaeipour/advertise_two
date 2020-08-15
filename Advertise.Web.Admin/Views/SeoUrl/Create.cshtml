@@ -1,0 +1,70 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.SeoUrl.SeoUrlCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "ایجاد آدرس انتقالی";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>ایجاد آدرس انتقالی</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newSeoUrl" action="@Url.Action(MVC.SeoUrl.Create())" method="Post" data-on-load="validateSeoUrl">
+            @Html.AntiForgeryToken()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="AbsoulateUrl" class="rl-label">آدرس قبلی</label>
+                    <input type="text" id="AbsoulateUrl" name="AbsoulateUrl" placeholder="آدرس قبلی" class="tooltipster ltr-left-text" title="آدرس قبلی"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="CurrentUrl" class="rl-label">آدرس جدید</label>
+                    <input type="text" id="CurrentUrl" name="CurrentUrl" placeholder="آدرس جدید" class="tooltipster ltr-left-text" title="آدرس جدید"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="IsActive" class="rl-label">فعال</label>
+                    <input type="checkbox" id="IsActive" name="IsActive" value="true" placeholder="فعال" class="tooltipster" title="فعال" checked="checked"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Redirection" class="rl-label">
+                        <span>نوع انتقال</span>
+                        <i class="fa fa-question-circle tooltipster" title="نوع انتقال"></i>
+                    </label>
+                    <select id="Redirection" name="Redirection">
+                        <option>--- @Admin.Choose ---</option>
+                        @foreach (var redirectionType in Model.RedirectionTypeList)
+                        {
+                            <option value="@redirectionType.Value">@redirectionType.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="newSeoUrl" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

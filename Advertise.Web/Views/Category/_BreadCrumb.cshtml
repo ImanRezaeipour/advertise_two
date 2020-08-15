@@ -1,0 +1,33 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.Category.CategoryBreadCrumbViewModel
+<ol class="breadcrumb">
+    @foreach (var node in Model.Nodes)
+    {
+        if (node == Model.Nodes.Last() && Model.CurrentTitle == null)
+        {
+            <li>
+                <a href="@if(Model.IsAllSearch == true) {<text>@Url.Action(MVC.Product.Search(node.Alias, null))</text>} else {<text>@Url.Action(MVC.Category.Detail(node.Alias, node.MetaTitle.CastToSlug()))</text>}">
+                    <h2>&laquo; @node.Title &raquo;</h2>
+                </a>
+            </li>
+        }
+        else if (node == Model.Nodes.Last() && Model.CurrentTitle != null)
+        {
+            <li>
+                <a href="@if(Model.IsAllSearch == true) {<text>@Url.Action(MVC.Product.Search(node.Alias, null))</text>} else {<text>@Url.Action(MVC.Category.Detail(node.Alias, node.MetaTitle.CastToSlug()))</text>}">@node.Title</a>
+                <span> &gt; </span>
+            </li>
+            <li>
+                <h2>&laquo; @Model.CurrentTitle &raquo;</h2>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="@if(Model.IsAllSearch == true) {<text>@Url.Action(MVC.Product.Search(node.Alias, null))</text>} else {<text>@Url.Action(MVC.Category.Detail(node.Alias, node.MetaTitle.CastToSlug()))</text>}">@node.Title</a>
+                <span> &gt; </span>
+            </li>
+        }
+    }
+</ol>

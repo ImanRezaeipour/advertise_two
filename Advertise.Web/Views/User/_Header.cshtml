@@ -1,0 +1,125 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@using Auth = Advertise.Service.Services.Permissions.PermissionConst
+@model Advertise.Core.Models.User.UserHeaderViewModel
+<div class="header-wrap">
+    <header>
+        <a href="@Url.Action(MVC.Home.LandingPage())">
+            <figure class="logo">
+                <img src="@FileConst.LogoSmallPth" alt="@($"{Admin.Logo} {Admin.Novinak} {Admin.SiteTitle}")">
+            </figure>
+        </a>
+        <div class="mobile-menu-handler left primary">
+            <i class="mobile-right-pull fa fa-bars fa-2x"></i>
+        </div>
+        <a href="@Url.Action(MVC.Home.LandingPage())">
+            <figure class="logo-mobile">
+                <img src="@FileConst.LogoMobilePth" alt="@($"{Admin.MobileLogo} {Admin.Novinak} {Admin.SiteTitle}")">
+            </figure>
+        </a>
+        <div class="mobile-account-options-handler right secondary">
+            <span class="icon-user-side-right fa fa-user-o"></span>
+        </div>
+        <ul class="user-board-top">
+            <li class="user-quick-avatar">
+                <a href="@Url.Action(MVC.Profile.Dashboard())" class="outer-avatar-ring tooltipster" title="@Admin.ProfilePage">
+                    <div class="inner-avatar-ring">
+                        <figure class="user-header-avatar">
+                            @if (Model.AvatarFileName != null)
+                            {
+                                <img src="@FileConst.ImagesWebPath.PlusWord(Model.AvatarFileName)" class="header-avatar-top" alt="user avatar image" />
+                            }
+                            else
+                            {
+                                <img src="@FileConst.NoAvatarPth" class="header-avatar-top" alt="user without avatar image" />
+                            }
+                        </figure>
+                    </div>
+                </a>
+                @if (Model.IsSetUserName != true)
+                {
+                    <a href="@Url.Action(MVC.User.MyEdit())" class="avatar-username-sticker tooltipster" title="@Admin.PickAUserName">
+                        <i class="fa fa-user-secret"></i>
+                    </a>
+                }
+                @if (Model.IsSetSubdomain != true)
+                {
+                    <a href="@Url.Action(MVC.Company.MyEdit())" class="avatar-domainname-sticker tooltipster" title="@Admin.ChooseADomain">
+                        <i class="fa fa-globe"></i>
+                    </a>
+                }
+            </li>
+            <li class="user-quick-name">
+                <a href="@Url.Action(MVC.Profile.Dashboard())">
+                    <p class="header-quick-name">@Model.DisplayName</p>
+                </a>
+            </li>
+            @if (Model.IsSetSubdomain != true && User.IsInRole(PermissionConst.CanCompanyMyEdit) != true)
+            {
+                <li class="user-order">
+                    <i class="fa fa-briefcase header-account-icon business-icon"></i>
+                    <a href="@Url.Action(MVC.Page.Costs())" class="header-account-link business-link">@Admin.BusinessManagementPanel</a>
+                </li>
+            }
+            else
+            {
+                <li class="user-order">
+                    <i class="fa fa-shopping-bag header-account-icon"></i>
+                    <a href="@Url.Action(MVC.Receipt.MyList())" class="header-account-link">@Admin.MyOrders</a>
+                </li>
+            }
+            <li class="user-language">
+                <i class="fa fa-language header-account-icon"></i>
+                <a href="javascript:void(0)" class="header-account-link">Language</a>
+                <ul id="LanguageList">
+                    <li>
+                        <a href="@Url.Action(MVC.Home.SetLang("en"))" class="header-account-link">English</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action(MVC.Home.SetLang("fa"))" class="header-account-link">فارسی</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action(MVC.Home.SetLang("ar"))" class="header-account-link">العربية</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="user-exit">
+                <i class="fa fa-sign-out header-account-icon"></i>
+                <a href="@Url.Action(MVC.Account.SignOut())" class="header-account-link">@Admin.Exit</a>
+            </li>
+        </ul>
+        <ul class="search-form">
+            <li>
+                <input type="text" class="header-search-area" name="term" id="searchProduct" placeholder="@Admin.SearchProductsOrServices" value="@(Request.QueryString["term"])" data-on-keyPress="searchTerm">
+            </li>
+            <li>
+                <a href="javascript:void(0)" id="searchProductOnLanding" data-on-click="searchInputTerm">
+                    <div class="main-menu-search-wrapper">
+                        <i class="main-menu-search-icon fa fa-search"></i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="header-cart-view">
+            <a href="@Url.Action(MVC.Bag.MyList())">
+                <span class="fa fa-shopping-cart fa-3x header-cart-icon tooltipster" title="@Admin.Cart"></span>
+            </a>
+            <div class="count-outer">
+                <div class="count-inner"></div>
+            </div>
+            <a href="@Url.Action(MVC.Bag.MyList())" class="tooltipster" title="@Admin.Cart">
+                <span id="HeaderCartCounter" class="cart-counter">@Model.BagCount</span>
+            </a>
+        </div>
+        @if (User.IsInRole(PermissionConst.CanHomeBoardPage))
+        {
+            <div class="header-dashboard-link">
+                <i class="fa fa-dashboard"></i>
+                <a href="@Url.Action(MVC.Panel.Board())">@Admin.Dashboard</a>
+            </div>
+        }
+    </header>
+</div>

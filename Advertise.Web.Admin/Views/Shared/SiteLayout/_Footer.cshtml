@@ -1,0 +1,105 @@
+﻿@using Advertise.Service.Managers.File
+@* Generator: MvcView GeneratePrettyNames: true *@
+<footer>
+    <div id="footer-top-wrap">
+        <div id="footer-top">
+            <div class="company-info">
+                <figure class="logo small">
+                    <figure class="logo">
+                        <img src=@FileConst.LogoSmallPth alt="logo"/>
+                    </figure>
+                </figure>
+                <p><br><br><br><br><br></p>
+                <h2 class="ftr-sub-logo">@Admin.BusinessSponsorshipWebsite</h2>
+                <h2 class="ftr-sub-logo">@Admin.ProvidingOnlineServices</h2>
+                <h2 class="ftr-sub-logo">@Admin.OnlineSaleAndOnlineShopping</h2>
+                <ul class="social-links">
+                    <li class="social-link fb">
+                        <a href="javascript:void(0)" target="_blank">
+                            <i class="fa fa-facebook-square fa-2x"></i>
+                        </a>
+                    </li>
+                    <li class="social-link twt">
+                        <a href="javascript:void(0)" target="_blank">
+                            <i class="fa fa-twitter-square fa-2x"></i>
+                        </a>
+                    </li>
+                    <li class="social-link rss">
+                        <a href="javascript:void(0)" target="_blank">
+                            <i class="fa fa-rss-square fa-2x"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="link-info">
+                <p class="footer-title ftr-top-txt">@Admin.ContactUs</p>
+                <ul class="link-list">
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href="@Url.Action(MVC.Page.BuyAndSell())">
+                            <span class="ftr-sub-txt">@Admin.BuyAndSell</span>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href="@Url.Action(MVC.Page.ContactUs())">
+                            <span class="ftr-sub-txt">@Admin.ContactUs</span>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href="@Url.Action(MVC.Page.HowToJoinUs())">
+                            <span class="ftr-sub-txt">@Admin.HowToJoinUs</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="link-info">
+                <p class="footer-title ftr-top-txt">@Admin.UsersLinks</p>
+                <ul class="link-list">
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href="@Url.Action(MVC.Page.Costs())">
+                            <span class="ftr-sub-txt">@Admin.Costs</span>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href=@Url.Action(MVC.Complaint.Create())>
+                            <span class="ftr-sub-txt">@Admin.Complaints</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="link-info">
+                <p class="footer-title ftr-top-txt">@Admin.Helpp</p>
+                <ul class="link-list">
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href="@Url.Action(MVC.Page.About())">
+                            <span class="ftr-sub-txt">@Admin.About</span>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href="@Url.Action(MVC.Page.FAQs())">
+                            <span class="ftr-sub-txt">@Admin.FrequentlyAskedQuestions</span>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href="@Url.Action(MVC.Page.Policy())">
+                            <span class="ftr-sub-txt">@Admin.RulesAndRegulations</span>
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <div class="bullet"></div>
+                        <a href="@Url.Action(MVC.Page.SiteMap())">
+                            <span class="ftr-sub-txt">@Admin.SiteMap</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

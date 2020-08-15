@@ -1,0 +1,38 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanyOfficial.CompanyOfficialListViewModel
+@using Advertise.Core.Extensions
+@using Advertise.Web.Framework.MvcPaging
+@{
+    Layout = Model.IsMine ? MVC.Shared.Views.SiteLayout.Profile._ProfileLayout : MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Model.IsMine ? Admin.ListMyConversations: Admin.ListConversations;
+    ViewBag.PageName = Model.IsMine != true ? "Conversations" : "myConversations";
+
+    ViewBag.HasSearchbar = true;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div id="search" class="list-searchbar">
+        <div class="input-container lists-header searchbar-header-container">
+            <input type="text" id="Term" name="Term" value="@Model.SearchRequest.Term" class="searchbar-lists-header" data-on-keypress="searchGrid" placeholder="@if (Model.IsMine != true) {<text>@Admin.SearchIn.PlusWord(" ").PlusWord(Admin.ListProductsComments)</text>} else {<text>@Admin.SearchIn</text>}" />
+            <button class="button secondary" type="button" data-on-click="navigate">
+                <i class="fa fa-search"></i>
+            </button>
+            <a href="javascript:void(0)" class="list-searchbar-filter" data-on-click="listSearchbarFilterToggle">
+                <i class="fa fa-filter"></i>
+            </a>
+            </div>
+        @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+        @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize.ToString())
+        @SearchItem.IsActive(Model.StateList, Model.SearchRequest.State.ToString())
+        @SearchItem.GridView()
+    </div>
+    <div class="landing-grids-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @Html.Partial(MVC.CompanyOfficial.Views._ListMore, Model.CompanyOfficials)
+            </div>
+        </div>
+    </div>
+    <div class="pager">
+        @Html.Pager(Model.SearchRequest.PageSize, Model.SearchRequest.PageIndex, Model.SearchRequest.TotalCount).Options(opt => opt.PageRouteValueKey("pageindex").RouteValues(new { }).AddFromQueryString(Request))
+    </div>
+</div>

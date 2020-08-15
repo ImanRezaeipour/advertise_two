@@ -1,0 +1,136 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.CategoryFollow.CategoryFollowViewModel
+<div class="landing-items category-items">
+    <div class="product-item column landing-column">
+        <div class="part-eight">
+            @if (User.IsInRole(PermissionConst.CanCategoryEdit) || User.IsInRole(PermissionConst.CanCategoryDeleteAjax))
+            {
+                <div class="item-edit-wrapper">
+                    <i class="fa fa-pencil-square"></i>
+                    <ul class="item-edit-list">
+                        @if (User.IsInRole(PermissionConst.CanCategoryEdit))
+                        {
+                            <li>
+                                <a href="@Url.Action(MVC.Category.Edit())">
+                                    <span>@Admin.Edit</span>
+                                    <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                </a>
+                            </li>
+                        }
+                        @if (User.IsInRole(PermissionConst.CanCategoryDeleteAjax))
+                        {
+                            <li>
+                                <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.CategoryFollow.MyToggleAjax(Model.Id))">
+                                    <span>@Admin.Delete</span>
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+        <div class="part-nine">
+            <div class="sharing-item-li">
+                <i class="fa fa-share-alt-square"></i>
+                <ul class="item-share-list">
+                    <li>
+                        <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias)).AddSlug(Model.CategoryMetaTitle).PlusWord("&text=").PlusWord(Model.CategoryTitle).BeforeWord("https://telegram.me/share/url?url=https://novinak.com")">
+                            <span>@Admin.Telegram</span>
+                            <i class="sharings fa fa-telegram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias)).AddSlug(Model.CategoryMetaTitle).BeforeWord("https://plus.google.com/share?url=https://novinak.com")">
+                            <span>@Admin.GPlus</span>
+                            <i class="sharings fa fa-google-plus"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias)).AddSlug(Model.CategoryMetaTitle).BeforeWord("https://www.facebook.com/sharer/sharer.php?u=https://novinak.com")">
+                            <span>@Admin.Facebook2</span>
+                            <i class="sharings fa fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias)).AddSlug(Model.CategoryMetaTitle).BeforeWord("https://twitter.com/home?status=https://novinak.com")">
+                            <span>@Admin.Twitter2</span>
+                            <i class="sharings fa fa-twitter"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="product-preview-actions">
+            <figure class="product-preview-image">
+                @if (Model.CategoryImageFileName != null)
+                {
+                    <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias)).AddSlug(Model.CategoryMetaTitle)">
+                        <div class="item-preview-image">
+                            <img src="@FileConst.ImagesWebPath.PlusWord(Model.CategoryImageFileName)" alt="@Model.CategoryTitle.PlusWord(" Category Image")">
+                        </div>
+                    </a>
+                }
+                else
+                {
+                    <div class="item-preview-image">
+                        <img src="@FileConst.NoPreview" alt="category without any preview image">
+                    </div>
+                }
+            </figure>
+        </div>
+        <a class="novinak-title-link" href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias)).AddSlug(Model.CategoryMetaTitle)">
+            <p class="novinak-title text-header">@Model.CategoryTitle</p>
+        </a>
+        <a href="javascript:void(0)">
+            <p class="part-one">
+                <span>@Admin.Priority.PlusWord(": ")</span>
+                <span>@Model.CategoryOrder</span>
+            </p>
+        </a>
+        <p class="part-two">
+            <span>@Model.CategoryCompanyCount.ToString().PlusWord("   ")</span>
+            <span>@Admin.Businesses2</span>
+            <i class="fa fa-briefcase"></i>
+        </p>
+        <p class="part-three">
+            <span>@Model.CategoryProductCount.ToString().PlusWord("   ")</span>
+            <span>@Admin.ProductsOrServices</span>
+            <i class="fa fa-cubes"></i>
+        </p>
+        <hr class="line-separator item-footer">
+        <div class="part-four">
+            <figure class="user-avatar small">
+                @if (Model.ParentCategoryImageFileName != null)
+                {
+                    <a href="@Url.Action(MVC.Category.Detail(Model.ParentCategoryAlias)).AddSlug(Model.ParentCategoryMetaTitle)">
+                        <div class="novinak-owner-image">
+                            <img src="@FileConst.ImagesWebPath.PlusWord(Model.ParentCategoryImageFileName)" alt="@Model.ParentCategoryTitle">
+                        </div>
+                    </a>
+                }
+                else
+                {
+                    <div class="novinak-owner-image">
+                        <img src="@FileConst.NoPreview" alt="notification image">
+                    </div>
+                }
+            </figure>
+            <a href="@Url.Action(MVC.Category.Detail(Model.ParentCategoryAlias)).AddSlug(Model.ParentCategoryMetaTitle)" class="tooltipster" title="@Model.ParentCategoryTitle">
+                <p class="part-five text-header tiny">@Model.ParentCategoryTitle</p>
+            </a>
+        </div>
+        <div class="part-six">
+            <div class="follow-button-wrapper">
+                <input id="categoryId" type="hidden" value="@Model.CategoryId" />
+                <a href="javascript:void(0)" class="follow-button @if (Model.InitFollowCategory){<text>followed-btn</text>}else{<text>unfollowed-btn</text>}" data-on-click="ajaxToggleFollowCategory" data-follow="@Admin.Follow" data-unfollow="@Admin.Unfollow">
+                    <span>@if(Model.InitFollowCategory){<text>@Admin.Unfollow</text>}else{<text>@Admin.Follow</text>}</span>
+                </a>
+            </div>
+        </div>
+        <div class="clearboth"></div>
+    </div>
+</div>

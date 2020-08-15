@@ -1,0 +1,54 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanyReview.CompanyReviewEditViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.EditReview;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.EditReview</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editCompanyReview" action="@Url.Action(MVC.CompanyReview.Edit())" method="Post" data-on-load="validateCompanyReview">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="CompanyId" name="CompanyId" value="@Model.CompanyId"/>
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">@Admin.BrandName : @Model.CompanyTitle </label>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label tooltipster" title="عنوان را وارد کنید">عنوان</label>
+                    <input type="text" id="Title" name="Title" value="@Model.Title"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Body" class="rl-label tooltipster" title="@Admin.ItShowsReviewText">@Admin.ReviewText</label>
+                    <textarea id="Body" name="Body" data-on-load="editorCompanyReview" data-val="true" data-val-required="@Admin.RequiredExplain">@Model.Body</textarea>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="editCompanyReview" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" >
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

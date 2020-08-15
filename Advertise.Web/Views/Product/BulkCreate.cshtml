@@ -1,0 +1,117 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@using Advertise.Core.Helpers
+@using EnumHelper = Advertise.Core.Helpers.EnumHelper
+@model Advertise.Core.Models.Product.ProductBulkCreateViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.ProductRegister;
+}
+@section scripts{
+    <script>
+        var categoryListJson = @Html.Raw(Model.CategoryListJson);
+        var catalogListJson = @Html.Raw(Model.CatalogListJson);
+    </script>
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.ProductRegister</h4>
+    </div>
+    <div class="form-box-item product-catalog-form">
+        <form id="newProductBulk" action="@Url.Action(MVC.Product.BulkCreate())" method="post" data-on-load="validateProductBulk">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="catalogContainer">
+                <div class="catalogItem add-product-page round-corners-five" data-index="0">
+                    <input type="hidden" name="ProductBulks[0].Index" value="0" />
+                    <input type="hidden" id="categoryDefault" value="b55ee720-f0bc-7dc0-e160-39e0903ebbce" />
+
+                    <div class="input-container nov-seven-col nov-col-1">
+                        <label for="ProductBulks_0_.CategoryId" class="rl-label">
+                            <span>@Admin.Category2</span>
+                        </label>
+                        <select id="ProductBulks_0_.CategoryId" name="ProductBulks[0].CategoryId" data-on-load="dropdownCategoryList" data-on-change="getCategory" value="b55ee720-f0bc-7dc0-e160-39e0903ebbce"></select>
+                    </div>
+
+                    <div class="input-container nov-seven-col nov-col-2">
+                        <label for="ProductBulks_0_.CatalogId" class="rl-label">
+                            <span>کالا</span>
+                        </label>
+                        <select id="ProductBulks_0_.CatalogId" name="ProductBulks[0].CatalogId" data-on-load="dropdownCatalogList"></select>
+                    </div>
+
+                    <div class="input-container nov-seven-col nov-col-3">
+                        <label for="ProductBulks_0_.Color" class="rl-label">
+                            <span>@Admin.Color</span>
+                        </label>
+                        <select id="ProductBulks_0_.Color" name="ProductBulks[0].Color" data-on-load="dropdownSimple">
+                            @foreach (var color in Model.ColorList)
+                            {
+                                <option value="@color.Value" style="background-color: @color.Text">@color.Text (@(EnumHelper.GetText<ColorType>(color.Value.ToInt32())))</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="input-container nov-seven-col nov-col-4">
+                        <label for="ProductBulks_0_.GuaranteeId" class="rl-label">
+                            <span>@Admin.Guarantee</span>
+                        </label>
+                        <select id="ProductBulks_0_.GuaranteeId" name="ProductBulks[0].GuaranteeId" data-on-load="dropdownProductBulk">
+                            @foreach (var gurantee in Model.GuaranteeList)
+                            {
+                                <option value="@gurantee.Value">@gurantee.Text</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="input-container nov-seven-col nov-col-5">
+                        <label for="ProductBulks_0_.Price" class="rl-label">
+                            <span>@Admin.Price</span>
+                        </label>
+                        <input type="text" id="ProductBulks_0_.Price" name="ProductBulks[0].Price" />
+                    </div>
+
+                    <div class="input-container nov-seven-col nov-col-6">
+                        <label for="ProductBulks_0_.AvailableCount" class="rl-label">
+                            <span>@Admin.Available</span>
+                        </label>
+                        <input type="text" id="ProductBulks_0_.AvailableCount" name="ProductBulks[0].AvailableCount" placeholder="@Admin.ExampleAvailable" />
+                    </div>
+
+                    <div class="input-container nov-seven-col nov-col-7">
+                        <label for="ProductBulks_0_.IsSecondHand" class="rl-label">
+                            <span>@Admin.State</span>
+                        </label>
+                        <select id="ProductBulks_0_.IsSecondHand" name="ProductBulks[0].IsSecondHand" data-on-change="toggleCatalogSecondHand">
+                            <option value="0" selected>نو</option>
+                            <option value="1">کار کرده</option>
+                        </select>
+                    </div>
+
+                    <div class="catalog-product-delete round-corners-five" data-on-click="removeCatalogCreate">
+                        <div class="catalog-delete-container"></div>
+                        <i class="fa fa-times"></i>
+                    </div>
+
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+            <div class="catalogItemTemplate">
+                @Html.Partial(MVC.Product.Views._CatalogItemTemplate)
+            </div>
+            <div class="catalogItemExtra">
+                @Html.Partial(MVC.Product.Views._CatalogItemExtra)
+            </div>
+            @Html.Partial(MVC.Product.Views._CatalogAddButton)
+            <div class="form-button-container">
+                <button type="submit" form="newProductBulk" class="form-button ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                    <i class="fa fa-check-circle"></i>
+                    <span>ثبت و ذخیره نهایی</span>
+                </button>
+            </div>
+
+            <div class="input-container"></div>
+        </form>
+    </div>
+</div>

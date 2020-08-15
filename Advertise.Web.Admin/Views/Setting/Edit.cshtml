@@ -1,0 +1,127 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Setting.SettingEditViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "تنظیمات سایت";
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>تنظیمات سایت</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editSetting" action="@Url.Action(MVC.Setting.Edit())" method="Post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="Id" name="Id" value="@Model.Id"/>
+            
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SiteTitle" class="rl-label">عنوان سایت</label>
+                    <input type="text" id="SiteTitle" name="SiteTitle" placeholder="عنوان سایت" value="@Model.SiteTitle" class="tooltipster" title="عنوان سایت"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SiteShortTitle" class="rl-label">عنوان مختصر سایت</label>
+                    <input type="text" id="SiteShortTitle" name="SiteShortTitle" placeholder="عنوان مختصر سایت" value="@Model.SiteShortTitle" class="tooltipster" title="عنوان مختصر سایت"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SiteVersion" class="rl-label">نسخه سایت</label>
+                    <input type="text" id="SiteVersion" name="SiteVersion" placeholder="نسخه سایت" value="@Model.SiteVersion" class="tooltipster" title="نسخه سایت"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SiteDescription" class="rl-label">توضیحات سایت</label>
+                    <input type="text" id="SiteDescription" name="SiteDescription" placeholder="توضیحات سایت" value="@Model.SiteDescription" class="tooltipster" title="توضیحات سایت"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="IsDefaultAvatarEnabled" class="rl-label">آیا آواتار پیشفرض فعال است</label>
+                    <input type="checkbox" id="IsDefaultAvatarEnabled" name="IsDefaultAvatarEnabled" @if (Model.IsDefaultAvatarEnabled){<text> checked</text>} placeholder="آیا آواتار پیشفرض فعال است" class="tooltipster" title="آیا آواتار پیشفرض فعال است"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="IsAllowViewingProfiles" class="rl-label">آیا پروفایل ها قابل مشاهده باشد</label>
+                    <input type="checkbox" id="IsAllowViewingProfiles" name="IsAllowViewingProfiles" @if (Model.IsAllowViewingProfiles){<text> checked</text>} placeholder="آیا پروفایل ها قابل مشاهده باشد" class="tooltipster" title="آیا پروفایل ها قابل مشاهده باشد"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="FacebookPageUrl" class="rl-label">آدرس فیسبوک</label>
+                    <input type="text" id="FacebookPageUrl" name="FacebookPageUrl" placeholder="آدرس فیسبوک" value="@Model.FacebookPageUrl" class="tooltipster" title="آدرس فیسبوک"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="GooglePlusPageUrl" class="rl-label">آدرس گوگل پلاس</label>
+                    <input type="text" id="GooglePlusPageUrl" name="GooglePlusPageUrl" placeholder="آدرس گوگل پلاس" value="@Model.GooglePlusPageUrl" class="tooltipster" title="آدرس گوگل پلاس"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="InstagramPageUrl" class="rl-label">آدرس اینستاگرام</label>
+                    <input type="text" id="InstagramPageUrl" name="InstagramPageUrl" placeholder="آدرس اینستاگرام" value="@Model.InstagramPageUrl" class="tooltipster" title="آدرس اینستاگرام"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="LinkedinPageUrl" class="rl-label">آدرس لینکداین</label>
+                    <input type="text" id="LinkedinPageUrl" name="LinkedinPageUrl" placeholder="آدرس لینکداین" value="@Model.LinkedinPageUrl" class="tooltipster" title="آدرس لینکداین"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="TelegramPageUrl" class="rl-label">آدرس تلگرام</label>
+                    <input type="text" id="TelegramPageUrl" name="TelegramPageUrl" placeholder="آدرس تلگرام" value="@Model.TelegramPageUrl" class="tooltipster" title="آدرس تلگرام"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SiteEmail" class="rl-label">آدرس ایمیل</label>
+                    <input type="text" id="SiteEmail" name="SiteEmail" placeholder="آدرس ایمیل" value="@Model.SiteEmail" class="tooltipster" title="آدرس ایمیل"/>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+
+        </form>
+        
+        <div class="form-button-container">
+            <button form="editSetting" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

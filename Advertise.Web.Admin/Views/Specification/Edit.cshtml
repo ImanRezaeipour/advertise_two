@@ -1,0 +1,119 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Specification.SpecificationEditViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.EditSpecifications;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.EditSpecifications</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editSpecification" action="@Url.Action(MVC.Specification.Edit())" method="Post" data-on-load="validateSpecification">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="CategoryId" name="CategoryId" value="@Model.CategoryId" />
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">@Admin.Category: @Model.CategoryTitle</label>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">@Admin.Title</label>
+                    <input type="text" id="Title" name="Title" value="@Model.Title" placeholder="@Admin.Title" class="tooltipster" title="@Admin.ItShowsSpecificationTitle" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Description" class="rl-label">@Admin.Description</label>
+                    <input type="text" id="Description" name="Description" value="@Model.Description" placeholder="@Admin.Description" class="tooltipster" title="@Admin.ItDescribesSpecification" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Order" class="rl-label">@Admin.Priority</label>
+                    <input type="text" id="Order" name="Order" value="@Model.Order" placeholder="@Admin.Priority" class="tooltipster" title="@Admin.ItShowsSpecificationPriority" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Type" class="rl-label tooltipster" title="@Admin.ItShowsSpecificationType">@Admin.Type:</label>
+                    <select id="Type" name="Type">
+                        @foreach (var type in Model.TypeList)
+                        {
+                            <option value="@type.Value" @if (Model.Type.ToString() == type.Value) { <text> selected</text>}> @type.Text </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.AddSpecificationOption</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.AddSpecificationOption"></i>
+                    </label>
+                    <div class="">
+                        <div id="items">
+                            @if (Model.Options.Any() == false)
+                            {
+                                <div id="item" data-index="0">
+                                    <input type="hidden" name="Options.Index" value="0" />
+                                    <input type="text" id="Options[0].Title" name="Options[0].Title" style="width: 85%; display: inline-block; margin-bottom: 10px;" />
+                                    <button class="button primary" type="button" data-action="removeSpecificationOption" data-event="click" data-param="0" style="width: 10%; display: inline-block; height: 40px; margin-bottom: 10px;">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    <span class="field-validation-error" data-valmsg-for="Options[0].Title" data-valmsg-replace="true"></span>
+                                </div>
+                            }
+                            else
+                            {
+                                var index = 0;
+                                foreach (var option in Model.Options)
+                                {
+                                    <div id="item" data-index="@index">
+                                        <input type="hidden" name="Options.Index" value="@index" />
+                                        <input type="text" id="Options[@index].Title" name="Options[@index].Title" value="@option.Title" style="width: 85%; display: inline-block; margin-bottom: 10px;" />
+                                        <button class="button primary" type="button" data-action="removeSpecificationOption" data-event="click" data-param="@index" style="width: 10%; display: inline-block; height: 40px; margin-bottom: 10px;">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    index = index + 1;
+                                }
+                            }
+                        </div>
+                        <button class="button primary" type="button" data-action="addSpecificationoption" data-event="click" style="height: 40px; margin-bottom: 10px;">
+                            <span>@Admin.AddSpecificationOption</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            <button form="editSpecification" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

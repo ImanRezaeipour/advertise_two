@@ -1,0 +1,85 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.CompanyVideo.CompanyVideoDetailViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Model.Title;
+    ViewBag.Keywords = $"{Admin.Video},{Admin.VideoGallery},{Model.Title},{Model.CompanyTitle}";
+    ViewBag.Description = $"{Admin.Video} {Admin.VideoGallery} {Model.Title} {Model.CompanyTitle}";
+}
+@section og {
+    <meta property="og:image" content="@if (Model.VideoFiles?.First().ThumbName != null) {<text>@FileConst.ThumbPath.PlusWord(Model.VideoFiles.First().ThumbName)</text>} else {<text>@FileConst.Video</text>}">
+}
+@section sitemap {
+    <div class="site-map">
+        <div id="SiteMap">
+            @*@Html.Action(MVC.Category.BreadCrumb(Model.Id, null, true))*@
+        </div>
+    </div>
+}
+<div class="detail-wrapper">
+    <div class="main-content">
+        <div class="gallery-container">
+            <div class="main-video-container">
+                <div class="headline primary">
+                    <h4><i class="fa fa-plus-circle"></i> @Model.Title</h4>
+                </div>
+                @{
+                    var indexVideo = 0;
+                    foreach (var video in Model.VideoFiles)
+                    {
+                        <video class="@if (video == Model.VideoFiles.First()) {<text>main-video</text>} else {<text>alternative-video</text>}" controls data-param="@(++indexVideo)" preload="none" poster="@if (video.ThumbName != null) {<text>@FileConst.ThumbPath.PlusWord(video.ThumbName)</text>} else {<text>@FileConst.Video</text>}">
+                            <source src="@if(video.WatermarkName == null) {<text>@FileConst.VideosWebPath.PlusWord(video.FileName)</text>}else{<text>@FileConst.VideosWebPath.PlusWord(video.WatermarkName)</text>}" type="video/mp4"/>
+                            <span>can not be play</span>
+                        </video>
+                    }
+                }
+            </div>
+            <div class="videos-carousel-container owl-carousel" data-on-load="loadVideoCarousel" >
+                @{
+                    var indexThumb = 0;
+                    foreach (var thumb in Model.VideoFiles)
+                    {
+                        <div class="video-thumbnail @if (thumb == Model.VideoFiles.First()) {<text>current-thumb</text>} else {<text>alternative-thumb</text>}" data-on-click="selectVideoFile" data-param="@(++indexThumb)">
+                            <figure>
+                                <img src="@if (thumb.ThumbName != null) {<text>@FileConst.ThumbPath.PlusWord(thumb.ThumbName)</text>} else {<text>@FileConst.Video</text>}" alt="@($"{Admin.VideoGallery} {Model.Title} {indexThumb}")"/>
+                            </figure>
+                            <span>@indexThumb</span>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias,Model.CompanyTitle.CastToSlug()))">
+            <figure class="company-logo">
+                <img src="@if (Model.CompanyLogo !=null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.CompanyLogo)</text>} else {<text>@FileConst.NoLogo</text>}" alt="@Model.CompanyTitle.PlusWord(Admin.Logo)" />
+            </figure>
+        </a>
+        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias,Model.CompanyTitle.CastToSlug()))">
+            <h4>@Model.CompanyTitle</h4>
+        </a>
+    </div>
+    <div class="side-content">
+        <div class="headline primary">
+            <h4><i class="fa fa-plus-circle"></i> @Admin.VideoGalleries</h4>
+        </div>
+        <div class="product-showcase detail-case">
+            <div id="productlistContainer" class="landing-items-wrapper landing-items-disp">
+                <div class="product-list grid">
+                    <div class="landing-column-wrapper">
+                        @*@Html.Partial(MVC.CompanyVideo.Views._ListMore, Model.Galleries)*@
+                        @if (Model.IsMySelf)
+                        {
+                            @Html.Partial(MVC.CompanyVideo.Views._AddItem)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="clearboth"></div>
+</div>

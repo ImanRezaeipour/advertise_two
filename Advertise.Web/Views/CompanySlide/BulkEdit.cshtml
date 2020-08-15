@@ -1,0 +1,101 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.CompanySlide.CompanySlideBulkEditViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = "ویرایش اسلاید";
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <div class="slide-preview-wrapper round-corners-five">
+            <figure>
+                <img src="@FileConst.SlideDefaultBanner"/>
+            </figure>
+        </div>
+        <ul class="slide-thumb-wrapper" data-on-load="bindButtons">
+            @{
+                var indexThumb = 0;
+                const int maxSlide = 5;
+            }
+            @foreach (var existThumb in Model.SlideList)
+            {
+                <li class="slide-active @(indexThumb == Model.SlideList.Count() - 1 ? "slide-selected" : "")" data-index="@indexThumb">
+                    <a href="javascript:void(0)" class="slide-delete round-corners-three"><i class="fa fa-trash"></i> <span>@Admin.Delete</span></a>
+                    <a href="javascript:void(0)" class="slide-item round-corners-seven">
+                        <span class="inner-circle">@(++indexThumb)</span>
+                    </a>
+                </li>
+            }
+            @for (var thumb = indexThumb; thumb < maxSlide; thumb++)
+            {
+                <li class="slide-add" data-index="@thumb">
+                    <a href="javascript:void(0)" class="slide-item round-corners-seven">
+                        <span class="inner-circle"><i class="fa fa-plus"></i></span>
+                    </a>
+                </li>
+            }
+        </ul>
+        <form id="editCompanySlide" data-on-load="validateCompanySlide" method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+        @{ var indexSlide = 0; }
+        @foreach (var slide in Model.SlideList)
+        {
+            <div class="input-form @(indexSlide != Model.SlideList.Count() -1 ? "hide-none-imp" : "")" data-index="@indexSlide">
+                <input type="hidden" id="SlideList_@(indexSlide)_.Id" name="SlideList[@indexSlide].Id" value="@slide.Id" />
+                <input type="hidden" name="SlideList[@(indexSlide)].Index" value="@(indexSlide)" />
+
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SlideList_@(indexSlide)_.Title" class="rl-label">
+                        <span>@Admin.Title</span>
+                    </label>
+                    <input type="text" id="SlideList_@(indexSlide)_.Title" name="SlideList[@(indexSlide)].Title" value="@slide.Title"/>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SlideList_@(indexSlide)_.ImageFileName" class="rl-label tooltipster" title="@Admin.ItChoosesImage">@Admin.UploadAdPhoto :</label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div id="SlideList_@(indexSlide)_.ImageFileName" name="SlideList[@(indexSlide)].ImageFileName" @*data-on-load="uploaderCompanySlide"*@ data-param="edit"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="SlideList_@(indexSlide)_.ProductId" class="rl-label">محصولات</label>
+                    <select id="SlideList_@(indexSlide)_.ProductId" name="SlideList[@(indexSlide)].ProductId">
+                        <option selected disabled>-- @Admin.Choose --</option>
+                            @foreach (var product in Model.ProductList)
+                            {
+                                <option value="@product.Value" selected="@(product.Value)">@product.Text</option>
+                            }
+                        <option selected="@(slide.ProductId.IsNullOrDefault())">-- هیچکدام --</option>
+                    </select>
+                </div>
+            </div>
+            indexSlide += 1;
+        }
+        </form>
+        <div class="InputItemTemplate hide-none-imp">
+            @Html.Partial(MVC.CompanySlide.Views._InputItemTemplate)
+        </div>
+        <div class="form-button-container">
+            <button type="submit" form="editCompanySlide" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.CompanySlide.Edit())';">
+                <i class="fa fa-save"></i>
+                <span>ذخیره</span>
+            </button>
+        </div>
+    </div>
+</div>

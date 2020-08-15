@@ -1,0 +1,63 @@
+﻿@* Generator: MvcHelper GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Account.RegisterViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Admin.CreateAccount;
+}
+<div class="register-wrapper">
+    <div class="form-box-item form-popup register-structure">
+        <form action="@Url.Action(MVC.Account.RegisterByEmail())" method="Post" data-on-load="validateEmailRegister" class="form-popup-content">
+            <h4 class="register-header popup-title">
+                <i class="fa fa-user-plus"></i> 
+                <span>@Admin.Register</span>
+            </h4>
+            <hr class="line-separator register-hr">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-container">
+                <i class="fa fa-envelope register-icon"></i>
+                <label for="Email" class="rl-label register-label">@Admin.Email</label>
+                <input type="text" id="Email" name="Email" class="register-input" placeholder="@Admin.ExampleEmail">
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-asterisk register-icon"></i>
+                <label for="Password" class="rl-label register-label">@Admin.PassWord</label>
+                <input type="password" id="Password" name="Password" class="register-input" placeholder="@Admin.PassWord">
+            </div>
+
+            <div class="input-container">
+                <img id="imageCaptcha" src="@Url.Action(MVC.Home.CaptchaImage(DateTime.Now.Ticks.ToString()))" alt="" />
+                <a href="javascript:void(0)" id="refreshCaptcha" data-on-click="refreshCaptcha">@Admin.RefreshCaptcha</a>
+            </div>
+
+            <div class="input-container">
+                <i class="fa fa-lock register-icon"></i>
+                <label for="Password" class="rl-label register-label">@Admin.Captcha</label>
+                <input type="text" id="CaptchaInputText" name="CaptchaInputText" class="register-input" placeholder="@Admin.Captcha">
+            </div>
+
+            <div class="input-container">
+                <input type="checkbox" id="TermOfService" name="TermOfService" class="hide-none-imp" checked value="true">
+                <label for="TermOfService" class="label-check register-label">
+                    <span class="checkbox primary primary">
+                        <span></span>
+                    </span>
+                    <span class="register-bottom-click">
+                        <a href="@Url.Action(MVC.Page.Policy())" class="primary register-link">@Admin.RulesAndRegulations</a>
+                        @Admin.IHaveBeenReadCarefully
+                    </span>
+                </label>
+            </div>
+
+            <div class="input-container">
+                <button type="submit" class="button mid dark register-top-btn">
+                    <span class="primary">@Admin.Register</span>
+                </button>
+            </div>
+
+            <div class="input-container"></div>
+        </form>
+    </div>
+</div>

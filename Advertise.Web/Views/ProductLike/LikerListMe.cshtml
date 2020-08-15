@@ -1,0 +1,29 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.ProductLike.ProductLikeListViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.Likers;
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.ListMyProductsLikers</h4>
+        <div id="search" class="lists-header searchbar-header-container">
+            @SearchItem.Term(Model.SearchRequest.Term)
+            @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+            @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize)
+            @SearchItem.GridView()
+        </div>
+    </div>
+
+    <div class="landing-items-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @Html.Partial(MVC.ProductLike.Views._ListMore, Model.ProductLikes)
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+    </div>
+</div>

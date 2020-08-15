@@ -1,0 +1,59 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanyHour.CompanyHourEditViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.EditReview;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.EditReview</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editCompanyReview" action="@Url.Action(MVC.CompanyHour.Edit())" method="Post" data-on-load="validateCompanyHour">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <div class="msg-box regular round-corners-five">
+                        <p>
+                            <i class="fa fa-quote-right"></i>
+                            <span>@Admin.ItShowsCompanyDomain</span>
+                            <i class="fa fa-quote-left"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="input-container fixed-height">
+                    @{var index = 0;}
+                    @foreach (var day in Model.DayList)
+                    {
+                        <div>
+                            <label>
+                                <input type="checkbox" name="CompanyHours[@index].DayOfWeek" value="@day.Value" id="CompanyHours_(@index)_DayOfWeek" @if (Model.CompanyHours.Any(model => model.DayOfWeek.Value.ToInt32().ToString() == day.Value)) { <text> checked</text>} />
+                                <span>@day.Text</span>
+                            </label>
+                            <label>
+                                <span>از</span>
+                            </label>
+                            <input type="time" value="@(Model.CompanyHours.Where(model => model.DayOfWeek.Value.ToInt32().ToString() == day.Value).Select(model => model.StartedOn).FirstOrDefault() ?? new TimeSpan(8, 0, 0))" name="CompanyHours[@index].StartedOn" id="CompanyHours_(@index)_StartedOn" />
+                            <label>
+                                <span>تا</span>
+                            </label>
+                            <input type="time" value="@(Model.CompanyHours.Where(model => model.DayOfWeek.Value.ToInt32().ToString() == day.Value).Select(model => model.EndedOn).FirstOrDefault() ?? new TimeSpan(20, 0, 0))" name="CompanyHours[@index].EndedOn" id="CompanyHours_(@index)_EndedOn" />
+                        </div>
+                        index = index + 1;
+                    }
+                </div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="editCompanyReview" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" >
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

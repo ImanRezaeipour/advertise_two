@@ -1,0 +1,6 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.ProductComment.ProductCommentListViewModel
+@foreach (var item in Model.ProductComments)
+{
+    @Html.Partial(MVC.ProductComment.Views._DetailItem, item)
+}

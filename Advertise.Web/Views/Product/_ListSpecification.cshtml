@@ -1,0 +1,26 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model IEnumerable<Advertise.Core.Models.Specification.SpecificationViewModel>
+@foreach (var spec in Model)
+{
+    <li class="search-filter-item" data-expand="collapse">
+        <h6 class="search-filter-title">@spec.Title<i class="fa fa-angle-down left-angle-icon"></i></h6>
+        <div class="search-filter">
+            @{ var index = 1; }
+            @foreach (var specOption in spec.Options)
+            {
+                <div class="@if (index > 5) {<text>hide-none-imp</text>} @if (specOption.IsSelected == true) {<text>search-spec-option-checked</text>}" @if (index > 5) {<text>data-toggle=""</text>}>
+                    <input id="@specOption.Title" name="@spec.Title" value="@specOption.Title" type="checkbox" data-on-change="navigateSearch" @if (specOption.IsSelected == true) {<text>checked</text>} />
+                    <span class="search-spec-option"> @specOption.Title</span>
+                </div>
+                ++index;
+            }
+            @if (index >= 6)
+            {
+                <a href="javascript:void(0)" class="search-spec-option-more" id="expandFilter" data-on-click="showMoreSpecOption">
+                    <i class="fa fa-plus-circle"></i>
+                    <span><span id="moreOptionCount">@(index - 5)</span> <span id="moreOptionText">مورد بیشتر</span></span>
+                </a>
+            }
+        </div>
+    </li>
+}

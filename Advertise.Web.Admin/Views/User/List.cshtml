@@ -1,0 +1,40 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.User.UserListViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.ListUsers;
+    ViewBag.PageName = "users";
+    ViewBag.HasSearchbar = true;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+        @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+        @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize)
+        @SearchItem.IsActive(Model.IsActiveList, Model.SearchRequest.IsActive)
+        @SearchItem.IsBan(Model.IsBanList, Model.SearchRequest.IsBan)
+        @SearchItem.IsVerify(Model.IsVerifyList, Model.SearchRequest.IsVerify)
+        @SearchItem.GridView()
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true){<text>لیست کاربران</text>}else{<text>لیست کاربران</text>}</h1>
+    </div>
+
+    <div class="landing-grids-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @if (User.IsInRole(PermissionConst.CanUserEasyRegister))
+                {
+                    @Html.Partial(MVC.User.Views._AddItem)
+                }
+                @Html.Partial(MVC.User.Views._ListMore, Model.Users)
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+    </div>
+</div>

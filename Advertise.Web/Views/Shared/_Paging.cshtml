@@ -1,0 +1,6 @@
+﻿@using Advertise.Web.Framework.MvcPaging
+@model Advertise.Core.Models.Common.BaseSearchRequest
+@(Html.Pager(Model.PageSize, Model.PageIndex, Model.TotalCount)
+      .Options(opt => opt.PageRouteValueKey("pageindex")
+      .RouteValues(new { })
+      .AddFromQueryString(Request)))

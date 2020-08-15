@@ -1,0 +1,401 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using EnumHelper = Advertise.Core.Helpers.EnumHelper
+@model Advertise.Core.Models.Company.CompanyDetailViewModel
+@{
+    Layout = MVC.Shared.Views._PublicLayout;
+    ViewBag.Title = Model.Title;
+    ViewBag.IsMySelf = Model.IsMyself;
+    ViewBag.Keywords = Model.MetaKeywords != null ? $"{Model.MetaKeywords},{Model.CategoryOption.Companies}" : $"{Model.Title},{Model.CategoryTitle},{Model.CategoryOption.Companies},{Admin.Novinak}";
+    ViewBag.Description = Model.MetaDescription != null ? Html.Raw(Server.HtmlDecode(Model.MetaDescription)).StripHtml() : $"{Admin.Novinak} {Admin.OnlineShopping} {L(Model.CategoryOption.Companies)} {Model.CategoryTitle} {Model.Title}";
+    ViewBag.Thumbnail = Model.LogoFileName != null ? FileConst.ImagesWebPath.PlusWord(Model.LogoFileName) : FileConst.LogoAvatar;
+    ViewBag.CategoryOptionProducts = L(Model.CategoryOptionProducts);
+}
+@section seo {
+    @if (SeoSetting.IsCanonicalUrlEnabled)
+    {
+        <link rel="canonical" href="@($"{Admin.CanonicalCompanyDetail}{Model.Alias}/{Model.Title.CastToSlug()}")" />
+    }
+}
+@section og {
+    <meta property="og:image" content="@(Model.LogoFileName != null ? FileConst.ImagesWebPath.PlusWord(Model.LogoFileName) : FileConst.LogoAvatar)">
+}
+@section sitemap {
+    <div class="site-map">
+        <div id="SiteMap">
+            @Html.Action(MVC.Category.BreadCrumb(Model.CategoryId, Model.Title, true))
+        </div>
+    </div>
+}
+@section scripts {
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsVAy5ATsGkBA11NPQWSakpy0BiNuBPTc&callback=mapGet"></script>
+}
+<div data-on-load="ajaxGetBusinessInformations" data-param="@Model.Alias"></div>
+<figure class="banner-figure">
+    <img class="banner-image @if (Model.CoverFileName == null) {<text>banner-covered</text>}" src="@if (Model.CoverFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.CoverFileName)</text>} else {<text>@FileConst.Banner</text>}" alt="@($"{Admin.Company} {Model.Title} {Admin.CoverPhoto}")" />
+    @if (Model.IsMyself)
+    {
+        <div class="btn-middle-abs-wrapper">
+            <a href="@Url.Action(MVC.Company.MyEdit()).PlusWord("#UploadCompanyCoverPhoto")" class="btn-middle blue-btn-middle round-corners-five"><i class="fa fa-plus"></i> @Admin.AddCoverPhoto</a>
+        </div>
+    }
+</figure>
+<input type="hidden" id="countFollow" name="countFollow" value="@Model.FollowerCount" />
+<input type="hidden" id="CreatedById" name="CreatedById" value="@Model.CreatedById" />
+<div class="author-profile-meta-wrap">
+    <div class="author-profile-meta">
+        <div class="author-profile-info">
+            <div class="author-profile-info-item">
+                <p class="text-header">
+                    <i class="fa fa-calendar-check-o"></i>
+                    <span>@Admin.MemberSince.PlusWord(":")</span>
+                </p>
+                <p class="date-time">@Model.CreatedOn.CastToRegularDate()</p>
+            </div>
+            <div class="author-profile-info-item">
+                <p class="text-header">
+                    <i class="fa fa-calendar-plus-o"></i>
+                    <span>@Admin.EstablishedOn.PlusWord(":")</span>
+                </p>
+                <p class="date-time">@Model.EstablishedOn.CastToRegularDate()</p>
+            </div>
+            <div class="author-profile-info-item">
+                <p class="text-header">
+                    <i class="fa fa-group"></i>
+                    <span>@Admin.EmployeeCount.PlusWord(":")</span>
+                </p>
+                <p class="company-detail head-info">@EnumHelper.GetDescription(Model.EmployeeRange.GetValueOrDefault())</p>
+            </div>
+            <div class="author-profile-info-item">
+                <p class="text-header">
+                    <i class="fa fa-globe"></i>
+                    <span>@Admin.WebSite.PlusWord(":")</span>
+                </p>
+                <p>
+                    <a id="WebsiteAddress" class="primary first-load-info">
+                        <i class="fa fa-globe fa-spin fa-fw fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-wrap">
+    <div class="section overflowable">
+        <div class="sidebar left author-profile">
+            <div class="sidebar-item author-bio company-detail">
+                @if (Model.LogoFileName != null)
+                {
+                    <div class="product-detail company-logo">
+                        <img src="@FileConst.ImagesWebPath.PlusWord(Model.LogoFileName)" alt="@Model.Title.PlusWord(" ").PlusWord(Model.Title)">
+                    </div>
+                }
+                else
+                {
+                    <div class="product-detail company-logo">
+                        <img src="@FileConst.NoLogo" alt="store without logo">
+                    </div>
+                }
+                <h1 class="text-header">@Model.Title</h1>
+                <p class="text-oneline">@Model.Slogan</p>
+                <h6>
+                    <br>
+                </h6>
+                @if (Model.FullName != null)
+                {
+                    <a href="@Url.Action(MVC.User.Detail(Model.UserUserName))">
+                        <p class="text-oneline">
+                            <span>@Admin.CompanyManager.PlusWord(": ")</span>
+                            <span href="#" class="primary">@Model.FullName</span>
+                        </p>
+                    </a>
+                }
+                else if (Model.UserUserName != null)
+                {
+                    <a href="@Url.Action(MVC.User.Detail(Model.UserUserName))">
+                        <p class="text-oneline">
+                            <span>@Admin.CompanyManager.PlusWord(": ")</span>
+                            <span href="#" class="primary">@Model.UserUserName</span>
+                        </p>
+                    </a>
+                }
+                <div class="share-icons">
+                    <div class="share-links-wrapper">
+                        <p class="text-header small">@Admin.CommunicationChannels:</p>
+                        <div class="clearboth"></div>
+                        <ul class="share-links">
+                            <li>
+                                <a href="javascript:void(0)" class="tlg" target="_blank">
+                                    <i class="fa fa-send"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" class="gplus" target="_blank">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" class="fb" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" class="twt" target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="side-statistics">
+                <h5>
+                    <i class="fa fa-line-chart"></i> 
+                    <span>@Admin.Statistics.PlusWord(":")</span>
+                </h5>
+                <hr>
+                <ul class="side-statistic">
+                    <li>
+                        <div class="side-statistic-title">
+                            <h6>
+                                <i class="fa fa-eye"></i> 
+                                <span>@Admin.Visitors.PlusWord(":")</span>
+                            </h6>
+                        </div>
+                        <div class="side-statistic-value">
+                            <h6>@Model.VisitCount</h6>
+                            <hr>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="side-statistic-title">
+                            <h6>
+                                <i class="fa fa-space-shuttle fa-flip-horizontal"></i>
+                                <span>@Admin.Followers.PlusWord(":")</span>
+                            </h6>
+                        </div>
+                        <div class="side-statistic-value">
+                            <h6 id="FollowerCount">@Model.FollowerCount</h6>
+                            <hr>
+                        </div>
+                    </li>
+                </ul>
+                <div class="follow-button-wrapper">
+                    <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                    <a @if (User.Identity.IsAuthenticated != true) { 
+                        <text> href="@Url.Action(MVC.Account.EmailRegister())" </text>  }
+                    else { <text> href="javascript:void(0)" data-on-click="ajaxToggleFollowCompany" data-follow="@Admin.Follow" data-unfollow="@Admin.Unfollow" </text> } class="follow-button @if (Model.InitFollow) {<text>followed-btn</text>} else {<text>unfollowed-btn</text>}"> 
+                        <span>@if (Model.InitFollow){<text>@Admin.Unfollow</text>}else{<text>@Admin.Follow</text>}</span>    
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-item product-info">
+                <h4>@Admin.ContactInfo.PlusWord(": ")</h4>
+                <hr class="line-separator">
+                <div class="information-layout">
+                    <div class="information-layout-item">
+                        <p class="text-header">@Admin.FieldOfActivity.PlusWord(": ")</p>
+                        <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias , Model.CategoryTitle.CastToSlug()))">
+                            <p class="category-text">@Model.CategoryTitle</p>
+                        </a>
+                    </div>
+                    @if (Model.PhoneNumber != null)
+                    {
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Phone.PlusWord(": ")</p>
+                            <p id="PhoneNumber" class="company-detail side-text first-load-info">
+                                <i class="fa fa-phone fa-spin fa-fw fa-2x"></i>
+                            </p>
+                        </div>
+                    }
+                    @if (Model.MobileNumber != null)
+                    {
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Mobile.PlusWord(": ")</p>
+                            <p id="MobileNumber" class="company-detail side-text first-load-info">
+                                <i class="fa fa-mobile fa-spin fa-fw fa-2x"></i>
+                            </p>
+                        </div>
+                    }
+                    @if (Model.Email != null)
+                    {
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Email.PlusWord(": ")</p>
+                            <p id="EmailAddress" class="company-detail side-text first-load-info">
+                                <i class="fa fa-envelope fa-spin fa-fw fa-2x"></i>
+                            </p>
+                        </div>
+                    }
+                    @if (Model.Address?.Extra != null)
+                    {
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Address.PlusWord(": ")</p>
+                            <p id="AddressPlace" class="company-detail side-address side-text first-load-info">
+                                <i class="fa fa-map-signs fa-spin fa-fw fa-2x"></i>
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+            <ul class="dropdown hover-effect" data-on-load="positionCompanyMenu">
+                @if (!Model.Description.IsNullOrEmpty())
+                {
+                    <li class="dropdown-item">
+                        <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="DescriptionSection">
+                            <span>
+                                <i class="fa fa-exclamation-circle"></i> 
+                                @Admin.AboutUs
+                            </span>
+                        </a>
+                    </li>
+                }
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="ProductsSection">
+                        <span>
+                            <i class="fa fa-cubes"></i> 
+                            @L(Model.CategoryOption.Products)
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="MapSection">
+                        <span>
+                            <i class="fa fa-map-marker"></i> 
+                            @Admin.LocationOnTheMap
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="GalleriesSection">
+                        <span>
+                            <i class="fa fa-image"></i> 
+                            @Admin.Galery
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="VideosSection">
+                        <span>
+                            <i class="fa fa-video-camera fa-flip-horizontal"></i> 
+                            @Admin.VideoGallery
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="FilesSection">
+                        <span>
+                            <i class="fa fa-paperclip"></i> 
+                            @Admin.Files
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="ConversationsSection">
+                        <span>
+                            <i class="fa fa-comments"></i> 
+                            @Admin.PrivateConversation
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="ReviewsSection">
+                        <span>
+                            <i class="fa fa-list-alt"></i> 
+                            @Admin.Review
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" data-on-click="companyTabTransition" data-section="QAsSection">
+                        <span>
+                            <i class="fa fa-question-circle"></i> 
+                            @Admin.QA
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="content right" id="productForCompanyContainer"></div>
+        <div id="ProductDetailSection"></div>
+        <div class="content right">
+            @if (!Model.Description.IsNullOrEmpty())
+            {
+                <div id="DescriptionSection" class="company-detail-section">
+                    <div class="headline simple primary">
+                        <h4>
+                            <i class="fa fa-exclamation-circle"></i> 
+                            @Admin.AboutUs
+                        </h4>
+                    </div>
+                    <div class="comment-list company-description">
+                        @Html.Raw(Server.HtmlDecode(Model.Description))
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            }
+            <div id="MapSection" class="company-detail-section">
+                <div class="headline simple primary">
+                    <h4>
+                        <i class="fa fa-map-marker"></i> 
+                        @Admin.LocationOnTheMap
+                    </h4>
+                </div>
+                @if (Model.Address?.Latitude == "0" || Model.Address?.Longitude == "0")
+                {
+                    <div class="comment-list updating-section">
+                        <p>
+                            <i class="fa fa-battery-empty fa-flip-horizontal"></i>
+                            @Admin.MessageSectionNoMap
+                        </p>
+                        @if (Model.IsMyself)
+                        {
+                            <div class="btn-middle-wrapper">
+                                <a href="@Url.Action(MVC.Company.Edit()).PlusWord("#SetCompanyOnMap")" class="btn-middle blue-btn-middle round-corners-five">
+                                    <i class="fa fa-plus"></i>
+                                    @Admin.LocateOnTheMap
+                                </a>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="comment-list company-detail-map">
+                        <div class="company-map-holder">
+                            <input type="hidden" id="Address_Longitude" name="Address.Longitude" value="@Model.Address.Longitude.ZeroIfNull()" />
+                            <input type="hidden" id="Address_Latitude" name="Address.Latitude" value="@Model.Address.Latitude.ZeroIfNull()" />
+                            <div id="getMap" class="map-holder"></div>
+                        </div>
+                    </div>
+                }
+                <br>
+                <br>
+            </div>
+            <div id="ProductsSection" class="company-detail-section">
+                @Html.Partial(MVC.Product.Views._List, Model.ProductList.Products)
+            </div>
+            <div id="GalleriesSection" class="company-detail-section">
+                @Html.Partial(MVC.CompanyImage.Views._List, Model.ImageList)
+            </div>
+            <div id="VideosSection" class="company-detail-section">
+                @Html.Partial(MVC.CompanyVideo.Views._List, Model.VideoList)
+            </div>
+            <div id="FilesSection" class="company-detail-section">
+                @Html.Partial(MVC.CompanyAttachment.Views._List, Model.AttachmentList.CompanyAttachments)
+            </div>
+            <div id="ConversationsSection" class="company-detail-section">
+                <br>
+                @Html.Partial(MVC.CompanyConversation.Views._List, Model.ConversationList)
+            </div>
+            <div id="ReviewsSection" class="product-detail activated">
+                @Html.Partial(MVC.CompanyReview.Views._List, Model.ReviewList.CompanyReviews)
+            </div>
+            <div id="QAsSection" class="product-detail activated">
+                @Html.Partial(MVC.CompanyQuestion.Views._List, Model.QuestionList)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -1,0 +1,767 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EA0E746B-A896-45E1-A575-67C0711A07E7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Advertise.Web.Admin</RootNamespace>
+    <AssemblyName>Advertise.Web.Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Views\Panel\Board.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Board.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\CheckBoxListBuilder.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CheckBoxListBuilder.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\DatePickerInitial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DatePickerInitial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\FineUploaderTemplates\_FineUploaderTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_FineUploaderTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\NotyBuilder.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NotyBuilder.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\Panel\_PanelHeader.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_PanelHeader.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\Panel\_PanelLayout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_PanelLayout.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\Panel\_PanelMenu.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_PanelMenu.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\SearchItem.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SearchItem.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_Footer.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Footer.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_HeaderAnonymous.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_HeaderAnonymous.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_MainMenu.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_MainMenu.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_Paging.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Paging.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_Script.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Script.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_SideMenuHeader.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SideMenuHeader.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_SideMenuLeft.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SideMenuLeft.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_SideMenuRight.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SideMenuRight.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_SideMenuRightAnonymous.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SideMenuRightAnonymous.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SiteLayout\_ViewType.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ViewType.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_Noty.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Noty.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\web.config" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configs\AspNetIdentityConfig.cs" />
+    <Compile Include="Configs\AutoMapperConfig.cs" />
+    <Compile Include="Configs\BundleConfig.cs" />
+    <Compile Include="Configs\DataBaseConfig.cs" />
+    <Compile Include="Configs\ElmahConfig.cs" />
+    <Compile Include="Configs\EntityFrameworkConfig.cs" />
+    <Compile Include="Configs\EntityFrameworkProfilerConfig.cs" />
+    <Compile Include="Configs\FilterConfig.cs" />
+    <Compile Include="Configs\MvcConfig.cs" />
+    <Compile Include="Configs\OwinConfig.cs" />
+    <Compile Include="Configs\RouteConfig.cs" />
+    <Compile Include="Configs\StartupConfig.cs" />
+    <Compile Include="Configs\StructureMapConfig.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
+    <Compile Include="Controllers\GuaranteeController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
+    <Compile Include="Controllers\ManufacturerController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\NewsletterController.cs" />
+    <Compile Include="Controllers\PanelController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SeoSettingController.cs" />
+    <Compile Include="Controllers\SeoUrlController.cs" />
+    <Compile Include="Controllers\SpecificationController.cs" />
+    <Compile Include="Controllers\SpecificationOptionController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="NewController\Controllers\AccountController.cs" />
+    <Compile Include="NewController\Controllers\AdsController.cs" />
+    <Compile Include="NewController\Controllers\AdsOptionController.cs" />
+    <Compile Include="NewController\Controllers\AdsPaymentController.cs" />
+    <Compile Include="NewController\Controllers\AdsReserveController.cs" />
+    <Compile Include="NewController\Controllers\BagController.cs" />
+    <Compile Include="NewController\Controllers\BaseController.cs" />
+    <Compile Include="NewController\Controllers\CatalogController.cs" />
+    <Compile Include="NewController\Controllers\CategoryController.cs" />
+    <Compile Include="NewController\Controllers\CategoryFollowController.cs" />
+    <Compile Include="NewController\Controllers\CategoryReviewController.cs" />
+    <Compile Include="NewController\Controllers\CityController.cs" />
+    <Compile Include="NewController\Controllers\CompanyAttachmentController.cs" />
+    <Compile Include="NewController\Controllers\CompanyBalanceController.cs" />
+    <Compile Include="NewController\Controllers\CompanyController.cs" />
+    <Compile Include="NewController\Controllers\CompanyConversationController.cs" />
+    <Compile Include="NewController\Controllers\CompanyFollowController.cs" />
+    <Compile Include="NewController\Controllers\CompanyHourController.cs" />
+    <Compile Include="NewController\Controllers\CompanyImageController.cs" />
+    <Compile Include="NewController\Controllers\CompanyQuestionController.cs" />
+    <Compile Include="NewController\Controllers\CompanyReviewController.cs" />
+    <Compile Include="NewController\Controllers\CompanySlideController.cs" />
+    <Compile Include="NewController\Controllers\CompanySocialController.cs" />
+    <Compile Include="NewController\Controllers\CompanyTagController.cs" />
+    <Compile Include="NewController\Controllers\CompanyVideoController.cs" />
+    <Compile Include="NewController\Controllers\ComplaintController.cs" />
+    <Compile Include="NewController\Controllers\ErrorController.cs" />
+    <Compile Include="NewController\Controllers\FileController.cs" />
+    <Compile Include="NewController\Controllers\FineUploaderController.cs" />
+    <Compile Include="NewController\Controllers\HomeController.cs" />
+    <Compile Include="NewController\Controllers\NotificationController.cs" />
+    <Compile Include="NewController\Controllers\PageController.cs" />
+    <Compile Include="NewController\Controllers\PermissionController.cs" />
+    <Compile Include="NewController\Controllers\PlanController.cs" />
+    <Compile Include="NewController\Controllers\PlanDiscountController.cs" />
+    <Compile Include="NewController\Controllers\PlanPaymentController.cs" />
+    <Compile Include="NewController\Controllers\ProductCommentController.cs" />
+    <Compile Include="NewController\Controllers\ProductController.cs" />
+    <Compile Include="NewController\Controllers\ProductFeatureController.cs" />
+    <Compile Include="NewController\Controllers\ProductImageController.cs" />
+    <Compile Include="NewController\Controllers\ProductLikeController.cs" />
+    <Compile Include="NewController\Controllers\ProductNotifyController.cs" />
+    <Compile Include="NewController\Controllers\ProductRateController.cs" />
+    <Compile Include="NewController\Controllers\ProductReviewController .cs" />
+    <Compile Include="NewController\Controllers\ProductSpecificationController.cs" />
+    <Compile Include="NewController\Controllers\ProductTagController.cs" />
+    <Compile Include="NewController\Controllers\ProfileController.cs" />
+    <Compile Include="NewController\Controllers\ReceiptController.cs" />
+    <Compile Include="NewController\Controllers\ReceiptOptionController.cs" />
+    <Compile Include="NewController\Controllers\ReceiptPaymentController.cs" />
+    <Compile Include="NewController\Controllers\SettingController.cs" />
+    <Compile Include="NewController\Controllers\StatisticController.cs" />
+    <Compile Include="NewController\Controllers\TagController.cs" />
+    <Compile Include="NewController\Controllers\UserBudgetController.cs" />
+    <Compile Include="NewController\Controllers\UserController.cs" />
+    <Compile Include="NewController\Controllers\UserSettingController.cs" />
+    <Compile Include="NewController\Controllers\UserViolationController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Account\EasyRegister.generated.cs" />
+    <Compile Include="Views\AdsOption\Create.generated.cs" />
+    <Compile Include="Views\AdsOption\Edit.generated.cs" />
+    <Compile Include="Views\AdsOption\List.generated.cs" />
+    <Compile Include="Views\AdsOption\_AddItem.generated.cs" />
+    <Compile Include="Views\AdsOption\_Item.generated.cs" />
+    <Compile Include="Views\AdsOption\_ListMore.generated.cs" />
+    <Compile Include="Views\AdsPayment\List.generated.cs" />
+    <Compile Include="Views\Ads\Edit.generated.cs" />
+    <Compile Include="Views\CatalogSpecification\_Create.generated.cs" />
+    <Compile Include="Views\CatalogSpecification\_Edit.generated.cs" />
+    <Compile Include="Views\Catalog\Create.generated.cs" />
+    <Compile Include="Views\Catalog\Edit.generated.cs" />
+    <Compile Include="Views\Catalog\List.generated.cs" />
+    <Compile Include="Views\Catalog\_AddItem.generated.cs" />
+    <Compile Include="Views\Catalog\_Item.generated.cs" />
+    <Compile Include="Views\Catalog\_ListMore.generated.cs" />
+    <Compile Include="Views\CategoryReview\Create.generated.cs" />
+    <Compile Include="Views\CategoryReview\Edit.generated.cs" />
+    <Compile Include="Views\CategoryReview\List.generated.cs" />
+    <Compile Include="Views\CategoryReview\_AddItem.generated.cs" />
+    <Compile Include="Views\CategoryReview\_Item.generated.cs" />
+    <Compile Include="Views\CategoryReview\_ListMore.generated.cs" />
+    <Compile Include="Views\Category\Create.generated.cs" />
+    <Compile Include="Views\Category\Edit.generated.cs" />
+    <Compile Include="Views\Category\ItemList.generated.cs" />
+    <Compile Include="Views\Category\List.generated.cs" />
+    <Compile Include="Views\Category\_AddItem.generated.cs" />
+    <Compile Include="Views\Category\_BreadCrumb.generated.cs" />
+    <Compile Include="Views\Category\_Item.generated.cs" />
+    <Compile Include="Views\Category\_ListMore.generated.cs" />
+    <Compile Include="Views\Category\_ProductItemList.generated.cs" />
+    <Compile Include="Views\CompanyAttachment\Edit.generated.cs" />
+    <Compile Include="Views\CompanyAttachment\List.generated.cs" />
+    <Compile Include="Views\CompanyBalance\Create.generated.cs" />
+    <Compile Include="Views\CompanyBalance\Edit.generated.cs" />
+    <Compile Include="Views\CompanyBalance\List.generated.cs" />
+    <Compile Include="Views\CompanyBalance\_AddItem.generated.cs" />
+    <Compile Include="Views\CompanyBalance\_Item.generated.cs" />
+    <Compile Include="Views\CompanyBalance\_MoreItem.generated.cs" />
+    <Compile Include="Views\CompanyImage\Edit.generated.cs" />
+    <Compile Include="Views\CompanyImage\List.generated.cs" />
+    <Compile Include="Views\CompanyReview\Create.generated.cs" />
+    <Compile Include="Views\CompanyReview\Detail.generated.cs" />
+    <Compile Include="Views\CompanyReview\Edit.generated.cs" />
+    <Compile Include="Views\CompanyReview\List.generated.cs" />
+    <Compile Include="Views\CompanyReview\_AddItem.generated.cs" />
+    <Compile Include="Views\CompanyReview\_Item.generated.cs" />
+    <Compile Include="Views\CompanyReview\_List.generated.cs" />
+    <Compile Include="Views\CompanyReview\_ListMore.generated.cs" />
+    <Compile Include="Views\CompanySocial\Edit.generated.cs" />
+    <Compile Include="Views\CompanySocial\List.generated.cs" />
+    <Compile Include="Views\CompanyVideo\Edit.generated.cs" />
+    <Compile Include="Views\Company\Edit.generated.cs" />
+    <Compile Include="Views\Company\List.generated.cs" />
+    <Compile Include="Views\Complaint\Detail.generated.cs" />
+    <Compile Include="Views\Complaint\List.generated.cs" />
+    <Compile Include="Views\Export\Index.generated.cs" />
+    <Compile Include="Views\Guarantee\Create.generated.cs" />
+    <Compile Include="Views\Guarantee\Edit.generated.cs" />
+    <Compile Include="Views\Guarantee\List.generated.cs" />
+    <Compile Include="Views\Guarantee\_AddItem.generated.cs" />
+    <Compile Include="Views\Guarantee\_Item.generated.cs" />
+    <Compile Include="Views\Guarantee\_ListMore.generated.cs" />
+    <Compile Include="Views\Import\Index.generated.cs" />
+    <Compile Include="Views\Manufacturer\Create.generated.cs" />
+    <Compile Include="Views\Manufacturer\Edit.generated.cs" />
+    <Compile Include="Views\Manufacturer\List.generated.cs" />
+    <Compile Include="Views\Manufacturer\_AddItem.generated.cs" />
+    <Compile Include="Views\Manufacturer\_Item.generated.cs" />
+    <Compile Include="Views\Manufacturer\_ListMore.generated.cs" />
+    <Compile Include="Views\Newsletter\Create.generated.cs" />
+    <Compile Include="Views\Newsletter\List.generated.cs" />
+    <Compile Include="Views\Newsletter\_AddItem.generated.cs" />
+    <Compile Include="Views\Newsletter\_Item.generated.cs" />
+    <Compile Include="Views\Newsletter\_ListMore.generated.cs" />
+    <Compile Include="Views\News\Create.generated.cs" />
+    <Compile Include="Views\News\Edit.generated.cs" />
+    <Compile Include="Views\News\List.generated.cs" />
+    <Compile Include="Views\News\_AddItem.generated.cs" />
+    <Compile Include="Views\News\_Item.generated.cs" />
+    <Compile Include="Views\News\_ListMore.generated.cs" />
+    <Compile Include="Views\Panel\Board.generated.cs">
+      <DependentUpon>Board.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Permission\Create.generated.cs" />
+    <Compile Include="Views\Permission\Edit.generated.cs" />
+    <Compile Include="Views\Permission\List.generated.cs" />
+    <Compile Include="Views\PlanDiscount\Create.generated.cs" />
+    <Compile Include="Views\PlanDiscount\Edit.generated.cs" />
+    <Compile Include="Views\PlanDiscount\List.generated.cs" />
+    <Compile Include="Views\PlanDiscount\_AddItem.generated.cs" />
+    <Compile Include="Views\PlanDiscount\_Item.generated.cs" />
+    <Compile Include="Views\PlanDiscount\_ListMore.generated.cs" />
+    <Compile Include="Views\PlanPayment\List.generated.cs" />
+    <Compile Include="Views\Plan\Create.generated.cs" />
+    <Compile Include="Views\Plan\Edit.generated.cs" />
+    <Compile Include="Views\Plan\List.generated.cs" />
+    <Compile Include="Views\Plan\_AddItem.generated.cs" />
+    <Compile Include="Views\Plan\_Item.generated.cs" />
+    <Compile Include="Views\Plan\_ListMore.generated.cs" />
+    <Compile Include="Views\ProductComment\Edit.generated.cs" />
+    <Compile Include="Views\ProductReview\Create.generated.cs" />
+    <Compile Include="Views\ProductReview\Edit.generated.cs" />
+    <Compile Include="Views\ProductReview\List.generated.cs" />
+    <Compile Include="Views\ProductReview\_AddItem.generated.cs" />
+    <Compile Include="Views\ProductReview\_Item.generated.cs" />
+    <Compile Include="Views\ProductReview\_ListMore.generated.cs" />
+    <Compile Include="Views\ProductSpecification\_Create.generated.cs" />
+    <Compile Include="Views\ProductSpecification\_Edit.generated.cs" />
+    <Compile Include="Views\Product\Edit.generated.cs" />
+    <Compile Include="Views\Product\List.generated.cs" />
+    <Compile Include="Views\ReceiptOption\List.generated.cs" />
+    <Compile Include="Views\ReceiptPayment\List.generated.cs" />
+    <Compile Include="Views\Receipt\List.generated.cs" />
+    <Compile Include="Views\Report\Create.generated.cs" />
+    <Compile Include="Views\Report\Detail.generated.cs" />
+    <Compile Include="Views\Report\Edit.generated.cs" />
+    <Compile Include="Views\Report\List.generated.cs" />
+    <Compile Include="Views\Report\_AddItem.generated.cs" />
+    <Compile Include="Views\Report\_Item.generated.cs" />
+    <Compile Include="Views\Report\_MoreItem.generated.cs" />
+    <Compile Include="Views\Role\Create.generated.cs" />
+    <Compile Include="Views\Role\Edit.generated.cs" />
+    <Compile Include="Views\Role\List1.generated.cs" />
+    <Compile Include="Views\Role\_AddItem.generated.cs" />
+    <Compile Include="Views\Role\_Item.generated.cs" />
+    <Compile Include="Views\Role\_ListMore.generated.cs" />
+    <Compile Include="Views\SeoSetting\Edit.generated.cs" />
+    <Compile Include="Views\SeoUrl\Create.generated.cs" />
+    <Compile Include="Views\SeoUrl\Edit.generated.cs" />
+    <Compile Include="Views\SeoUrl\List.generated.cs" />
+    <Compile Include="Views\SeoUrl\_AddItem.generated.cs" />
+    <Compile Include="Views\SeoUrl\_Item.generated.cs" />
+    <Compile Include="Views\SeoUrl\_MoreItem.generated.cs" />
+    <Compile Include="Views\Setting\Edit.generated.cs" />
+    <Compile Include="Views\Shared\CheckBoxListBuilder.generated.cs">
+      <DependentUpon>CheckBoxListBuilder.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\DatePickerInitial.generated.cs">
+      <DependentUpon>DatePickerInitial.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\FineUploaderTemplates\_FineUploaderTemplate.generated.cs">
+      <DependentUpon>_FineUploaderTemplate.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\NotyBuilder.generated.cs">
+      <DependentUpon>NotyBuilder.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\Panel\_PanelHeader.generated.cs">
+      <DependentUpon>_PanelHeader.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\Panel\_PanelLayout.generated.cs">
+      <DependentUpon>_PanelLayout.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\Panel\_PanelMenu.generated.cs">
+      <DependentUpon>_PanelMenu.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\SearchItem.generated.cs">
+      <DependentUpon>SearchItem.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_Footer.generated.cs">
+      <DependentUpon>_Footer.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_HeaderAnonymous.generated.cs">
+      <DependentUpon>_HeaderAnonymous.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_MainMenu.generated.cs">
+      <DependentUpon>_MainMenu.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_Paging.generated.cs">
+      <DependentUpon>_Paging.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_Script.generated.cs">
+      <DependentUpon>_Script.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_SideMenuHeader.generated.cs">
+      <DependentUpon>_SideMenuHeader.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_SideMenuLeft.generated.cs">
+      <DependentUpon>_SideMenuLeft.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_SideMenuRight.generated.cs">
+      <DependentUpon>_SideMenuRight.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_SideMenuRightAnonymous.generated.cs">
+      <DependentUpon>_SideMenuRightAnonymous.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteLayout\_ViewType.generated.cs">
+      <DependentUpon>_ViewType.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\Shared\SiteMapTemplates\CanonicalHelperModel.generated.cs" />
+    <Compile Include="Views\Shared\SiteMapTemplates\MenuHelperModel.generated.cs" />
+    <Compile Include="Views\Shared\SiteMapTemplates\MetaRobotsHelperModel.generated.cs" />
+    <Compile Include="Views\Shared\SiteMapTemplates\SiteMapHelperModel.generated.cs" />
+    <Compile Include="Views\Shared\SiteMapTemplates\SiteMapNodeModel.generated.cs" />
+    <Compile Include="Views\Shared\SiteMapTemplates\SiteMapNodeModelList.generated.cs" />
+    <Compile Include="Views\Shared\SiteMapTemplates\SiteMapPath.generated.cs" />
+    <Compile Include="Views\Shared\SiteMapTemplates\SiteMapPathHelperModel.generated.cs" />
+    <Compile Include="Views\Shared\SiteMapTemplates\SiteMapTitleHelperModel.generated.cs" />
+    <Compile Include="Views\Shared\_Noty.generated.cs">
+      <DependentUpon>_Noty.cshtml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Views\SpecificationOption\Create.generated.cs" />
+    <Compile Include="Views\SpecificationOption\Edit1.generated.cs" />
+    <Compile Include="Views\SpecificationOption\List.generated.cs" />
+    <Compile Include="Views\SpecificationOption\_AddItem.generated.cs" />
+    <Compile Include="Views\SpecificationOption\_Item.generated.cs" />
+    <Compile Include="Views\SpecificationOption\_ListMore.generated.cs" />
+    <Compile Include="Views\Specification\Create.generated.cs" />
+    <Compile Include="Views\Specification\Edit.generated.cs" />
+    <Compile Include="Views\Specification\List.generated.cs" />
+    <Compile Include="Views\Specification\_AddItem.generated.cs" />
+    <Compile Include="Views\Specification\_Item.generated.cs" />
+    <Compile Include="Views\Specification\_ListMore.generated.cs" />
+    <Compile Include="Views\Statistic\List.generated.cs" />
+    <Compile Include="Views\Tag\Create.generated.cs" />
+    <Compile Include="Views\Tag\Edit.generated.cs" />
+    <Compile Include="Views\Tag\List.generated.cs" />
+    <Compile Include="Views\Tag\_AddItem.generated.cs" />
+    <Compile Include="Views\Tag\_Item.generated.cs" />
+    <Compile Include="Views\Tag\_ListMore.generated.cs" />
+    <Compile Include="Views\UserSetting\Edit.generated.cs" />
+    <Compile Include="Views\UserSetting\List.generated.cs" />
+    <Compile Include="Views\UserSetting\_Item.generated.cs" />
+    <Compile Include="Views\UserSetting\_ListMore.generated.cs" />
+    <Compile Include="Views\UserViolation\Create.generated.cs" />
+    <Compile Include="Views\UserViolation\Detail.generated.cs" />
+    <Compile Include="Views\UserViolation\Edit.generated.cs" />
+    <Compile Include="Views\UserViolation\List.generated.cs" />
+    <Compile Include="Views\UserViolation\_Item.generated.cs" />
+    <Compile Include="Views\UserViolation\_ListMore.generated.cs" />
+    <Compile Include="Views\User\Edit.generated.cs" />
+    <Compile Include="Views\User\SetPassword.generated.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Views\Account\EasyRegister.cshtml" />
+    <Content Include="Views\AdsOption\Create.cshtml" />
+    <Content Include="Views\AdsOption\Edit.cshtml" />
+    <Content Include="Views\AdsOption\List.cshtml" />
+    <Content Include="Views\AdsOption\_AddItem.cshtml" />
+    <Content Include="Views\AdsOption\_Item.cshtml" />
+    <Content Include="Views\AdsOption\_ListMore.cshtml" />
+    <Content Include="Views\AdsPayment\List.cshtml" />
+    <Content Include="Views\Ads\Edit.cshtml" />
+    <Content Include="Views\CatalogSpecification\_Create.cshtml" />
+    <Content Include="Views\CatalogSpecification\_Edit.cshtml" />
+    <Content Include="Views\Catalog\Create.cshtml" />
+    <Content Include="Views\Catalog\Edit.cshtml" />
+    <Content Include="Views\Catalog\List.cshtml" />
+    <Content Include="Views\Catalog\_AddItem.cshtml" />
+    <Content Include="Views\Catalog\_Item.cshtml" />
+    <Content Include="Views\Catalog\_ListMore.cshtml" />
+    <Content Include="Views\CategoryReview\Create.cshtml" />
+    <Content Include="Views\CategoryReview\Edit.cshtml" />
+    <Content Include="Views\CategoryReview\List.cshtml" />
+    <Content Include="Views\CategoryReview\_AddItem.cshtml" />
+    <Content Include="Views\CategoryReview\_Item.cshtml" />
+    <Content Include="Views\CategoryReview\_ListMore.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\List.cshtml" />
+    <Content Include="Views\Category\_AddItem.cshtml" />
+    <Content Include="Views\Category\_BreadCrumb.cshtml" />
+    <Content Include="Views\Category\_CompanyItemList.cshtml" />
+    <Content Include="Views\Category\_Item.cshtml" />
+    <Content Include="Views\Category\_ListMore.cshtml" />
+    <Content Include="Views\Category\_ProductItemList.cshtml" />
+    <Content Include="Views\CompanyAttachment\Edit.cshtml" />
+    <Content Include="Views\CompanyAttachment\List.cshtml" />
+    <Content Include="Views\CompanyBalance\Create.cshtml" />
+    <Content Include="Views\CompanyBalance\Edit.cshtml" />
+    <Content Include="Views\CompanyBalance\List.cshtml" />
+    <Content Include="Views\CompanyBalance\_AddItem.cshtml" />
+    <Content Include="Views\CompanyBalance\_Item.cshtml" />
+    <Content Include="Views\CompanyBalance\_MoreItem.cshtml" />
+    <Content Include="Views\CompanyImage\Edit.cshtml" />
+    <Content Include="Views\CompanyImage\List.cshtml" />
+    <Content Include="Views\CompanyReview\Create.cshtml" />
+    <Content Include="Views\CompanyReview\Detail.cshtml" />
+    <Content Include="Views\CompanyReview\Edit.cshtml" />
+    <Content Include="Views\CompanyReview\List.cshtml" />
+    <Content Include="Views\CompanyReview\_AddItem.cshtml" />
+    <Content Include="Views\CompanyReview\_Item.cshtml" />
+    <Content Include="Views\CompanyReview\_List.cshtml" />
+    <Content Include="Views\CompanyReview\_ListMore.cshtml" />
+    <Content Include="Views\CompanySocial\Edit.cshtml" />
+    <Content Include="Views\CompanySocial\List.cshtml" />
+    <Content Include="Views\CompanyVideo\Edit.cshtml" />
+    <Content Include="Views\CompanyVideo\List.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\List.cshtml" />
+    <Content Include="Views\Complaint\Detail.cshtml" />
+    <Content Include="Views\Complaint\List.cshtml" />
+    <Content Include="Views\Export\Index.cshtml" />
+    <Content Include="Views\Guarantee\Create.cshtml" />
+    <Content Include="Views\Guarantee\Edit.cshtml" />
+    <Content Include="Views\Guarantee\List.cshtml" />
+    <Content Include="Views\Guarantee\_AddItem.cshtml" />
+    <Content Include="Views\Guarantee\_Item.cshtml" />
+    <Content Include="Views\Guarantee\_ListMore.cshtml" />
+    <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\Manufacturer\Create.cshtml" />
+    <Content Include="Views\Manufacturer\Edit.cshtml" />
+    <Content Include="Views\Manufacturer\List.cshtml" />
+    <Content Include="Views\Manufacturer\_AddItem.cshtml" />
+    <Content Include="Views\Manufacturer\_Item.cshtml" />
+    <Content Include="Views\Manufacturer\_ListMore.cshtml" />
+    <Content Include="Views\Newsletter\Create.cshtml" />
+    <Content Include="Views\Newsletter\List.cshtml" />
+    <Content Include="Views\Newsletter\_AddItem.cshtml" />
+    <Content Include="Views\Newsletter\_Item.cshtml" />
+    <Content Include="Views\Newsletter\_ListMore.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\List.cshtml" />
+    <Content Include="Views\News\_AddItem.cshtml" />
+    <Content Include="Views\News\_Item.cshtml" />
+    <Content Include="Views\News\_ListMore.cshtml" />
+    <Content Include="Views\Permission\Create.cshtml" />
+    <Content Include="Views\Permission\Edit.cshtml" />
+    <Content Include="Views\Permission\List.cshtml" />
+    <Content Include="Views\PlanDiscount\Create.cshtml" />
+    <Content Include="Views\PlanDiscount\Edit.cshtml" />
+    <Content Include="Views\PlanDiscount\List.cshtml" />
+    <Content Include="Views\PlanDiscount\_AddItem.cshtml" />
+    <Content Include="Views\PlanDiscount\_Item.cshtml" />
+    <Content Include="Views\PlanDiscount\_ListMore.cshtml" />
+    <Content Include="Views\PlanPayment\List.cshtml" />
+    <Content Include="Views\Plan\Create.cshtml" />
+    <Content Include="Views\Plan\Edit.cshtml" />
+    <Content Include="Views\Plan\List.cshtml" />
+    <Content Include="Views\Plan\_AddItem.cshtml" />
+    <Content Include="Views\Plan\_Item.cshtml" />
+    <Content Include="Views\Plan\_ListMore.cshtml" />
+    <Content Include="Views\ProductComment\Edit.cshtml" />
+    <Content Include="Views\ProductReview\Create.cshtml" />
+    <Content Include="Views\ProductReview\Edit.cshtml" />
+    <Content Include="Views\ProductReview\List.cshtml" />
+    <Content Include="Views\ProductReview\_AddItem.cshtml" />
+    <Content Include="Views\ProductReview\_Item.cshtml" />
+    <Content Include="Views\ProductReview\_ListMore.cshtml" />
+    <Content Include="Views\ProductSpecification\_Create.cshtml" />
+    <Content Include="Views\ProductSpecification\_Edit.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\ReceiptOption\List.cshtml" />
+    <Content Include="Views\ReceiptPayment\List.cshtml" />
+    <Content Include="Views\Receipt\List.cshtml" />
+    <Content Include="Views\Report\Create.cshtml" />
+    <Content Include="Views\Report\Detail.cshtml" />
+    <Content Include="Views\Report\Edit.cshtml" />
+    <Content Include="Views\Report\List.cshtml" />
+    <Content Include="Views\Report\_AddItem.cshtml" />
+    <Content Include="Views\Report\_FromDateToDate.cshtml" />
+    <Content Include="Views\Report\_Item.cshtml" />
+    <Content Include="Views\Report\_MoreItem.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\List.cshtml" />
+    <Content Include="Views\Role\_AddItem.cshtml" />
+    <Content Include="Views\Role\_Item.cshtml" />
+    <Content Include="Views\Role\_ListMore.cshtml" />
+    <Content Include="Views\SeoSetting\Edit.cshtml" />
+    <Content Include="Views\SeoUrl\Create.cshtml" />
+    <Content Include="Views\SeoUrl\Edit.cshtml" />
+    <Content Include="Views\SeoUrl\List.cshtml" />
+    <Content Include="Views\SeoUrl\_AddItem.cshtml" />
+    <Content Include="Views\SeoUrl\_Item.cshtml" />
+    <Content Include="Views\SeoUrl\_MoreItem.cshtml" />
+    <Content Include="Views\Setting\Edit.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\MenuHelperModel.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\MetaRobotsHelperModel.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\SiteMapPath.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\SiteMapPathHelperModel.cshtml" />
+    <Content Include="Views\Shared\SiteMapTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\SpecificationOption\Create.cshtml" />
+    <Content Include="Views\SpecificationOption\Edit.cshtml" />
+    <Content Include="Views\SpecificationOption\List.cshtml" />
+    <Content Include="Views\SpecificationOption\_AddItem.cshtml" />
+    <Content Include="Views\SpecificationOption\_Item.cshtml" />
+    <Content Include="Views\SpecificationOption\_ListMore.cshtml" />
+    <Content Include="Views\Specification\Create.cshtml" />
+    <Content Include="Views\Specification\Edit.cshtml" />
+    <Content Include="Views\Specification\List.cshtml" />
+    <Content Include="Views\Specification\_AddItem.cshtml" />
+    <Content Include="Views\Specification\_Item.cshtml" />
+    <Content Include="Views\Specification\_ListMore.cshtml" />
+    <Content Include="Views\Statistic\List.cshtml" />
+    <Content Include="Views\Tag\Create.cshtml" />
+    <Content Include="Views\Tag\Edit.cshtml" />
+    <Content Include="Views\Tag\List.cshtml" />
+    <Content Include="Views\Tag\_AddItem.cshtml" />
+    <Content Include="Views\Tag\_Item.cshtml" />
+    <Content Include="Views\Tag\_ListMore.cshtml" />
+    <Content Include="Views\UserSetting\Edit.cshtml" />
+    <Content Include="Views\UserSetting\List.cshtml" />
+    <Content Include="Views\UserSetting\_Item.cshtml" />
+    <Content Include="Views\UserSetting\_ListMore.cshtml" />
+    <Content Include="Views\UserViolation\Create.cshtml" />
+    <Content Include="Views\UserViolation\Detail.cshtml" />
+    <Content Include="Views\UserViolation\Edit.cshtml" />
+    <Content Include="Views\UserViolation\List.cshtml" />
+    <Content Include="Views\UserViolation\_Item.cshtml" />
+    <Content Include="Views\UserViolation\_ListMore.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
+    <Content Include="Views\User\SetPassword.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>14979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:11136/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

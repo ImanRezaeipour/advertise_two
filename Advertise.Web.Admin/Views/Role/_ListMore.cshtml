@@ -1,0 +1,6 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model IEnumerable<Advertise.Core.Models.Role.RoleViewModel>
+@foreach (var item in Model)
+{
+    @Html.Partial(MVC.Role.Views._Item, item)
+}

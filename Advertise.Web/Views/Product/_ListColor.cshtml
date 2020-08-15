@@ -1,0 +1,33 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+
+    @foreach (var spec in Model)
+    {
+        <div id="searchFilterContainer" class="fa-border">
+            <label> @spec.Title</label>
+            @{ var index = 1; }
+            @foreach (var specOption in spec.Options)
+            {
+                <div class="@if (index > 5)
+                            {
+                                <text>hide-none-imp</text>
+                            }" @if (index > 5)
+                               {
+                                   <text>data-toggle=""</text>
+                               }>
+                    <label > @specOption.Title</label>
+                    <input id="@specOption.Title" name="@spec.Title" value="@specOption.Title" type="checkbox" data-on-change="navigateSearch" @if (specOption.IsSelected == true)
+                                                                                                                                               {
+                                                                                                                                                   <text>checked</text>
+                                                                                                                                               } />
+                </div>
+                index = index + 1;
+            }
+            @if (index >= 6)
+            {
+                <button id="expandFilter" data-on-click="showMoreSpecOption">
+                    + موارد بیشتر
+                </button>
+            }
+        </div>
+
+    }

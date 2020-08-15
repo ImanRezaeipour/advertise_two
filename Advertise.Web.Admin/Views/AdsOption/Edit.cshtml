@@ -1,0 +1,92 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@using EnumHelper = Advertise.Core.Helpers.EnumHelper
+@model Advertise.Core.Models.AdsOption.AdsOptionEditViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.AdOptionCreate;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.AdOptionCreate</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editBanner" action="" method="post" ata-on-load="validateAdsOption">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">@Admin.TypeAd:</label>
+                    <select name="Type" id="Type" data-val="true" data-val-required="@Admin.RequiredType">
+                        <option selected disabled>-- @Admin.Choose --</option>
+                        @foreach (var type in Model.TypeList)
+                        {
+                            <option value="@type.Value" selected="@(Model.Type.ToInt32() == type.Value.ToInt32())">@(type.Value.ToInt32() == AdsType.Banner.ToInt32() ? Admin.Banner : Admin.Slide)</option>
+                        }
+                    </select>
+                    <span class="field-validation-error" data-valmsg-for="Type" data-valmsg-replace="true"></span>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div id="adsLocationContainer" class="input-container fixed-height">
+                    <label for="PositionType" class="rl-label">
+                        <span>@Admin.Position:</span>
+                    </label>
+                    <select name="PositionType" id="PositionType" data-val="true" data-val-required="@Admin.RequiredPosition">
+                        <option selected disabled>-- @Admin.Choose --</option>
+                        @foreach (var type in Model.PositionList)
+                        {
+                            <option value="@type.Value" selected="@(Model.PositionType.ToInt32() == type.Value.ToInt32())">@(type.Value.ToInt32() == AdsPositionType.AdsLandingPage.ToInt32() ? Admin.MainPage : Admin.CategoriesPages)</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">
+                        <span>@Admin.Title:</span>
+                    </label>
+                    <input type="text" id="Title" name="Title" value="@Admin.Title" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Order" class="rl-label">
+                        <span>@Admin.Priority:</span>
+                    </label>
+                    <input type="text" id="Order" name="Order" value="@Admin.Priority" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Price" class="rl-label">
+                        <span>@Admin.Price:</span>
+                    </label>
+                    <input type="text" id="Price" name="Price" value="@Admin.Price" />
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            <button type="submit" form="editBanner" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.AdsOption.Create())';">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

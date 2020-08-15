@@ -1,0 +1,239 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Auth = Advertise.Service.Services.Permissions.PermissionConst
+@model Advertise.Core.Models.Product.ProductEditViewModel
+@{
+    Layout = Model.IsMine != true ? MVC.Shared.Views.SiteLayout.Panel._PanelLayout : MVC.Shared.Views.SiteLayout.Profile._ProfileLayout;
+    ViewBag.Title = Admin.Edit;
+}
+<div class="@if (Model.IsMine != true){<text>dashboard-content</text>}else{<text>profile-content</text>}">
+    <div class="headline buttons primary">
+        <h4>@Admin.ProductEdit</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editProduct" action="" method="post" data-on-load="validateProduct">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+            <input type="hidden" id="CreatedById" name="CreatedById" value="@Model.CreatedById" />
+            <input type="hidden" id="CompanyId" name="CompanyId" value="@Model.CompanyId" />
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="CategoryId" class="rl-label">@Admin.Category2</label>
+                    <div id="CategoryTree" style="direction: rtl" class="tree" data-on-load="treeCategoryProduct"></div>
+                    <input type="hidden" id="CategoryId" name="CategoryId" value="@Model.CategoryId" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="title" class="rl-label">
+                        <span>@Admin.Title</span>
+                        <i class="fa fa-question-circle tooltipster" title=@Admin.Title></i>
+                    </label>
+                    <input type="text" id="title" name="Title" value="@Model.Title" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="PreviousPrice" class="rl-label">
+                        <span>@($"{Admin.PreviousPrice} ({Admin.Toman})")</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsPreviousPrice"></i>
+                    </label>
+                    <input type="text" id="PreviousPrice" name="PreviousPrice" value="@Model.PreviousPrice" placeholder="@Admin.PreviousPrice" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Price" class="rl-label">
+                        <span>@($"{Admin.Price}({Admin.Toman})")</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsPrice"></i>
+                    </label>
+                    <input type="text" id="Price" name="Price" value="@Model.Price" placeholder="@Admin.Price" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="sell" class="rl-label">
+                        <span>@Admin.State </span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductState"></i>
+                    </label>
+                    <select id="sell" name="sell">
+                        <option>--- @Admin.Choose ---</option>
+                        @foreach (var sellType in Model.SellTypeList)
+            {
+                            <option value="@sellType.Value" @if (Model.Sell.ToString() == sellType.Value) { <text> selected</text>}>@sellType.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="description" class="rl-label">
+                        <span>@Admin.Description</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItDescribesProduct"></i>
+                    </label>
+                    <textarea type="text" id="description" name="Description" data-on-load="editorProductDescription" rows="4">@Model.Description</textarea>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="files" class="rl-label">@Admin.Preview</label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderProductImage" data-param="edit"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="files2" class="rl-label">
+                        <span>@Admin.Galery </span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsImagesGallery"></i>
+                    </label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files2" id="files2" data-on-load="uploaderProductImages" data-param="edit"></div>
+                </div>
+
+                <div class="clearboth"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>کلمات کلیدی</span>
+                        <i class="fa fa-question-circle tooltipster" title="کلمات کلیدی"></i>
+                    </label>
+                    <select id="ProductKeywords" name="ProductKeywords[]" data-on-load="dropdownMulti">
+                        @foreach (var keyword in Model.KeywordList)
+                        {
+                            <option value="@keyword.Value" @if (Model.ProductKeywordList.Contains(keyword.Value.ToGuid())) { <text> selected</text>}>@keyword.Text</option>
+                        }
+                        @foreach (var keyword in Model.ProductKeywords)
+                        {
+                            <option value="@keyword" selected>@keyword</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label tooltipster">
+                        <span></span>@Admin.Tags
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductTags"></i>
+                    </label>
+                    <div>
+                        @{ var index = 0;
+                            foreach (var tag in Model.Tags)
+                            {
+                                <label style="display: inline-block;">
+                                    <input type="hidden" name="ProductTags.Index" value="@index" />
+                                    <input type="checkbox" class="" name="ProductTags[@index].TagId" value="@tag.Id" @if(Model.ProductTags.Any(model => model.TagId == tag.Id)) { <text> checked</text>} />
+                                    <span>@tag.Title</span>
+                                </label>
+                                index = index + 1;
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="clearboth"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.Specification</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductSpecifications"></i>
+                    </label>
+                    <div id="specificationContainer22" class="tree" data-on-load="ajaxLoadEditProductSpecification" data-param="edit"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.Features</span>
+                        <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsProductFeatures"></i>
+                    </label>
+                    <div class="tree">
+                        <div id="items">
+                            @if (Model.Features.Any() == false)
+                            {
+                                <div id="item" data-index="0">
+                                    <input type="hidden" name="Features.Index" value="0" />
+                                    <input type="text" id="Features[0].Title" name="Features[0].Title" style="width: 85%; display: inline-block; margin-bottom: 10px;" />
+                                    <button class="button primary" type="button" data-on-click="removeFeatures" data-param="0" style="width: 10%; display: inline-block; height: 40px; margin-bottom: 10px;">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                var indexFeature = 0;
+                                foreach (var feature in Model.Features)
+                                {
+                                    <div id="item" data-index="@indexFeature">
+                                        <input type="hidden" name="Features.Index" value="@indexFeature" />
+                                        <input type="text" id="Features[@indexFeature].Title" name="Features[@indexFeature].Title" value="@feature.Title" style="width: 85%; display: inline-block; margin-bottom: 10px;" />
+                                        <button class="button primary" type="button" data-on-click="removeFeatures" data-param="@indexFeature" style="width: 10%; display: inline-block; height: 40px; margin-bottom: 10px;">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    indexFeature = indexFeature + 1;
+                                }
+                            }
+                        </div>
+                        <button class="button primary" type="button" data-on-click="addFeatures" style="height: 40px; margin-bottom: 10px;">
+                            <span>@Admin.AddNewFeature</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            @if (User.IsInRole(Auth.CanProductEditApprove))
+            {
+                <button form="editProduct" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.Product.EditApprove())';">
+                    <i class="fa fa-check-circle"></i>
+                    <span>@Admin.OkAndClose</span>
+                </button>
+                <button form="editProduct" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.Product.EditReject())';">
+                    <i class="fa fa-times-circle"></i>
+                    <span>@Admin.CancelAndClose</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" form="editProduct" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@if(Model.IsMine != true) {<text>@Url.Action(MVC.Product.Edit())</text>} else {<text>@Url.Action(MVC.Product.MyEdit())</text>}';">
+                    <i class="fa fa-save"></i>
+                    <span>@Admin.Save</span>
+                </button>
+            }
+        </div>
+    </div>
+</div>

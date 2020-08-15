@@ -1,0 +1,17 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.ReceiptPayment.ReceiptPaymentCompleteViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.FinancialTransaction;
+}
+<div class="dashboard-content">
+    <div class="form-box-item">
+            <div class="input-container half">
+                <span style="color:@Model.Color">@Model.Message</span>
+                <br/>
+                <span>@($"{Admin.TrackingCode}: ")</span>
+                <span >@Model.InvoiceNumber</span>
+            </div>
+           <div class="input-container"></div>
+    </div>
+</div>

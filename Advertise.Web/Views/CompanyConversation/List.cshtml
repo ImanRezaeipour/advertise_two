@@ -1,0 +1,35 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanyConversation.CompanyConversationListViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.MyPrivateConversations;
+    ViewBag.PageName = Model.IsMine != true ? Admin.ListConversations : Admin.MyPrivateConversations;
+    ViewBag.HasSearchbar = true;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true){<text>لیست گفتگو خصوصی</text>}else{<text>لیست گفتگو خصوصی</text>}</h1>
+    </div>
+
+    <div class="landing-items-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                <div class="input-container half fixed-height">
+                    <label for="CreatedById" class="rl-label">@Admin.ListUsers</label>
+                    <select id="CreatedById" name="CreatedById" data-on-change="ajaxSelectListConversation">
+                        <option>--- @Admin.Choose ---</option>
+                        @foreach (var type in Model.CreatedIdConversationList)
+                        {
+                            <option value="@type.Value" selected="@(Model.OwnedById.ToString() == type.Value)">@type.Text</option>
+                        }
+                    </select>
+                </div>
+                <div id="container"></div>
+            </div>
+        </div>
+    </div>
+</div>

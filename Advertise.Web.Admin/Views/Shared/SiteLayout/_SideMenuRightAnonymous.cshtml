@@ -1,0 +1,66 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+<div id="account-options-menu" class="side-menu right closed">
+    <svg class="svg-plus">
+        <use xlink:href="#svg-plus"></use>
+    </svg>
+    <div class="side-menu-header">
+        <div class="user-quickview">
+            <ul class="user-board-option">
+                <li>
+                    <a href="@Url.Action(MVC.Account.Login())" class="outer-avatar-ring tooltipster" title="@Admin.Login">
+                        <div class="inner-avatar-ring">
+                            <figure class="user-header-avatar">
+                                <div class="anonymous-avatar-top" alt="anonymous avatar image"></div>
+                            </figure>
+                        </div>
+                    </a>
+                </li>
+                <li class="quick-name">
+                    <a href="@Url.Action(MVC.Account.Login().AddRouteValues(new {returnUrl = Request.UrlReferrer}))">
+                        <p class="header-quick-name">@Admin.WelcomeToNovinak</p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="option-menu-widget widget-anonymous">
+                <li class="widget-fa">
+                    <a href="@Url.Action(MVC.Home.SetLang("fa"))">
+                        <i class="fa fa-language fa-2x widget-icon"></i>
+                        <span>فارسی</span>
+                    </a>
+                </li>
+                <li class="widget-en">
+                    <a href="@Url.Action(MVC.Home.SetLang("en"))">
+                        <i class="fa fa-language fa-flip-horizontal fa-2x widget-icon"></i>
+                        <span>English</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <ul class="dropdown dark hover-effect">
+        <li class="dropdown-item interactive">
+            <a href="@Url.Action(MVC.Page.Costs())">
+                <span class="sl-icon fa fa-briefcase fa-2x anonymous-option-icon"></span>
+                <span>@Admin.BusinessRegistration</span>
+            </a>
+        </li>
+        <li class="dropdown-item interactive">
+            <a href="@Url.Action(MVC.Account.Login())">
+                <span class="sl-icon fa fa-shopping-cart fa-2x fa-flip-horizontal anonymous-option-icon"></span>
+                <span>@Admin.Cart</span>
+            </a>
+        </li>
+        <li class="dropdown-item interactive">
+            <a href="@Url.Action(MVC.Account.Login().AddRouteValues(new {returnUrl = Request.UrlReferrer}))">
+                <span class="sl-icon fa fa-sign-in fa-2x anonymous-option-icon"></span>
+                <span>@Admin.Login</span>
+            </a>
+        </li>
+        <li class="dropdown-item interactive">
+            <a href="@Url.Action(MVC.Account.EmailRegister())">
+                <span class="sl-icon fa fa-user-plus fa-2x anonymous-option-icon"></span>
+                <span>@Admin.Register</span>
+            </a>
+        </li>
+    </ul>
+</div>

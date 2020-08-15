@@ -1,0 +1,38 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.CompanyQuestion.CompanyQuestionListViewModel
+@{var index = 0;}
+@foreach (var item in Model.CompanyQuestions)
+{
+    <div class="comment-wrap-each @if(item.ReplyId != null) {<text>reply-answer</text>} " data-index="@index">
+        <a href="@Url.Action(MVC.User.Detail(item.UserUserName))">
+            <figure class="user-avatar medium">
+                @if (item.UserAvatar != null)
+                {
+                    <div class="product-detail company-logo">
+                        <img src="@FileConst.ImagesWebPath.PlusWord(item.UserAvatar)" alt="@item.Body">
+                    </div>
+                }
+                else
+                {
+                    <div class="product-detail company-logo">
+                        <img src="@FileConst.NoLogo" alt="store without logo">
+                    </div>
+                }
+            </figure>
+        </a>
+        <div class="comment">
+            <p class="text-header">@item.UserFullName</p>
+            <p class="timestamp">@item.CreatedOn.CastToRelativeFullDate()</p>
+            <p>@item.Body</p>
+            @if (item.IsMyself && item.ReplyId == null)
+            {
+                <input type="text" id="Question_@index" name="Question[@index]" placeholder="پاسخ دهید" />
+                <button type="button" class="button primary" id="ReplyId_@index" name="ReplyId[@index]" value="@item.Id" data-on-click="ajaxReplyToQuestion">پاسخ دادن</button>
+            }
+        </div>
+    </div>
+    <hr class="line-separator">
+    index = index + 1;
+}

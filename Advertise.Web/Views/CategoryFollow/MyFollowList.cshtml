@@ -1,0 +1,30 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CategoryFollow.CategoryFollowListViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.FollowCategories;
+    ViewBag.PageName = "myFollowCategories";
+    ViewBag.HasSearchbar = true;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+        @SearchItem.GridView()
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true){<text>@Admin.ListMyFollowsCategory</text>}else{<text>@Admin.ListMyFollowsCategory</text>}</h1>
+    </div>
+
+    <div class="landing-grids-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @Html.Partial(MVC.CategoryFollow.Views._FollowListMore, Model.CategoryFollows)
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+    </div>
+</div>

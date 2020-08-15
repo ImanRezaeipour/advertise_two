@@ -1,0 +1,50 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.Bag.BagListViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.Cart;
+}
+<div class="profile-content">
+    <div class="headline purchases primary">
+        <h4>@Admin.Cart</h4>
+        <a class="button primary bag-my-item-list @if(Model.Bags.Any()== false) {<text>disabled-btn-link</text>}" href="@if(Model.Bags.Any()  == false) {<text>javascript:void(0)</text>} else {<text>@Url.Action(MVC.Receipt.CheckOut())</text>}">@Admin.CompletePurchaseProcess</a>
+    </div>
+    <div class="purchases-list">
+        <div id="PageLoader" class="page-loader hide-none"></div>
+        <div id="BagShadow" class="bag-shadow hide-none"></div>
+        <div class="purchases-list-header @if (Model.Bags.Any()== false) {<text>hide-none</text>}">
+            <div class="purchases-list-header-date">
+                <p class="text-header small">@Admin.DateAndTime</p>
+            </div>
+            <div class="purchases-list-header-details">
+                <p class="text-header small">@Admin.ProductDetails</p>
+            </div>
+            <div class="purchases-list-header-info">
+                <p class="text-header small">@Admin.AdditionalInfo</p>
+            </div>
+            <div class="purchases-list-header-download">
+                <p class="text-header small">@Admin.UnitPrice</p>
+            </div>
+            <div class="purchases-list-header-price">
+                <p class="text-header small">@Admin.Amount</p>
+            </div>
+            <div class="purchases-list-header-recommend">
+                <p class="text-header small">@Admin.TotalPrice</p>
+            </div>
+        </div>
+        <div class="bag-total-list-wrapper @if (Model.Bags.Any()== false) {<text>hide-none</text>}">
+            @Html.Partial(MVC.Bag.Views._ListMore, Model.Bags)
+        </div>
+        <div class="bag-footer @if (Model.Bags.Any()== false) {<text>hide-none</text>}">
+            <p class="total-bag-price-toman">@Admin.Toman</p>
+            <p class="total-bag-price">@Model.TotalProductListPrice.CastToRegularCurrency()</p>
+            <p class="total-bag-price-text">@Admin.YourBagPrice.PlusWord(":")</p>
+            <div class="clearboth"></div>
+        </div>
+        <p class="purchases-no-item @if (Model.Bags.Any()){<text>hide-none</text>}">
+            <i class="fa fa-shopping-cart fa-flip-horizontal"></i>
+            <span>@Admin.YourBagIsEmpty</span>
+        </p>
+    </div>
+</div>

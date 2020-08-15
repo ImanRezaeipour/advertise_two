@@ -1,0 +1,38 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Tag.TagListViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.ListTags;
+    ViewBag.PageName = "tags";
+    ViewBag.HasSearchbar = true;
+}
+<div class="dashboard-content">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+        @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+        @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize)
+        @SearchItem.IsActive(Model.ActiveList, Model.SearchRequest.IsActive)
+        @SearchItem.GridView()
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true){<text>لیست برچسب ها</text>}else{<text>لیست برچسب ها</text>}</h1>
+    </div>
+
+    <div class="landing-items-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @if (User.IsInRole(PermissionConst.CanTagCreate))
+                {
+                    @Html.Partial(MVC.Tag.Views._AddItem)
+                }
+                @Html.Partial(MVC.Tag.Views._ListMore, Model.Tags)
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+    </div>
+</div>

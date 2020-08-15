@@ -1,0 +1,23 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Managers.File
+<div class="subscribe-top-footer">
+    <div id="subscribe-banner-wrap">
+        <div id="subscribe-banner">
+            <div class="subscribe-content">
+                <div class="subscribe-header">
+                    <figure>
+                        <img src="@FileConst.NewsIcon" alt="subscribe-icon">
+                    </figure>
+                    <h2>@Admin.SiteTitle</h2>
+                    <p class="subscribe-title">@Admin.SubscribeToOurNewsletter</p>
+                    <br>
+                    <p>@Admin.AndReceiveTheLatestNewsAndOffers</p>
+                </div>
+                <div class="subscribe-form">
+                    <input type="text" name="Email" id="Email" placeholder="@Admin.EnterEmail">
+                    <button type="button" class="button medium dark" data-on-click="ajaxSubscribe">@Admin.Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

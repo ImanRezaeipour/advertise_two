@@ -1,0 +1,80 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.CompanySlide.CompanySlideEditViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = "ویرایش اسلاید کمپانی";
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@ViewBag.Title</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editCompanySlide" data-on-load="validateCompanySlide" method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="Id" name="Id" value="@Model.Id"/>
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">
+                        <span>@Admin.Title</span>
+                    </label>
+                    <input type="text" id="Title" name="Title" class="tooltipster" value="@Model.Title"/>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="ImageFileName" class="rl-label tooltipster" title="@Admin.ItChoosesImage">@Admin.UploadAdPhoto :</label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="ImageFileName" id="ImageFileName" data-on-load="uploaderCompanySlide" data-param="edit"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label class="rl-label">
+                        <span>@Admin.ThisAdIsUsedFor</span>
+                    </label>
+                    <label class="enabled-form-iradio-label" for="CompanyEntity">
+                        <input type="radio" name="EntityName" value="CompanyEntity" id="CompanyEntity" data-on-change="disableEntity" checked="@(!Model.ProductId.HasValue)" />
+                        <span>کمپانی من</span>
+                    </label>
+                    <label class="disabled-form-iradio-label" for="ProductEntity">
+                        <input type="radio" name="EntityName" value="ProductEntity" id="ProductEntity" data-on-change="enableEntity" checked="@(Model.ProductId.HasValue)"/>
+                        <span>محصولات</span>
+                    </label>
+                </div>
+
+                <div class="msg-container hide-none">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height hide-none">
+                    <label for="ProductId" class="rl-label">محصولات</label>
+                    <select name="ProductId" id="ProductId">
+                        <option selected disabled>-- @Admin.Choose --</option>
+                        @foreach (var item in Model.EntityList)
+                        {
+                            <option value="@item.Value" selected="@(Model.ProductId.ToString() == item.Value)">@item.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        <div class="form-button-container">
+            <button type="submit" form="editCompanySlide" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@Url.Action(MVC.CompanySlide.Edit())';">
+                <i class="fa fa-save"></i>
+                <span>ذخیره</span>
+            </button>
+        </div>
+    </div>
+</div>

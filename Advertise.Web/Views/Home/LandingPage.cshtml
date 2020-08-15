@@ -1,0 +1,165 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.Home.LandingPageViewModel
+@{
+    ViewBag.Title = Admin.SiteTitle;
+    ViewBag.Keywords = $"{Admin.Novinak},{Admin.CommercialAndAdvertisingServices},{Admin.CommercialServices},{Admin.AdvertisingServices},{Admin.Commercial},{Admin.Advertising},{Admin.Commerce},{Admin.Advertise},{Admin.Ads},{Admin.OnlineShopping},{Admin.OnlineShopping}";
+    ViewBag.Description = Admin.MetaDescription_LandingPage;
+    ViewBag.Thumbnail = FileConst.LogoMobilePth;
+}
+@section og{
+    <meta property="og:image" content="@FileConst.LogoMobilePth">
+}
+<div id="product-sideshow-wrap">
+    <div id="product-sideshow">
+        <div class="landing-wrapper">
+            <div class="product-showcase slide-case">
+                <div class="landing-items-wrapper landing-items-disp">
+                    <div class="top-slider landing-slider owl-carousel round-corners-five" data-on-load="carouselLandingSlider">
+                        <a>
+                            <img src="/Files/Assets/mosaic-categories/gaming-mobiles-banner.jpg" alt="گوشی‌های مخصوص بازی">
+                        </a>                        
+                        <a>
+                            <img src="/Files/Assets/mosaic-categories/water-resistance-mobiles-banner.jpg" alt="انواع گوشی‌های مقاوم در برابر آب">
+                        </a>
+                        <a>
+                            <img src="/Files/Assets/mosaic-categories/women-mobiles-banner.jpg" alt="گوشی‌های مخصوص بانوان">
+                        </a>
+                    </div>
+                    <div class="slider-tabs-title">
+                        <h5 data-tab="1">گوشی‌های مخصوص بازی</h5>
+                        <h5 data-tab="2">انواع گوشی‌های مقاوم در برابر آب</h5>
+                        <h5 data-tab="3">گوشی‌های مخصوص بانوان</h5>
+                    </div>
+                    <div  data-on-load="sliderTabs" data-tabs="3"></div>
+                </div>
+            </div>
+            <div class="landing-side">
+                <div class="side-ads owl-carousel" data-on-load="carouselSideAds">
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/lg-mobiles-side-banner.jpg" alt="گوشی‌های موبایل LG" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل LG</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/samsung-mobiles-side-banner.jpg" alt="گوشی‌های موبایل Samsung" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل Samsung</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/iphone-mobiles-side-banner.jpg" alt="گوشی‌های موبایل iPhone" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل iPhone</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/pixel-mobiles-side-banner.jpg" alt="گوشی‌های موبایل Pixel" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل Pixel</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/huawei-mobiles-side-banner.jpg" alt="گوشی‌های موبایل Huawei" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل Huawei</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/sony-mobiles-side-banner.jpg" alt="گوشی‌های موبایل Sony" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل Sony</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/nokia-mobiles-side-banner.jpg" alt="گوشی‌های موبایل Nokia" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل Nokia</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/asus-mobiles-side-banner.jpg" alt="گوشی‌های موبایل Asus" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل Asus</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="side-ads-item">
+                            <img src="~/Files/Assets/mosaic-categories/htc-mobiles-side-banner.jpg" alt="گوشی‌های موبایل HTC" />
+                            <div class="side-item-sub side-general-sub">
+                                <p class="mosaic-paragraph">گوشی‌های موبایل HTC</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="product-showcase landing-case">
+                @if (Model.LastMobileCompanyItemList.Any())
+                {
+                    <div class="headline primary">
+                        <h4>
+                            <i class="fa fa-shopping-cart fa-flip-horizontal landing-headline-icon"></i>
+                            <span>@Admin.MobilePhoneStores</span>
+                        </h4>
+                    </div>
+                    <div class="landing-items-wrapper landing-items-disp landing-item-car">
+                        <div class="product-list grid">
+                            <div class="landing-column-wrapper owl-carousel" data-on-load="carouselLandingPage">
+                                @Html.Partial(MVC.Company.Views._ListMore, Model.LastMobileCompanyItemList)
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.LastMobileProductItemList.Any())
+                {
+                    <div class="headline primary">
+                        <h4>
+                            <i class="fa fa-mobile-phone landing-headline-icon"></i>
+                            <span>@Admin.MobilePhones</span>
+                        </h4>
+                    </div>
+                    <div class="landing-items-wrapper landing-items-disp">
+                        <div class="product-list grid">
+                            <div class="landing-column-wrapper">
+                                @Html.Partial(MVC.Product.Views._ListMore, Model.LastMobileProductItemList)
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (User.Identity.IsAuthenticated && Model.MyLastVisitItemList.Any())
+                {
+                    <div class="headline primary">
+                        <h4>
+                            <i class="fa fa-eye landing-headline-icon"></i>
+                            <span>آخرین بازدید‌های شما</span>
+                        </h4>
+                    </div>
+                    <div class="landing-items-wrapper landing-items-disp landing-item-car">
+                        <div class="product-list grid">
+                            <div class="landing-column-wrapper owl-carousel" data-on-load="carouselLandingPage">
+                                @Html.Partial(MVC.Product.Views._ListMore, Model.MyLastVisitItemList)
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

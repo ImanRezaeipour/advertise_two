@@ -1,0 +1,233 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.Receipt.ReceiptViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.CompletePurchaseProcess;
+}
+@section scripts {
+    <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDsVAy5ATsGkBA11NPQWSakpy0BiNuBPTc&callback=loadMapReceipt'></script>
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.ProfileEdit</h4>
+    </div>
+    <div class="form-box-item profile-form">
+    <form id="editInfo" action="@Url.Action(MVC.Receipt.CheckOut())" method="post" data-on-load="validateReceipt">
+        <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <div class="input-form">
+            <div class="vertical-dashed"></div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <input type="hidden" id="Address_Longitude" name="Address.Longitude" value="@Model.Address.Longitude.ZeroIfNull()"/>
+                <input type="hidden" id="Address_Latitude" name="Address.Latitude" value="@Model.Address.Latitude.ZeroIfNull()"/>
+                <div id="receiptMap" class="my-bag-info-edit"></div>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="Address_City_ParentId" class="rl-label tooltipster" title="@Admin.ItShowsProvince">@Admin.Province</label>
+                <input type="hidden" name="ProvinceId" id="ProvinceId" value="@Model.Address.City.ParentId"/>
+                <select id="Address_City_ParentId" name="Address.City.ParentId" data-on-change="ajaxSelectProvince">
+                    <option value="" selected disabled>-- @Admin.Choose --</option>
+                    @foreach (var province in Model.AddressProvince)
+                    {
+                        <option value="@province.Value" @if (province.Value == Model.Address.City.ParentId.ToString()){<text> selected</text>}>@province.Text</option>
+                    }
+                </select>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="Address_City_Id" class="rl-label tooltipster" title="@Admin.ItShowsCity">@Admin.City</label>
+                <input type="hidden" name="CityId" id="CityId" value="@Model.Address.City.Id"/>
+                <select id="Address_City_Id" name="Address.City.Id" data-on-load="ajaxSelectCity">
+                    <option value="">-- @Admin.Choose --</option>
+                </select>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height address-area">
+                <label for="Address_Extra" class="rl-label">@Admin.Address</label>
+                <textarea rows="2" id="Address_Extra" name="Address.Extra" class="info-address-textarea tooltipster" value="" title="@Admin.ItShowsAddress" placeholder="@Admin.Address">@Model.Address.Extra</textarea>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="Address_PostalCode" class="rl-label">@Admin.PostalCode</label>
+                <input type="text" id="Address_PostalCode" name="Address.PostalCode" placeholder="@Admin.ExamplePostalCode" value="@Model.Address.PostalCode" class="tooltipster" title="@Admin.ItShowsPostalCode"/>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="FirstName" class="rl-label">@Admin.FirstName</label>
+                <input type="text" id="FirstName" name="FirstName" placeholder="@Admin.FirstName" value="@Model.FirstName" class="tooltipster" title="@Admin.ItShowsFirstName"/>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="LastName" class="rl-label">@Admin.LastName</label>
+                <input type="text" id="LastName" name="LastName" placeholder="@Admin.LastName" value="@Model.LastName" class="tooltipster" title="@Admin.ItShowsLastName"/>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="NationalCode" class="rl-label">@Admin.NationalCode</label>
+                <input type="text" id="NationalCode" name="NationalCode" placeholder="@Admin.ExampleNationalCode" value="@Model.NationalCode" class="tooltipster" title="@Admin.ItShowsNationalCode"/>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="HomeNumber" class="rl-label">@Admin.Phone</label>
+                <input type="text" id="HomeNumber" name="HomeNumber" placeholder="@Admin.ExamplePhoneNumber" value="@Model.HomeNumber" class="tooltipster" title="@Admin.ItShowsPhoneNumber"/>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="PhoneNumber" class="rl-label">@Admin.Mobile</label>
+                <input type="text" id="PhoneNumber" name="PhoneNumber" placeholder="@Admin.ExampleMobileNumber" value="@Model.PhoneNumber" class="tooltipster" title="@Admin.ItShowsMobileNumber"/>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height">
+                <label for="TransfereeName" class="rl-label">@Admin.TransfereeName.PlusWord(" (").PlusWord(Admin.Optional).PlusWord(")")</label>
+                <input type="text" id="TransfereeName" name="TransfereeName" value="@Model.TransfereeName" placeholder="@Admin.TransfereeName" class="tooltipster" title="@Admin.ItShowsTransfereeName"/>
+            </div>
+                
+            <div class="msg-container">
+                <div class="msg-box regular round-corners-five">
+                    <p>
+                        <i class="fa fa-quote-right"></i>
+                        <span></span>
+                        <i class="fa fa-quote-left"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="input-container fixed-height payment-wrapper">
+                <label class="rl-label tooltipster" title="@Admin.ItShowsPaymentType">@Admin.PaymentType</label>
+                <ul class="payment-holder">
+                    <li class="payment-label-list">
+                        <label for="paymentType1" class="payment-label">
+                            <input type="radio" id="paymentType1" name="Payment" value="1" checked> 
+                            @Admin.OnlinePayment
+                        </label>
+                    </li>
+                    <li class="payment-label-list">
+                        <label for="paymentType2" class="payment-label">
+                            <input type="radio" id="paymentType2" name="Payment" value="2"> 
+                            @Admin.PayInPerson
+                        </label>
+                    </li>
+                    <li class="payment-label-list">
+                        <label for="paymentType3" class="payment-label">
+                            <input type="radio" id="paymentType3" name="Payment" value="3"> 
+                            @Admin.PaymentViaATM
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="clearboth"></div>
+        </div>
+    </form>
+        
+    <div class="form-button-container">
+        <button type="submit" form="editInfo" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link">
+            <i class="fa fa-save"></i>
+            <span>@Admin.Save</span>
+        </button>
+    </div>
+    </div>
+</div>

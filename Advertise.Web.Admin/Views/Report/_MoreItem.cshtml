@@ -1,0 +1,6 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model IList<Advertise.Core.Models.Report.ReportViewModel>
+@foreach (var item in Model)
+{
+    @Html.Partial(MVC.Report.Views._Item, item)
+}

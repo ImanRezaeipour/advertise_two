@@ -1,0 +1,66 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Auth = Advertise.Service.Services.Permissions.PermissionConst
+
+@model Advertise.Core.Models.CompanyOfficial.CompanyOfficialEditViewModel
+@{
+    Layout = Model.IsMine != true ? MVC.Shared.Views.SiteLayout.Panel._PanelLayout : MVC.Shared.Views.SiteLayout.Profile._ProfileLayout;
+
+    ViewBag.Title = Admin.EditReview;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+
+    <div class="headline buttons primary">
+        <h4>@Admin.EditReview</h4>
+    @if (User.IsInRole(Auth.CanCompanyOfficialApprove) && Model.IsMine != true)
+    {
+        <button form="editCompanyOfficial" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled onclick="javascript: form.action = '@Url.Action(MVC.CompanyOfficial.EditApprove())';">
+
+            <i class="fa fa-save"></i>
+            <span>@Admin.OkAndClose</span>
+        </button>
+    }
+    
+        <h4>@Admin.EditReview</h4>
+        @if (User.IsInRole(Auth.CanCompanyOfficialEdit) && Model.IsMine)
+        {
+            <button form="editCompanyOfficial" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled onclick="javascript: form.action = '@Url.Action(MVC.CompanyOfficial.MyEdit())';">
+
+                <i class="fa fa-save"></i>
+                <span>@Admin.OkAndClose</span>
+            </button>
+        }
+       
+    </div>
+    <div class="form-box-item">
+        <form id="editCompanyOfficial"  method="Post" data-on-load="validateCompanyOfficial">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="Id" name="Id" value="@Model.Id"/>
+            <div class="input-container">
+                <label for="files" class="rl-label">
+                    <span>کپی جواز کسب</span>
+                </label>
+                @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                <div name="files" id="files" data-on-load="uploaderBusinessLicense" data-param="edit"></div>
+                <div id="PreviewContainer"></div>
+            </div>
+
+            <div class="input-container">
+                <label for="files" class="rl-label">
+                    <span>کپی کارت ملی</span>
+                </label>
+                @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                <div name="files1" id="files1" data-on-load="uploaderNationalCard" data-param="edit"></div>
+            </div>
+
+            <div class="input-container">
+                <label for="files" class="rl-label">
+                    <span>آدرس روزنامه رسمی</span>
+                </label>
+                @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                <div name="files2" id="files2" data-on-load="uploaderOfficialNewspaperAddress" data-param="edit"></div>
+            </div>
+
+        </form>
+    </div>
+</div>

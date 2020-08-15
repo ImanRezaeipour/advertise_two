@@ -1,0 +1,160 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.Bag.BagMyInfoViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.ProfileEdit;
+}
+@section scripts {
+    <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDsVAy5ATsGkBA11NPQWSakpy0BiNuBPTc&callback=mapSet'></script>
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.ProfileEdit</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editInfo" action="@Url.Action(MVC.Bag.Edit())" method="post" data-on-load="validateBag">
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="CreatedById" name="CreatedById" value="@Model.CreatedById" />
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <input type="hidden" id="Address_Longitude" name="Address.Longitude" value="@Model.Address.Longitude.ZeroIfNull()" />
+                    <input type="hidden" id="Address_Latitude" name="Address.Latitude" value="@Model.Address.Latitude.ZeroIfNull()" />
+                    <div id="setMap"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="province" class="rl-label">@Admin.Province</label>
+                    <input type="hidden" name="ProvinceId" id="ProvinceId" value="" />
+                    <select id="province" name="province" data-on-change="ajaxSelectProvince">
+                        <option value="" selected disabled>-- @Admin.Choose --</option>
+                        @foreach (var province in Model.AddressProvince)
+                        {
+                            <option value="@province.Value">@province.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="city" class="rl-label">@Admin.City</label>
+                    <input type="hidden" name="CityId" id="CityId" value="" />
+                    <select id="city" name="city" data-on-load="ajaxSelectCity">
+                        <option value="">-- @Admin.Choose --</option>
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height address-area">
+                    <label for="address" class="rl-label">@Admin.Address</label>
+                    <textarea rows="2" id="address" name="address" class="info-address-textarea" placeholder="@Admin.Address" value="@Model.UserAddress"></textarea>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="postalCode" class="rl-label">@Admin.PostalCode</label>
+                    <input type="number" id="postalCode" name="postalCode" placeholder="@Admin.ExamplePostalCode" value="@Model.PostalCode" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="firstName" class="rl-label">@Admin.FirstName</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="@Admin.FirstName" value="@Model.UserFirstName" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="lastName" class="rl-label">@Admin.LastName</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="@Admin.LastName" value="@Model.UserLastName" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="nationalCode" class="rl-label">@Admin.NationalCode</label>
+                    <input type="number" id="nationalCode" name="nationalCode" placeholder="@Admin.ExampleNationalCode" value="@Model.UserNationalCode" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="phoneNumber" class="rl-label">@Admin.Phone</label>
+                    <input type="number" id="phoneNumber" name="phoneNumber" placeholder="@Admin.ExamplePhoneNumber" value="@Model.PhoneNumber" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="mobileNumber" class="rl-label">@Admin.Mobile</label>
+                    <input type="number" id="mobileNumber" name="mobileNumber" placeholder="@Admin.ExampleMobileNumber" value="@Model.MobileNumber" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="transfereeName" class="rl-label">@Admin.TransfereeName.PlusWord(" (").PlusWord(Admin.Optional).PlusWord(")")</label>
+                    <input type="text" id="transfereeName" name="transfereeName" placeholder="@Admin.TransfereeName" value="@Model.TransfereeName" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height payment-wrapper">
+                    <label class="rl-label">@Admin.PaymentType</label>
+                    <ul class="payment-holder">
+                        <li class="payment-label-list">
+                            <label for="paymentType1" class="payment-label">
+                                <input type="radio" id="paymentType1" name="Payment" value="1" checked>
+                                <span>@Admin.OnlinePayment</span>
+                            </label>
+                        </li>
+                        <li class="payment-label-list">
+                            <label for="paymentType2" class="payment-label">
+                                <input type="radio" id="paymentType2" name="Payment" value="2">
+                                <span>@Admin.PayInPerson</span>
+                            </label>
+                        </li>
+                        <li class="payment-label-list">
+                            <label for="paymentType3" class="payment-label">
+                                <input type="radio" id="paymentType3" name="Payment" value="3">
+                                <span>@Admin.PaymentViaATM</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            <button type="submit" form="editInfo" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E14757DD-130A-423B-ADB7-7F9FD3C36734}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Advertise.Service.Manager</RootNamespace>
+    <AssemblyName>Advertise.Service.Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\DependentDLL\adodb.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\DependentDLL\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AsyncEnumerable">
+      <HintPath>..\DependentDLL\AsyncEnumerable.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\DependentDLL\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="CaptchaMvc">
+      <HintPath>..\DependentDLL\CaptchaMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\DependentDLL\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EFSecondLevelCache">
+      <HintPath>..\DependentDLL\EFSecondLevelCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\DependentDLL\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="ElmahEFLogger">
+      <HintPath>..\DependentDLL\ElmahEFLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\DependentDLL\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\DependentDLL\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\DependentDLL\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\DependentDLL\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc">
+      <HintPath>..\DependentDLL\FluentValidation.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender">
+      <HintPath>..\DependentDLL\HibernatingRhinos.Profiler.Appender.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\DependentDLL\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageProcessor">
+      <HintPath>..\DependentDLL\ImageProcessor.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\DependentDLL\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="JWT">
+      <HintPath>..\DependentDLL\JWT.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit">
+      <HintPath>..\DependentDLL\LinqKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\DependentDLL\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\DependentDLL\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\DependentDLL\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\DependentDLL\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DotNet.InternalAbstractions">
+      <HintPath>..\DependentDLL\Microsoft.DotNet.InternalAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\DependentDLL\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\DependentDLL\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.RedisOutputCacheProvider">
+      <HintPath>..\DependentDLL\Microsoft.Web.RedisOutputCacheProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcCheckBoxList">
+      <HintPath>..\DependentDLL\MvcCheckBoxList.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider">
+      <HintPath>..\DependentDLL\MvcSiteMapProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider.WebActivator">
+      <HintPath>..\DependentDLL\MvcSiteMapProvider.WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DependentDLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx">
+      <HintPath>..\DependentDLL\Nito.AsyncEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Concurrent">
+      <HintPath>..\DependentDLL\Nito.AsyncEx.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Enlightenment">
+      <HintPath>..\DependentDLL\Nito.AsyncEx.Enlightenment.dll</HintPath>
+    </Reference>
+    <Reference Include="NReco.VideoConverter">
+      <HintPath>..\DependentDLL\NReco.VideoConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="NReco.VideoInfo">
+      <HintPath>..\DependentDLL\NReco.VideoInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\DependentDLL\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PersianDateTime">
+      <HintPath>..\DependentDLL\PersianDateTime.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorGenerator.Mvc">
+      <HintPath>..\DependentDLL\RazorGenerator.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="RedLock.StrongName">
+      <HintPath>..\DependentDLL\RedLock.StrongName.dll</HintPath>
+    </Reference>
+    <Reference Include="RefactorThis.GraphDiff">
+      <HintPath>..\DependentDLL\RefactorThis.GraphDiff.dll</HintPath>
+    </Reference>
+    <Reference Include="SmsIrRestful">
+      <HintPath>..\DependentDLL\SmsIrRestful.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis.StrongName">
+      <HintPath>..\DependentDLL\StackExchange.Redis.StrongName.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base">
+      <HintPath>..\DependentDLL\Stimulsoft.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report">
+      <HintPath>..\DependentDLL\Stimulsoft.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Mvc">
+      <HintPath>..\DependentDLL\Stimulsoft.Report.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Web">
+      <HintPath>..\DependentDLL\Stimulsoft.Report.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\DependentDLL\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.DynamicInterception">
+      <HintPath>..\DependentDLL\StructureMap.DynamicInterception.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Web">
+      <HintPath>..\DependentDLL\StructureMap.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DependentDLL\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient">
+      <HintPath>..\DependentDLL\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>..\DependentDLL\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\DependentDLL\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\DependentDLL\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\DependentDLL\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\DependentDLL\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\DependentDLL\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\DependentDLL\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\DependentDLL\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\DependentDLL\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\DependentDLL\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\DependentDLL\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\DependentDLL\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="T4MVCExtensions">
+      <HintPath>..\DependentDLL\T4MVCExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\DependentDLL\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\DependentDLL\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Z.EntityFramework.Extensions">
+      <HintPath>..\DependentDLL\Z.EntityFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Z.EntityFramework.Plus.EF6">
+      <HintPath>..\DependentDLL\Z.EntityFramework.Plus.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="Z.Expressions.Eval">
+      <HintPath>..\DependentDLL\Z.Expressions.Eval.dll</HintPath>
+    </Reference>
+    <Reference Include="Z.ExtensionMethods">
+      <HintPath>..\DependentDLL\Z.ExtensionMethods.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attachments\AttachmentManager.cs" />
+    <Compile Include="Attachments\AttachmentType.cs" />
+    <Compile Include="Attachments\AttachmentValidator.cs" />
+    <Compile Include="Attachments\IAttachmentManager.cs" />
+    <Compile Include="Attachments\IAttachmentType.cs" />
+    <Compile Include="Attachments\IAttachmentValidator.cs" />
+    <Compile Include="Attachments\MimeTypeDetector.cs" />
+    <Compile Include="Attachments\MimeTypeManager.cs" />
+    <Compile Include="Caching\CacheExtension.cs" />
+    <Compile Include="Caching\Extensions.cs" />
+    <Compile Include="Caching\ICacheManager.cs" />
+    <Compile Include="Caching\IRedisConnectionWrapper.cs" />
+    <Compile Include="Caching\MemoryCacheManager.cs" />
+    <Compile Include="Caching\NopNullCache.cs" />
+    <Compile Include="Caching\PerRequestCacheManager.cs" />
+    <Compile Include="Caching\RedisCacheManager.cs" />
+    <Compile Include="Caching\RedisConnectionWrapper.cs" />
+    <Compile Include="Connected Services\ZarinpalServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Cookie\CookieExtention.cs" />
+    <Compile Include="Cookie\CookieManager.cs" />
+    <Compile Include="Cookie\ICookieManager.cs" />
+    <Compile Include="Document\CrowlManager.cs" />
+    <Compile Include="Document\PdfManager.cs" />
+    <Compile Include="Events\EventPublisher.cs" />
+    <Compile Include="Events\EventPublisherExtensions.cs" />
+    <Compile Include="Events\IEventHandler.cs" />
+    <Compile Include="Events\IEventPublisher.cs" />
+    <Compile Include="Events\ISubscriptionService.cs" />
+    <Compile Include="Events\SubscriptionService.cs" />
+    <Compile Include="Extensions\CastExtensions.cs" />
+    <Compile Include="Extensions\CloneableExtensions.cs" />
+    <Compile Include="Extensions\ConvertExtentions.cs" />
+    <Compile Include="Extensions\GenericExtensions.cs" />
+    <Compile Include="Extensions\HttpExtentions.cs" />
+    <Compile Include="Extensions\NumberExtensions.cs" />
+    <Compile Include="Extensions\PagingExtensions.cs" />
+    <Compile Include="Extensions\PersianUtils\DateTimeOffsetPart.cs" />
+    <Compile Include="Extensions\PersianUtils\DateTimeUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\EquinoxCalculator.cs" />
+    <Compile Include="Extensions\PersianUtils\FriendlyPerisanDateUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\HumanReadableInteger.cs" />
+    <Compile Include="Extensions\PersianUtils\IranCities\City.cs" />
+    <Compile Include="Extensions\PersianUtils\IranCities\County.cs" />
+    <Compile Include="Extensions\PersianUtils\IranCities\District.cs" />
+    <Compile Include="Extensions\PersianUtils\IranCities\Iran.cs" />
+    <Compile Include="Extensions\PersianUtils\IranCities\Province.cs" />
+    <Compile Include="Extensions\PersianUtils\IranCodesUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\IranShebaUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\IranShetabUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\NationalCodeUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\Normalizer\AggressiveEditing.cs" />
+    <Compile Include="Extensions\PersianUtils\Normalizer\FixDash.cs" />
+    <Compile Include="Extensions\PersianUtils\Normalizer\FixDiacritics.cs" />
+    <Compile Include="Extensions\PersianUtils\Normalizer\FixDots.cs" />
+    <Compile Include="Extensions\PersianUtils\Normalizer\FixEnglishQuotes.cs" />
+    <Compile Include="Extensions\PersianUtils\Normalizer\FixZwnj.cs" />
+    <Compile Include="Extensions\PersianUtils\PersianCulture.cs" />
+    <Compile Include="Extensions\PersianUtils\PersianDateTimeUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\PersianNormalizers.cs" />
+    <Compile Include="Extensions\PersianUtils\PersianNormalizerUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\PersianNumbersUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\PersianStopwords.cs" />
+    <Compile Include="Extensions\PersianUtils\RegexUtils.cs" />
+    <Compile Include="Extensions\PersianUtils\TimeConstants.cs" />
+    <Compile Include="Extensions\PersianUtils\UnicodeConstants.cs" />
+    <Compile Include="Extensions\PersianUtils\YeKe.cs" />
+    <Compile Include="Extensions\RegexExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TypeExtention.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
+    <Compile Include="File\FileConst.cs" />
+    <Compile Include="File\FileManager.cs" />
+    <Compile Include="File\FileModel.cs" />
+    <Compile Include="File\FilePermissionHelper.cs" />
+    <Compile Include="File\FineUploaderModel.cs" />
+    <Compile Include="File\IFileManager.cs" />
+    <Compile Include="Helpers\CaptchaHelper.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\LazySingletonHelper.cs" />
+    <Compile Include="Helpers\QueryHelper.cs" />
+    <Compile Include="Helpers\RandomNumberHelper.cs" />
+    <Compile Include="Helpers\RandomTextHelper.cs" />
+    <Compile Include="Helpers\ReadingHelper.cs" />
+    <Compile Include="Helpers\SequentialGuidHelper.cs" />
+    <Compile Include="Helpers\SequentialGuidType.cs" />
+    <Compile Include="Html\HtmlSanitizer.cs" />
+    <Compile Include="Image\DefaultImageGenerator.cs" />
+    <Compile Include="Image\IImageBuilder.cs" />
+    <Compile Include="Image\IImageValidator.cs" />
+    <Compile Include="Image\ImageBuilder.cs" />
+    <Compile Include="Image\ImageManager.cs" />
+    <Compile Include="Image\ImageValidator.cs" />
+    <Compile Include="Image\TextToImage.cs" />
+    <Compile Include="Kendo\DynamicLinq\Aggregate.cs" />
+    <Compile Include="Kendo\DynamicLinq\DataSourceRequest.cs" />
+    <Compile Include="Kendo\DynamicLinq\DataSourceResult.cs" />
+    <Compile Include="Kendo\DynamicLinq\Filter.cs" />
+    <Compile Include="Kendo\DynamicLinq\QueryableExtensions.cs" />
+    <Compile Include="Kendo\DynamicLinq\Sort.cs" />
+    <Compile Include="Localization\CultureHelper.cs" />
+    <Compile Include="Localization\DbResourceManager.cs" />
+    <Compile Include="Localization\IResourceService.cs" />
+    <Compile Include="Localization\Persian\DigitGroup.cs" />
+    <Compile Include="Localization\Persian\HumanReadableInteger.cs" />
+    <Compile Include="Localization\Persian\Language.cs" />
+    <Compile Include="Localization\Persian\NumberWord.cs" />
+    <Compile Include="Localization\Persian\PersianExtension.cs" />
+    <Compile Include="Localization\Persian\PersianProofWriter.cs" />
+    <Compile Include="Localization\Persian\RemainingDateTime.cs" />
+    <Compile Include="Localization\Persian\UnicodeExtensions.cs" />
+    <Compile Include="Localization\ResourceExtensions.cs" />
+    <Compile Include="Localization\ResourceService.cs" />
+    <Compile Include="Node\EnumerableExtensions.cs" />
+    <Compile Include="Node\NodeExtensions.cs" />
+    <Compile Include="Node\NodeManager.cs" />
+    <Compile Include="Node\NodeModel.cs" />
+    <Compile Include="Paging\IPagedList.cs" />
+    <Compile Include="Paging\PagedList.cs" />
+    <Compile Include="PaymentGateway\IZarinpalGatewayManager.cs" />
+    <Compile Include="PaymentGateway\ZarinpalGatewayManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\PropertyReflector.cs" />
+    <Compile Include="Security\IJwtManager.cs" />
+    <Compile Include="Security\JwtManager.cs" />
+    <Compile Include="Security\SecurityExtension.cs" />
+    <Compile Include="Session\ISessionManager.cs" />
+    <Compile Include="Session\Session.cs" />
+    <Compile Include="Session\SessionManager.cs" />
+    <Compile Include="Transaction\IRunAfterEachRequest.cs" />
+    <Compile Include="Transaction\IRunAtInit.cs" />
+    <Compile Include="Transaction\IRunAtStartUp.cs" />
+    <Compile Include="Transaction\IRunOnEachRequest.cs" />
+    <Compile Include="Transaction\IRunOnError.cs" />
+    <Compile Include="Video\Audio.cs" />
+    <Compile Include="Video\IVideoManager.cs" />
+    <Compile Include="Video\IVideoValidator.cs" />
+    <Compile Include="Video\Video.cs" />
+    <Compile Include="Video\VideoManager.cs" />
+    <Compile Include="Video\VideoMetaData.cs" />
+    <Compile Include="Video\VideoValidator.cs" />
+    <Compile Include="Video\VideoWatermarkPositionType.cs" />
+    <Compile Include="Video\VideoWatermarkType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Advertise.Core.Model\Advertise.Core.Model.csproj">
+      <Project>{0c321638-91a4-4298-8a24-c63146d20884}</Project>
+      <Name>Advertise.Core.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Core\Advertise.Core.csproj">
+      <Project>{b4666778-7fbb-4682-abe8-b90a72ba60c1}</Project>
+      <Name>Advertise.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Connected Services\ZarinpalServiceReference\Advertise.Service.Manager.ZarinpalServiceReference.GetUnverifiedTransactionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ZarinpalServiceReference\Advertise.Service.Manager.ZarinpalServiceReference.PaymentRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ZarinpalServiceReference\Advertise.Service.Manager.ZarinpalServiceReference.PaymentRequestWithExtraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ZarinpalServiceReference\Advertise.Service.Manager.ZarinpalServiceReference.PaymentVerificationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ZarinpalServiceReference\Advertise.Service.Manager.ZarinpalServiceReference.PaymentVerificationWithExtraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ZarinpalServiceReference\Advertise.Service.Manager.ZarinpalServiceReference.RefreshAuthorityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ZarinpalServiceReference\PaymentGatewayImplementationService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ZarinpalServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ZarinpalServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ZarinpalServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ZarinpalServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

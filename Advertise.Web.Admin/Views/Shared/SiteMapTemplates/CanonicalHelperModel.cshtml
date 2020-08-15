@@ -1,0 +1,6 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model CanonicalHelperModel
+@if (!string.IsNullOrEmpty(Model.CurrentNode?.CanonicalUrl))
+{
+    <link rel="canonical" href="@Model.CurrentNode.CanonicalUrl"/>
+}

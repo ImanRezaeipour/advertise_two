@@ -1,0 +1,9 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.PlanPayment.PlanPaymentViewModel
+<div>
+    @Model.PlanTitle
+</div>
+<div>
+    @Model.CreatedOn.CastToRegularDate()
+</div>

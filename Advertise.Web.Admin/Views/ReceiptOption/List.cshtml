@@ -1,0 +1,33 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@model Advertise.Core.Models.ReceiptOption.ReceiptOptionListViewModel
+@{
+    Layout = Model.IsMine ? MVC.Shared.Views.SiteLayout.Profile._ProfileLayout : MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Model.IsMine ? (Model.SearchRequest.ListType == ReceiptOptionListType.Buy ? "لیست محصولات خریداری شده من" : "لیست محصولات فروخته شده من") : "لیست کلیه محصولات فروخته شده";
+    ViewBag.PageName = Model.IsMine ? (Model.SearchRequest.ListType == ReceiptOptionListType.Buy ? "myReceiptOptionBuyList" : "myReceiptOptionSaleList") : "receiptOptionList";
+    ViewBag.HasSearchbar = true;
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+        @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+        @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize)
+        @SearchItem.GridView()
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true){<text>لیست محصولات خریداری شده</text>}else{<text>لیست محصولات خریداری شده</text>}</h1>
+    </div>
+
+    <div class="landing-grids-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @Html.Partial(MVC.ReceiptOption.Views._ListMore, Model.ReceiptOptions)
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+    </div>
+</div>

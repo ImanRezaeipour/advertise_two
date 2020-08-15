@@ -1,0 +1,40 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+<div class="input-form hide-none-imp" data-index="*">
+    <input type="hidden" name="SlideList[*].Index" value="*" />
+
+    <div class="vertical-dashed"></div>
+
+    <div class="msg-container">
+        <p class="msg-box regular round-corners-five"></p>
+    </div>
+    <div class="input-container fixed-height">
+        <label for="SlideList_*_.Title" class="rl-label">
+            <span>@Admin.Title</span>
+        </label>
+        <input type="text" id="SlideList_*_.Title" name="SlideList[*].Title" />
+    </div>
+
+    <div class="msg-container">
+        <p class="msg-box regular round-corners-five"></p>
+    </div>
+    <div class="input-container fixed-height">
+        <label for="SlideList_*_.ImageFileName" class="rl-label tooltipster" title="@Admin.ItChoosesImage">@Admin.UploadAdPhoto :</label>
+        @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+        <div id="SlideList_*_.ImageFileName" name="SlideList[*].ImageFileName" @*data-on-load="uploaderCompanySlide"*@ data-param="create"></div>
+    </div>
+
+    <div class="msg-container">
+        <p class="msg-box regular round-corners-five"></p>
+    </div>
+    <div class="input-container fixed-height">
+        <label for="SlideList_*_.ProductId" class="rl-label">محصولات</label>
+        <select id="SlideList_*_.ProductId" name="SlideList[*].ProductId">
+            <option selected disabled>-- @Admin.Choose --</option>
+                @foreach (var product in Model.ProductList)
+                {
+                    <option value="@product.Value" selected="@(product.Value)">@product.Text</option>
+                }
+            <option>-- هیچکدام --</option>
+        </select>
+    </div>
+</div>

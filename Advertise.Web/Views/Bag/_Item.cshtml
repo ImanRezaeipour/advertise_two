@@ -1,0 +1,58 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.Bag.BagViewModel
+<div class="purchase-item removable-bag-item">
+    <div class="purchase-item-date">
+        <p>@Model.CreatedOn</p>
+    </div>
+    <div class="purchase-item-details">
+        <div class="item-preview">
+            <figure class="product-preview-image small">
+                <img src="@FileConst.ImagesWebPath.PlusWord(Model.ProductImageFileName)" alt="product image">
+            </figure>
+            <a href="@Url.Action(MVC.Product.Detail(Model.ProductCode,Model.ProductTitle))">
+                <p class="text-header">@Model.ProductTitle</p>
+            </a>
+            <p class="description">@Html.Raw(Model.ProductDescription)</p>
+        </div>
+    </div>
+    <div class="purchase-item-info">
+        <a href="@Url.Action(MVC.Product.Search().AddRouteValues(new {c = Model.CategoryId}))">
+            <p class="category primary">@Model.CategoryTitle</p>
+        </a>
+        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.CastToSlug()))">
+            <p>
+                <span class="light">@Admin.Company.PlusWord(": ")</span>
+                <span>@Model.CompanyTitle</span>
+            </p>
+        </a>
+        <p>
+            <span class="light">@Admin.ProductCode.PlusWord(": ")</span>
+            <span>@Model.ProductCode</span>
+        </p>
+        <p>
+            <span class="light">@Admin.CompanyCode.PlusWord(": ")</span>
+            <span>@Model.CompanyAlias</span>
+        </p>
+    </div>
+    <div class="purchase-item-download">
+        <p class="price">@Model.ProductPrice.CastToRegularCurrency()</p>
+        <p class="price-toman">@Admin.Toman</p>
+    </div>
+    <div class="purchase-item-price">
+        <select id="count" name="count" value="@Model.ProductCount" data-on-change="ajaxBagChangeProductCount" data-param="@Model.ProductId" data-param-2="@Model.ProductPrice">
+            @for (var index = 1; index <= 10; index++)
+            {
+                <option value="@index" selected="@(Model.ProductCount == index)">@index</option>
+            }
+        </select>
+    </div>
+    <div class="purchase-item-recommend">
+        <p class="price total-product-price" data-val="@Model.TotalProductPrice">@Model.TotalProductPrice.CastToRegularCurrency()</p>
+        <p class="price-toman"> @Admin.Toman</p>
+    </div>
+    <div class="purchase-item-delete" data-on-click="ajaxBagProfileDelete" data-param="@Model.ProductId">
+        <i class="delete fa fa-times-circle"></i>
+    </div>
+</div>

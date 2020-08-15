@@ -1,0 +1,129 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.User.UserViewModel
+<div class="landing-items nov-item-height-131">
+    <div class="product-item squared-preview-image column landing-column">
+        <div class="nov-item-header">
+            <div class="share-section">
+                <input type="hidden" id="UserName" name="UserName" value="@Model.UserName" />
+                @if (User.IsInRole(PermissionConst.CanUserEdit))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(PermissionConst.CanUserEdit))
+                            {
+                                <li>
+                                    <a href="@Url.Action(MVC.User.Edit(Model.UserName))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (true)
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@Url.Action(MVC.User.DeleteAjax(Model.Id))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="action-section">
+                <div class="sharing-item-li">
+                    <i class="fa fa-share-alt-square"></i>
+                    <ul class="item-share-list">
+                        <li>
+                            <a href="@if (Model.IsSetUserName == true) {<text>@Url.Action(MVC.User.Detail(Model.UserName)).PlusWord("&text=").PlusWord(Model.UserName).BeforeWord("https://telegram.me/share/url?url=https://novinak.com")</text>}">
+                                <span>@Admin.Telegram</span>
+                                <i class="sharings fa fa-telegram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@if (Model.IsSetUserName== true) {<text>@Url.Action(MVC.User.Detail(Model.UserName)).BeforeWord("https://plus.google.com/share?url=https://novinak.com")</text>}">
+                                <span>@Admin.GPlus</span>
+                                <i class="sharings fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@if (Model.IsSetUserName== true) {<text>@Url.Action(MVC.User.Detail(Model.UserName)).BeforeWord("https://www.facebook.com/sharer/sharer.php?u=https://novinak.com")</text>}">
+                                <span>@Admin.Facebook2</span>
+                                <i class="sharings fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@if (Model.IsSetUserName== true) {<text>@Url.Action(MVC.User.Detail(Model.UserName)).BeforeWord("https://twitter.com/home?status=https://novinak.com")</text>}">
+                                <span>@Admin.Twitter2</span>
+                                <i class="sharings fa fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="rectangle-section">
+                <span>
+                    <span>@Model.Role</span>
+                </span>
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a @if (Model.AvatarFileName != null) { <text> href="@Url.Action(MVC.User.Detail(Model.UserName))" </text> }>
+                            <div class="item-preview-image">
+                                <img src="@if (Model.AvatarFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.AvatarFileName)</text>} else {<text>@FileConst.NoAvatarPth</text>}" alt="@Model.FullName">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="@Url.Action(MVC.User.Detail(Model.UserName))">
+                    <p class="novinak-title text-header">@Model.FullName</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a>
+                        <p>@Model.Email</p>
+                    </a>
+                </div>
+                <div class="middle-part">
+                    <p class="small-state"><i class="fa fa-id-card-o"></i> <span>@Admin.UserUserName.PlusWord(":")</span></p>
+                </div>
+                <div class="bottom-part">
+                    <p>
+                        <span>@Model.UserName</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="nov-item-footer">
+            <hr class="line-separator item-footer">
+            <div class="overview-section">
+                <div class="image-part">
+                    <figure class="user-avatar small">
+                        <a @if (Model.CompanyLogoFileName != null) { <text> href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias,Model.CompanyTitle.CastToSlug()))" </text> }>
+                            <div class="novinak-image">
+                                <img src="@if (Model.CompanyLogoFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.CompanyLogoFileName)</text>} else {<text>@FileConst.NoLogo</text>}" alt="@($"{Model.FullName} {Model.CompanyTitle}")">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+                <div class="caption-part">
+                    <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias)).AddSlug(Model.CompanyTitle)" class="tooltipster" title="@Model.CompanyTitle">
+                        <p class="text-header tiny">@Model.CompanyTitle</p>
+                    </a>
+                </div>
+            </div>
+        </div> 
+        <div class="clearboth"></div>
+    </div>
+</div>

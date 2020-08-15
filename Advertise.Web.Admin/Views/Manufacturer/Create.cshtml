@@ -1,0 +1,56 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Manufacturer.ManufacturerCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "ایجاد کاتالوگ";
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>ایجاد برند</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newManufacturer" action="@Url.Action(MVC.Manufacturer.Create())" method="post" data-on-load="validateManufacturer">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div id="adsLocationContainer" class="input-container fixed-height">
+                    <label for="Country" class="rl-label">
+                        <span>@Admin.Position</span>
+                    </label>
+                    <select name="Country" id="Country">
+                        <option selected disabled>-- @Admin.Choose --</option>
+                        @foreach (var type in Model.CountryList)
+                        {
+                            <option value="@type.Value">@type.Text</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Name" class="rl-label">
+                        <span>@Admin.Title</span>
+                    </label>
+                    <input type="text" id="Name" name="Name"/>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button type="submit" form="newManufacturer" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>
+

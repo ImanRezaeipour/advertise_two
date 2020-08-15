@@ -1,0 +1,307 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Auth = Advertise.Service.Services.Permissions.PermissionConst
+@model Advertise.Core.Models.Company.CompanyEditViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = Admin.Edit;
+}
+@section scripts {
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsVAy5ATsGkBA11NPQWSakpy0BiNuBPTc&callback=mapSet"></script>
+}
+<div class="@if (Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div class="headline buttons primary">
+        <h4>@Admin.CompanyEdit</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editCompany" method="Post" data-on-load="validateCompany">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+            <input type="hidden" id="Address_Id" name="Address.Id" value="@Model.Address.Id" />
+            <input type="hidden" id="AddressId" name="AddressId" value="@Model.AddressId" />
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsCompanyDomain</p>
+                </div>
+                <div class="input-container fixed-height">
+                    @if (Model.IsSetAlias != true)
+                    {
+                        <label for="Alias" class="rl-label">
+                            <span>* @Admin.DomainName</span>
+                            <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsCompanyDomain"></i>
+                        </label>
+                        <input type="text" id="Alias" name="Alias" value="@Model.Alias" placeholder="@Admin.DomainName" />
+                        <button id="checkAliasButton" type="button" class="button mid-short" data-on-click="ajaxCheckAlias">
+                            <span class="primary">چک کردن</span>
+                        </button>
+                    }
+                    else
+                    {
+                        <label for="Alias" class="rl-label center-rl-label">
+                            <span>@Admin.DomainName:</span>
+                            <a href="@Url.Action(MVC.Company.Detail(Model.Alias, Model.Title.CastToSlug()))">
+                                <span>@Model.Alias</span>
+                            </a>
+                        </label>
+                        <input type="hidden" Name="Alias" value="@Model.Alias" />
+                    }
+                </div>
+                
+            <div class="msg-container">
+                <p class="msg-box regular round-corners-five">@Admin.ItShowsCompanyName</p>
+            </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label">
+                        <span>* @Admin.Title</span>
+                    </label>
+                    <input type="text" id="Title" name="Title" value="@Model.Title" placeholder="@Admin.Title" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsCompanySlogan</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Slogan" class="rl-label">
+                        <span>@Admin.Slogan</span>
+                    </label>
+                    <input type="text" id="Slogan" name="Slogan" value="@Model.Slogan" placeholder="@Admin.ExampleSlogan" />
+                </div>
+                
+            <div class="msg-container">
+                <p class="msg-box regular round-corners-five">@Admin.ItShowsPhoneNumber</p>
+            </div>
+                <div class="input-container fixed-height">
+                    <label for="PhoneNumber" class="rl-label">
+                        <span>@Admin.Phone</span>
+                    </label>
+                    <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" placeholder="@Admin.ExamplePhoneNumber" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsMobileNumber</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="MobileNumber" class="rl-label">
+                        <span>@Admin.Mobile</span>
+                    </label>
+                    <input type="text" id="MobileNumber" name="MobileNumber" value="@Model.MobileNumber" placeholder="@Admin.ExampleMobileNumber" />
+                </div>
+                
+            <div class="msg-container">
+                <p class="msg-box regular round-corners-five">@Admin.ItShowsEmail</p>
+            </div>
+                <div class="input-container fixed-height">
+                    <label for="Email" class="rl-label">
+                        <span>@Admin.Email</span>
+                    </label>
+                    <input type="text" id="Email" name="Email" value="@Model.Email" placeholder="@Admin.ExampleEmail" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsCompanyWebsite</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="WebSite" class="rl-label">
+                        <span>@Admin.WebSite</span>
+                    </label>
+                    <input type="text" id="WebSite" name="WebSite" value="@Model.WebSite" placeholder="@Admin.ExampleWebsite" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsEmployeeNumber</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="EmployeeRange" class="rl-label">
+                        <span>@Admin.EmployeeCount</span>
+                    </label>
+                    <select id="EmployeeRange" name="EmployeeRange">
+                        @foreach (var employeeRange in Model.EmployeeRangeList)
+            {
+                            <option value="@employeeRange.Value" @if (employeeRange.Value == Model.EmployeeRange.ToInt32().ToString()) { <text> selected</text>}>@employeeRange.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">شماره شتاب</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="ShetabNumber" class="rl-label">
+                        <span>شماره شتاب</span>
+                    </label>
+                    <input type="text" id="ShetabNumber" name="ShetabNumber" value="@Model.ShetabNumber" placeholder="شماره شتاب" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">شماره حساب شبا</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="ShebaNumber" class="rl-label">
+                        <span>شماره حساب شبا</span>
+                    </label>
+                    <input type="text" id="ShebaNumber" name="ShebaNumber" value="@Model.ShebaNumber" placeholder="شماره حساب شبا" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">روش تسویه حساب</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Clearing" class="rl-label">
+                        <span>روش تسویه حساب</span>
+                    </label>
+                    <select id="Clearing" name="Clearing">
+                        <option value="" selected disabled>-- @Admin.Choose --</option>
+                        @foreach (var item in Model.ClearingList)
+            {
+                            <option value="@item.Value" selected="@(item.Value.ToInt32() == Model.Clearing.ToInt32())">@item.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.FieldOfActivity</p>
+                </div>
+                <div class="input-container tree-chart-company-edit">
+                    <label for="CategoryId" class="rl-label">
+                        <span>@Admin.FieldOfActivity:</span>
+                    </label>
+                    <input type="hidden" id="CategoryId" name="CategoryId" value="@Model.CategoryId" />
+                    @if (Model.CategoryId == Guid.Empty || Model.CategoryRoot)
+                    {
+                        <div id="CategoryTree" style="direction: rtl" class="tree" data-on-load="treeCategoryCompany"></div>
+                    }
+                    else
+                    {
+                        <label for="CategoryId" class="rl-label center-rl-label">
+                            <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias))">
+                                <span>@Model.CategoryTitle</span>
+                            </a>
+                        </label>
+                    }
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItDescribes</p>
+                </div>
+                <div class="input-container">
+                    <label for="Description" class="rl-label">
+                        <span>@Admin.Description</span>
+                    </label>
+                    <textarea rows="14" id="Description" name="Description" data-on-load="editorCompanyDescription" class="info-address-textarea" placeholder="@Admin.Description">@Model.Description</textarea>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsLogo</p>
+                </div>
+                <div class="input-container">
+                    <label for="files" class="rl-label">
+                        <span>@Admin.UploadLogo</span>
+                    </label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderCompany" data-param="edit"></div>
+                    <div id="PreviewContainer"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsCover</p>
+                </div>
+                <div class="input-container" id="UploadCompanyCoverPhoto">
+                    <label for="files2" class="rl-label">
+                        <span>@Admin.UploadCover</span>
+                    </label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files2" id="files2" data-on-load="uploaderCompanyCover" data-param="edit"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.LocationOnTheMap</p>
+                </div>
+                <div class="input-container" id="SetCompanyOnMap">
+                    <label class="rl-label">
+                        <span>@Admin.LocationOnTheMap</span>
+                    </label>
+                    <input type="hidden" id="Address_Longitude" name="Address.Longitude" value="@Model.Address.Longitude.ZeroIfNull()" />
+                    <input type="hidden" id="Address_Latitude" name="Address.Latitude" value="@Model.Address.Latitude.ZeroIfNull()" />
+                    <div id="setMap" class="map-holder"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsProvince</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Address_City_ParentId" class="rl-label">
+                        <span>@Admin.Province </span>
+                    </label>
+                    <input type="hidden" name="ProvinceId" id="ProvinceId" value="@Model.Address.City.ParentId" />
+                    <select id="Address_City_ParentId" name="Address.City.ParentId" data-on-change="ajaxSelectProvince">
+                        <option value="" selected disabled>-- @Admin.Choose --</option>
+                        @foreach (var province in Model.AddressProvince)
+                        {
+                            <option value="@province.Value" @if (province.Value == Model.Address.City.ParentId.ToString()) { <text> selected</text>}>@province.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsCity</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Address_City_Id" class="rl-label">
+                        <span>@Admin.City</span>
+                    </label>
+                    <input type="hidden" name="CityId" id="CityId" value="@Model.Address.City.Id" />
+                    <select id="Address_City_Id" name="Address.City.Id" data-on-load="ajaxSelectCity" data-on-change="ajaxChangeLocation">
+                        <option value="">-- @Admin.Choose --</option>
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsAddress</p>
+                </div>
+                <div class="input-container address-area">
+                    <label for="Address_Extra" class="rl-label">
+                        <span>@Admin.Address </span>
+                    </label>
+                    <textarea rows="2" id="Address_Extra" name="Address.Extra" class="info-address-textarea" value="" placeholder="@Admin.Address">@Model.Address.Extra</textarea>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five">@Admin.ItShowsPostalCode</p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Address_PostalCode" class="rl-label">
+                        <span>@Admin.PostalCode </span>
+                    </label>
+                    <input type="text" id="Address_PostalCode" name="Address.PostalCode" placeholder="@Admin.ExamplePostalCode" value="@Model.Address.PostalCode" />
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            @if (User.IsInRole(Auth.CanCompanyEditApprove) && Model.IsMine != true)
+            {
+                <button form="editCompany" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled onclick="javascript: form.action = '@Url.Action(MVC.Company.EditApprove())';">
+                    <i class="fa fa-check-circle"></i>
+                    <span>@Admin.OkAndClose</span>
+                </button>
+                <button form="editCompany" type="submit" class="form-button right-form-btn cancel-button round-corners-five disabled-btn-link" disabled onclick="javascript: form.action = '@Url.Action(MVC.Company.EditReject())';">
+                    <i class="fa fa-times-circle"></i>
+                    <span>@Admin.CancelAndClose</span>
+                </button>
+            }
+            else if (User.IsInRole(Auth.CanCompanyMyEdit) && Model.IsMine)
+            {
+                <button form="editCompany" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" onclick="javascript: form.action = '@if(Model.IsMine != true) {<text>@Url.Action(MVC.Company.Edit())</text>} else {<text>@Url.Action(MVC.Company.MyEdit())</text>}';">
+                    <i class="fa fa-save"></i>
+                    <span>@Admin.Save</span>
+                </button>
+            }
+        </div>
+    </div>
+</div>

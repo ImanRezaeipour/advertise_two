@@ -1,0 +1,46 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Role.RoleCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.CreateRole;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.CreateRole</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newRole" action="@Url.Action(MVC.Role.Create())" method="Post" data-on-load="validateRole">
+            @Html.AntiForgeryToken()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Name" class="rl-label">@Admin.Title</label>
+                    <input type="text" id="Name" name="Name" placeholder="@Admin.Title" class="tooltipster" title="@Admin.ItShowsRoleTitle"/>
+                </div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="permissionTree" class="rl-label  tooltipster" title="@Admin.ItShowsRoleAccess">@Admin.Accesss</label>
+                    <div id="permissionTree" style="direction: rtl" class="tree" data-on-load="treeRole"></div>
+                    <input type="hidden" id="permissions" name="permissions" value=""/>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="newRole" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled" >
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model IEnumerable<Advertise.Core.Models.CompanyConversation.CompanyConversationViewModel>
+<div class="headline simple primary">
+    <h4>
+        <i class="fa fa-comments"></i>
+        <span>@Admin.PrivateConversation</span>
+    </h4>
+</div>
+<p>
+    @Html.Partial(MVC.CompanyConversation.Views._ListMore, Model)
+</p>
+<div class="clearfix"></div>
+@if (User.Identity.IsAuthenticated == false)
+{
+    <h3>
+        <span>@Admin.ForLeaveAComment</span>
+        <a href="@Url.Action(MVC.Account.Login())">@Admin.Enter</a>
+        <span>@Admin.FirstShavid</span>
+    </h3>
+}
+else
+{
+    @Html.Partial(MVC.CompanyConversation.Views._Create)
+}
+<br>
+<br>

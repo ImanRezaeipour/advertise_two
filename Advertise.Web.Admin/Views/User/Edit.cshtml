@@ -1,0 +1,250 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.User.UserEditViewModel
+@{
+    Layout = Model.IsMine != true ? MVC.Shared.Views.SiteLayout.Panel._PanelLayout : MVC.Shared.Views.SiteLayout.Profile._ProfileLayout;
+    ViewBag.Title = Admin.UserProfileEdit;
+}
+@section scripts {
+    <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDsVAy5ATsGkBA11NPQWSakpy0BiNuBPTc&callback=mapSet'></script>
+}
+<div class="@if(Model.IsMine != true) {<text>dashboard-content</text>} else {<text>profile-content</text>}">
+    <div class="headline buttons primary">
+        <h4>@Admin.EditUsers</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="editUser" action="@if (Model.IsMine != true) {<text>@Url.Action(MVC.User.Edit())</text>} else {<text>@Url.Action(MVC.User.MyEdit())</text>}" method="Post" data-on-load="validateUser">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input type="hidden" id="Address_Id" name="Address.Id" value="@Model.Address.Id" />
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+            <input type="hidden" id="OrginalUserName" name="OrginalUserName" value="@Model.UserName" />
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    @if (Model.IsSetUserName != true)
+                    {
+                        <label for="UserName" class="rl-label">
+                            <span>* @Admin.UserUserName</span>
+                            <i class="fa fa-question-circle tooltipster" title="@Admin.ItShowsCompanyDomain"></i>
+                        </label>
+                        <input type="text" id="UserName" name="UserName" value="@Model.UserName" placeholder="@Admin.UserUserName" data-val="true" />
+                    }
+                    else if (Model.IsSetUserName)
+                    {
+                        <label for="UserName" class="rl-label center-rl-label">
+                            <span>@Admin.UserUserName:</span>
+                            <a href="@Url.Action(MVC.User.Detail(Model.UserName))">
+                                <span>@Model.UserName</span>
+                            </a>
+                        </label>
+                        <input type="hidden" Name="UserName" value="@Model.UserName" />
+                    }
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="FirstName" class="rl-label">@Admin.FirstName</label>
+                    <input type="text" id="FirstName" name="FirstName" value="@Model.FirstName" @if (Model.IsMine) { <text> data-val="true" data-val-required="@Admin.RequiredFirstName" </text>   } placeholder="@Admin.FirstName" class="tooltipster" title="@Admin.ItShowsFirstName" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="LastName" class="rl-label">@Admin.LastName</label>
+                    <input type="text" id="LastName" name="LastName" value="@Model.LastName" placeholder="@Admin.LastName" class="tooltipster" title="@Admin.ItShowsLastName" @if (Model.IsMine) { <text> data-val="true" data-val-required="@Admin.RequiredLastName" </text>   } />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="NationalCode" class="rl-label">@Admin.NationalCode</label>
+                    <input type="text" id="NationalCode" name="NationalCode" value="@Model.NationalCode" placeholder="@Admin.ExampleNationalCode" class="tooltipster" title="@Admin.ItShowsNationalCode" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Gender" class="rl-label">@Admin.Gender :</label>
+                    <select id="Gender" name="Gender">
+                        @foreach (var type in Model.GenderList)
+                        {
+                            <option value="@type.Value" @if (Model.Gender.ToString() == type.Value) { <text> selected</text>  }>@type.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="HomeNumber" class="rl-label">@Admin.Phone</label>
+                    <input type="text" id="HomeNumber" name="HomeNumber" value="@Model.HomeNumber" placeholder="@Admin.ExamplePhoneNumber" class="tooltipster" title="@Admin.ItShowsPhoneNumber" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="PhoneNumber" class="rl-label">@Admin.Mobile</label>
+                    <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" placeholder="@Admin.ExampleMobileNumber" class="tooltipster" title="@Admin.ItShowsMobileNumber" />
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    @*<input type="hidden" id="AvatarFileName" name="AvatarFileName" value="@Model.AvatarFileName" />*@
+                    <label for="files" class="rl-label tooltipster" title="@Admin.ItShowsPreviewImage">@Admin.UploadImage</label>
+                    @Html.Partial(MVC.Shared.Views.FineUploaderTemplates._FineUploaderTemplate)
+                    <div name="files" id="files" data-on-load="uploaderUser" data-param="edit"></div>
+                </div>
+
+                <div class="clearboth"></div>
+
+                <div class="input-container fixed-height">
+                    <input type="hidden" id="Address_Longitude" name="Address.Longitude" value="@Model.Address.Longitude.ZeroIfNull()" />
+                    <input type="hidden" id="Address_Latitude" name="Address.Latitude" value="@Model.Address.Latitude.ZeroIfNull()" />
+                    <div id="setMap" class="map-holder"></div>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="ProvinceId" class="rl-label tooltipster" title="@Admin.ItShowsProvince">@Admin.Province</label>
+                    <input type="hidden" name="ProvinceId" id="ProvinceId" value="@Model.Address.City.ParentId" />
+                    <select id="Address_City_ParentId" name="Address.City.ParentId" data-on-change="ajaxSelectProvince">
+                        <option selected disabled>-- @Admin.Choose --</option>
+                        @foreach (var province in Model.AddressProvince)
+                        {
+                            <option value="@province.Value" @if (province.Value == Model.Address.City.ParentId.ToString()) { <text> selected</text>}>@province.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="CityId" class="rl-label tooltipster" title="@Admin.ItShowsCity">@Admin.City</label>
+                    <input type="hidden" name="CityId" id="CityId" value="@Model.Address.City.Id" />
+                    <select id="Address_City_Id" name="Address.City.Id" data-on-load="ajaxSelectCity">
+                        <option>-- @Admin.Choose --</option>
+                    </select>
+                    <span class="field-validation-error" data-valmsg-for="CityId" data-valmsg-replace="true"></span>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container address-area">
+                    <label for="Address_Extra" class="rl-label">@Admin.Address</label>
+                    <textarea rows="2" id="Address_Extra" name="Address.Extra" class="info-address-textarea tooltipster" value="@Model.Address.Extra" title="@Admin.ItShowsAddress" placeholder="@Admin.Address">
+                        @Model.Address.Extra
+                    </textarea>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Address_PostalCode" class="rl-label">@Admin.PostalCode</label>
+                    <input type="text" id="Address_PostalCode" name="Address.PostalCode" placeholder="@Admin.ExamplePostalCode" value="@Model.Address.PostalCode" class="tooltipster" title="@Admin.ItShowsPostalCode" />
+                </div>
+
+                <div class="clearboth"></div>
+
+                @if (Model.IsMine != true)
+                {
+                    <br>
+                    <br>
+                    <div class="msg-container">
+                        <div class="msg-box regular round-corners-five">
+                            <p>
+                                <i class="fa fa-quote-right"></i>
+                                <span></span>
+                                <i class="fa fa-quote-left"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-container fixed-height">
+                        <label for="BannedReason" class="rl-label">@Admin.BannedReason</label>
+                        <input type="text" id="BannedReason" value="@Model.BannedReason" name="BannedReason" placeholder="@Admin.BannedReason" />
+                    </div>
+
+                    <div class="msg-container">
+                        <div class="msg-box regular round-corners-five">
+                            <p>
+                                <i class="fa fa-quote-right"></i>
+                                <span></span>
+                                <i class="fa fa-quote-left"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-container fixed-height">
+                        <label for="IsSystemAccount" class="rl-label">@Admin.SystemManager</label>
+                        <input type="checkbox" id="IsSystemAccount" name="IsSystemAccount" value="true" />
+                        <input type="hidden" name="IsSystemAccount" value="false" />
+                    </div>
+
+                    <div class="msg-container">
+                        <div class="msg-box regular round-corners-five">
+                            <p>
+                                <i class="fa fa-quote-right"></i>
+                                <span></span>
+                                <i class="fa fa-quote-left"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-container fixed-height">
+                        <label for="IsBan" class="rl-label">@Admin.Ban</label>
+                        <input type="checkbox" id="IsBan" name="IsBan" value="true" checked="@Model.IsBan" />
+                        <input type="hidden" name="IsBan" value="false" />
+                    </div>
+
+                    <div class="msg-container">
+                        <div class="msg-box regular round-corners-five">
+                            <p>
+                                <i class="fa fa-quote-right"></i>
+                                <span></span>
+                                <i class="fa fa-quote-left"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-container fixed-height">
+                        <label for="RoleId" class="rl-label">@Admin.UserRole</label>
+                        <select id="RoleId" name="RoleId">
+                            <option disabled="disabled">@Admin.UserRole</option>
+                            @foreach (var role in Model.RoleList)
+                            {
+                                <option value="@role.Value" @if (Model.RoleId.ToString() == role.Value) { <text> selected</text>  }>@role.Text</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="input-container"></div>
+
+                    <div class="clearboth"></div>
+                }
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            <button form="editUser" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

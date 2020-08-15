@@ -1,0 +1,69 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@model Advertise.Core.Models.Home.PanelBoardViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.DashboardPanel;
+}
+<div class="dashboard-content">
+    <div class="headline simple primary">
+        <h4>@Admin.TotalStatistics</h4>
+    </div>
+    <div class="graph-stats-list">
+        <a href="@Url.Action(MVC.Company.List())">
+            <div class="graph-stats-list-item green bars">
+                <h2>@Model.AllCompanyCount</h2>
+                <p class="text-header">@Admin.TotalCompaniesNumber</p>
+                <br/>
+                <br/>
+                <h2>@Model.ApprovedCompanyCount</h2>
+                <p class="text-header">تعداد فروشگاه های تایید شده</p>
+            </div>
+        </a>
+        <a href="@Url.Action(MVC.Product.List())">
+            <div class="graph-stats-list-item violet line">
+                <h2>@Model.AllProductCount</h2>
+                <p class="text-header">@Admin.TotalProductsNumber</p>
+                <br/>
+                <br/>
+                <h2>@Model.ApprovedProductCount</h2>
+                <p class="text-header">تعداد محصولات تایید شده</p>
+            </div>
+        </a>
+        <a href="@Url.Action(MVC.Category.List())">
+            <div class="graph-stats-list-item blue step">
+                <h2>@Model.AllCategoryCount</h2>
+                <p class="text-header">@Admin.TotalCategoriesNumber</p>
+                <p></p>
+            </div>
+        </a>
+        <a href="@Url.Action(MVC.User.List())">
+            <div class="graph-stats-list-item red curve">
+                <h2>@Model.AllUserCount</h2>
+                <p class="text-header">@Admin.TotalUsersNumber</p>
+                <p></p>
+            </div>
+        </a>
+        <a href="@Url.Action(MVC.Statistic.List())">
+            <div class="graph-stats-list-item green bars">
+                <h2>@Model.AllVisitCount</h2>
+                <p class="text-header">@Admin.TotalVisitorsNumber</p>
+                <p></p>
+            </div>
+        </a>
+        <a href="#">
+            <div class="graph-stats-list-item violet bars">
+                <h2>@Model.AllUserOnlineCount</h2>
+                <p class="text-header">تعداد کاربران آنلاین</p>
+                <p></p>
+            </div>
+        </a>
+        <a href="#">
+            <div class="graph-stats-list-item blue bars">
+                <h2>@Model.ServerTime.CastToShortDateTime()</h2>
+                <p class="text-header">ساعت و زمان سرور</p>
+                <p></p>
+            </div>
+        </a>
+    </div>
+</div>

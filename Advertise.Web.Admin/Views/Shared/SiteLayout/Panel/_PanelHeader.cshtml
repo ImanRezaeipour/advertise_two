@@ -1,0 +1,23 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.User.UserHeaderViewModel
+<div class="side-menu-header">
+    <div class="user-quickview">
+        <ul class="user-board-option">
+            <li>
+                <a href="@Url.Action(MVC.Profile.Dashboard())" class="outer-avatar-ring tooltipster" title="@Admin.ProfilePage">
+                    <div class="inner-avatar-ring">
+                        <figure class="user-header-avatar">
+                            <div class="header-avatar-top" alt="user avatar image" data-param-src="@FileConst.ImagesWebPath" data-param-none="@FileConst.NoAvatarPth"></div>
+                        </figure>
+                    </div>
+                </a>
+            </li>
+            <li class="quick-name">
+                <a href="@Url.Action(MVC.Profile.Dashboard())">
+                    <p class="header-quick-name">@Model.DisplayName</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

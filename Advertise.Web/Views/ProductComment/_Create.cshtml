@@ -1,0 +1,10 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@{
+    Layout = null;
+}
+<h3>@Admin.AddComment...</h3>
+<div class="comment-wrap comment-reply">
+    <textarea id="commentBody" name="commentBody" placeholder="@Admin.CommentText" class="tooltipster" title="@Admin.ItShowsCommentText" data-val="true" data-val-required="@Admin.RequiredExplain"></textarea>
+    <span class="field-validation-error" data-valmsg-for="commentBody" data-valmsg-replace="true"></span>
+    <button type="button" id="btnSendComment" class="button primary" data-on-click="ajaxSendProductComment">@Admin.RegisterComment</button>
+</div>

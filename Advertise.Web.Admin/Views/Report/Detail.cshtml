@@ -1,0 +1,35 @@
+﻿    @using Stimulsoft.Report.Mvc
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "نمایش گزارش";
+}
+@Html.Stimulsoft().StiMvcViewer("ReportDetail", new StiMvcViewerOptions
+{
+    Actions =
+    {
+        GetReportSnapshot = "DetailReport",
+        ViewerEvent = "DetailViewerEvent",
+        ExportReport = "DetailExportReport",
+        PrintReport = "DetailPrintReport",
+        Interaction = "DetailInteraction",
+        DesignReport = "",
+        EmailReport = ""
+    },
+    Appearance =
+    {
+        RightToLeft = true,
+        ScrollbarsMode = true,
+        PageAlignment = StiContentAlignment.Center,
+    },
+    Server =
+    {
+        GlobalReportCache = false,
+    },
+    Localization = "~/Files/Localization/fa.xml",
+    Theme = StiTheme.Default,
+    Toolbar = new StiMvcViewerOptions.ToolbarOptions
+    {
+        ShowAboutButton = false,
+    },
+    Height = 700
+})

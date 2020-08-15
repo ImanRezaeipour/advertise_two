@@ -1,0 +1,123 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Types
+@using Advertise.Core.Helpers
+@using EnumHelper = Advertise.Core.Helpers.EnumHelper
+@model Advertise.Core.Models.Product.ProductEditCatalogViewModel
+@{
+    Layout = MVC.Shared.Views._ProfileLayout;
+    ViewBag.Title = "بروزرسانی محصول";
+}
+@section scripts{
+    <script>
+        var categoryListJson = @Html.Raw(Model.CategoryListJson);
+        var catalogListJson = @Html.Raw(Model.CatalogListJson);
+    </script>
+}
+<div class="profile-content">
+    <div class="headline buttons primary">
+        <h4>بروزرسانی محصول</h4>
+    </div>
+    <div class="form-box-item product-catalog-form">
+        <form id="editProductEditCatalog" action="@Url.Action(MVC.Product.EditCatalog())" method="post" data-on-load="validateProductEditCatalog">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <div class="catalogContainer">
+                <div class="catalogItem round-corners-five" data-index="0">
+                    <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                    <div class="input-container nov-seven-col nov-col-1">
+                        <label for="CategoryId" class="rl-label">
+                            <span>@Admin.Category2</span>
+                        </label>
+                        <select id="CategoryId" name="CategoryId" data-on-load="dropdownCategoryList" value="@Model.CategoryId" disabled></select>
+                    </div>
+
+                    <div class="input-container nov-seven-col nov-col-2">
+                        <label for="CatalogId" class="rl-label">
+                            <span>کالا</span>
+                        </label>
+                        @if (Model.CatalogId == null)
+                        {
+                            <input type="text" value="محصول" disabled />
+                        }
+                        else
+                        {
+                            <select id="CatalogId" name="CatalogId" data-on-load="dropdownCatalogList" value="@Model.CatalogId" disabled></select>
+                        }
+                    </div>
+                    <div class="input-container nov-seven-col nov-col-3">
+                        <label for="Color" class="rl-label">
+                            <span>@Admin.Color</span>
+                        </label>
+                        <select id="Color" name="Color" data-on-load="dropdownSimple">
+                            @foreach (var color in Model.ColorList)
+                            {
+                                <option value="@color.Value" @if (color.Value == Model.Color.ToInt32().ToString()) { <text> selected</text>}>@color.Text (@(EnumHelper.GetText<ColorType>(color.Value.ToInt32())))</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="input-container nov-seven-col nov-col-4">
+                        <label for="GuaranteeId" class="rl-label">
+                            <span>@Admin.Guarantee</span>
+                        </label>
+                        <select id="GuaranteeId" name="GuaranteeId" data-on-load="dropdownSimple">
+                            @foreach (var guarantee in Model.GuaranteeList)
+                            {
+                                <option value="@guarantee.Value" @if (guarantee.Value == Model.GuaranteeId.ToString()) { <text> selected</text>}>@guarantee.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="input-container nov-seven-col nov-col-5">
+                        <label for="Price" class="rl-label">
+                            <span>@Admin.Price</span>
+                        </label>
+                        <input type="text" id="Price" name="Price" value="@Model.Price" />
+                    </div>
+                    <div class="input-container nov-seven-col nov-col-6">
+                        <label for="AvailableCount" class="rl-label">
+                            <span>@Admin.Available</span>
+                        </label>
+                        <input type="text" id="AvailableCount" name="AvailableCount" value="@Model.AvailableCount" />
+                    </div>
+                    <div class="input-container nov-seven-col nov-col-7">
+                        <label for="IsSecondHand" class="rl-label">
+                            <span>@Admin.State</span>
+                        </label>
+                        <select id="IsSecondHand" name="IsSecondHand" value="@Model.IsSecondHand.ToInt32()" data-on-load="dropdownSimple" data-on-change="toggleCatalogSecondHand">
+                            <option value="0">نو</option>
+                            <option value="1">کار کرده</option>
+                        </select>
+                    </div>
+                    @if (Model.IsSecondHand == true)
+                    {
+                        <div class="catalogExtra">
+                            <div class="input-container">
+                                <label for="SecondHandCode" class="rl-label">
+                                    <span>@Admin.Code</span>
+                                </label>
+                                <input type="text" id="SecondHandCode" name="SecondHandCode" value="@Model.SecondHandCode" />
+                            </div>
+
+                            <div class="input-container">
+                                <label for="Description" class="rl-label">
+                                    <span>@Admin.Description</span>
+                                </label>
+                                <textarea type="text" id="Description" name="Description">@Model.Description</textarea>
+                            </div>
+                        </div>
+                    }
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+            <div class="catalogItemExtra">
+                @Html.Partial(MVC.Product.Views._CatalogItemExtra)
+            </div>
+            <div class="form-button-container">
+                <button type="submit" form="editProductEditCatalog" class="form-button ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                    <i class="fa fa-check-circle"></i>
+                    <span>ویرایش و ذخیره</span>
+                </button>
+            </div>
+            <div class="input-container"></div>
+        </form>
+    </div>
+</div>

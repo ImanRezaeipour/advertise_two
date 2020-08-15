@@ -1,0 +1,68 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Advertise.Service.Services.Categories
+@model Advertise.Core.Models.Home.MainMenuViewModel
+<div id="mobile-menu" class="side-menu left closed">
+    <svg class="svg-plus">
+        <use xlink:href="#svg-plus"></use>
+    </svg>
+    <div class="side-menu-header">
+        <figure class="logo small smaller">
+            <img src="@FileConst.LogoSmallPth" alt="logo">
+        </figure>
+    </div>
+    <p class="side-menu-title">@Admin.MainLinks</p>
+<ul class="dropdown dark hover-effect interactive">
+    <li class="dropdown-item">
+        <a href="@Url.Action(MVC.Page.About())"><i class="fa fa-info-circle"></i> @Admin.AboutUs</a>
+    </li>
+    <li class="dropdown-item">
+        <a href="@Url.Action(MVC.Page.Costs())"><i class="fa fa-user-circle-o"></i> @Admin.GetAdminPanel</a>
+    </li>
+    <li class="dropdown-item">
+        <a href="@Url.Action(MVC.Page.Policy())"><i class="fa fa-legal fa-flip-horizontal"></i> @Admin.RulesAndRegulations</a>
+    </li>
+    <li class="dropdown-item">
+        <a href="@Url.Action(MVC.Page.ContactUs())"><i class="fa fa-phone fa-flip-horizontal"></i> @Admin.ContactUs</a>
+    </li>
+    <li class="mobile-menus-deactive">
+        <i class="fa fa-circle"></i>
+        <span>@Admin.Categories</span>
+    </li>
+    @foreach (var categoryL1 in Model.Categories.GetSubLevelOneByAlias("Category-All"))
+    {
+    <li class="dropdown-item @if (categoryL1.HasChild == true){<text>interactive</text>}">
+        <a href="@if (categoryL1.HasChild == true) {<text>#</text>} else {<text>@Url.Action(MVC.Category.Detail(categoryL1.Alias)).AddSlug(categoryL1.MetaTitle)</text>}">
+            @categoryL1.Title
+            @if (categoryL1.HasChild == true)
+            {
+                <svg class="svg-arrow">
+                    <use xlink:href="#svg-arrow"></use>
+                </svg>
+            }
+        </a>
+        @if (categoryL1.HasChild == true)
+        {
+            <ul class="inner-dropdown">
+                @foreach (var categoryL2 in Model.Categories.GetSubLevelOneByAlias(categoryL1.Alias))
+                {
+                    <li class="inner-dropdown-item dropdown-title">
+                        <a href="@Url.Action(MVC.Category.Detail(categoryL2.Alias)).AddSlug(categoryL2.MetaTitle)">@categoryL2.Title</a>
+                    </li>
+                    if (categoryL2.HasChild == true)
+                    {
+                        foreach (var categoryL3 in Model.Categories.GetSubLevelOneByAlias(categoryL2.Alias))
+                        {
+                            <li class="inner-dropdown-item">
+                                <a href="@Url.Action(MVC.Category.Detail(categoryL3.Alias)).AddSlug(categoryL3.MetaTitle)">@categoryL3.Title</a>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        }
+    </li>
+    }
+</ul>
+</div>

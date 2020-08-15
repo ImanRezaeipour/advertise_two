@@ -1,0 +1,17 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Admin.AccessDenied;
+}
+<div class="mp-wrapper">
+    <div class="mp-container">
+        <h1 class="mp-header mp-err">
+            <i class="fa fa-exclamation-triangle"></i>
+            <span class="mp-err">@Admin.ErrorMethodNotAllowed</span>
+        </h1>
+        <h2 class="mp-paragraph">
+            <i class="fa fa-exclamation-circle mp-icon"></i>
+            <span>@Admin.ErrorMethodNotAllowedReason</span>
+        </h2>
+    </div>
+</div>

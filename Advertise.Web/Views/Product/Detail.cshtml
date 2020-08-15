@@ -1,0 +1,553 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Core.Types
+@using Advertise.Service.Managers.File
+@model Advertise.Core.Models.Product.ProductDetailViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Model.Title;
+    ViewBag.Keywords = Model.MetaKeywords != null ? $"{Model.MetaKeywords},{Model.CategoryOption.Products}" : $"{Model.CategoryOption.Products},{Model.Title},{Admin.OnlineShopping},{Model.CompanyTitle},{Model.CategoryTitle},{Admin.Novinak}";
+    ViewBag.Description = Model.MetaDescription ?? $"{Admin.Novinak} {Admin.OnlineShopping} {Model.CategoryTitle} {Model.CategoryOption.Products} {Model.CompanyTitle} {Model.Title}";
+    if (Model.ImageFileName != null)
+    {
+        ViewBag.Thumbnail = Model.IsCatalog != true ? FileConst.ImagesWebPath.PlusWord(Model.ImageFileName) : FileConst.ImagesCatalogWebPath.PlusWord(Model.ImageFileName);
+    }
+    else if (Model.Images.Any())
+    {
+        ViewBag.Thumbnail = Model.IsCatalog != true ? FileConst.ImagesWebPath.PlusWord(Model.Images.First().FileName) : FileConst.ImagesCatalogWebPath.PlusWord(Model.Images.First().FileName);
+    }
+}
+@section og {
+    <meta property="og:image" content="@ViewBag.Thumbnail">
+}
+@section sitemap {
+    <div class="site-map">
+        <div id="SiteMap">
+            @Html.Action(MVC.Category.BreadCrumb(Model.CategoryId, Model.Title, true))
+        </div>
+    </div>
+}
+<input type="hidden" name="Id" id="Id" value="@Model.Id"/>
+<div class="section-wrap">
+    <div class="section">
+        <div class="top-content">
+            <div class="top-right-content">
+                <div class="share-icons">
+                    <div class="share-links-wrapper">
+                        <p class="text-header small">@Admin.Share:</p>
+                        <ul class="share-links hoverable">
+                            <li><a href="https://tg.me/share?url=http://www.novinak.com/company/detail/@Model.CompanyId" class="tlg" target="_blank"><i class="fa fa-send"></i></a></li>
+                            <li><a href="https://plus.google.com/share?url=http://www.novinak.com/company/detail/@Model.CompanyId" class="gplus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="https://facebook.com/share?url=http://www.novinak.com/company/detail/@Model.CompanyId" class="fb" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/share?url=http://www.novinak.com/company/detail/@Model.CompanyId" class="twt" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-rate-wrapper">
+                    <hr class="line-separator-spec">
+                    <hr class="line-separator-spec-second">
+                    <div class="rating-outer-circle">
+                        <input id="AverageRate" type="hidden" value="@Model.RateNumber"/>
+                        <span id="AverageRateText" class="rate-number">@Model.RateNumber.ToString("0.0").Replace("/", ".")</span>
+                        <div class="rating-stars-wrapper left-stars small-stars">
+                            <ul class="rating-star-ul">
+                                <li class="rating-star-li">
+                                    <i class="star-first fa @if (Model.RateNumber > 0.5.ToDecimal()) {<text>fa-star</text>} else if (Model.RateNumber > 0) {<text>fa-star-half-o</text>} else {<text>fa-star-o</text>}"></i>
+                                    <ul class="rating-star-ul">
+                                        <li class="rating-star-li">
+                                            <i class="star-second fa @if (Model.RateNumber > 1.5.ToDecimal()) {<text>fa-star</text>} else if (Model.RateNumber > 1) {<text>fa-star-half-o</text>} else {<text>fa-star-o</text>}"></i>
+                                            <ul class="rating-star-ul">
+                                                <li class="rating-star-li">
+                                                    <i class="star-third fa @if (Model.RateNumber > 2.5.ToDecimal()) {<text>fa-star</text>} else if (Model.RateNumber > 2) {<text>fa-star-half-o</text>} else {<text>fa-star-o</text>}"></i>
+                                                    <ul class="rating-star-ul">
+                                                        <li class="rating-star-li">
+                                                            <i class="star-fourth fa @if (Model.RateNumber > 3.5.ToDecimal()) {<text>fa-star</text>} else if (Model.RateNumber > 3) {<text>fa-star-half-o</text>} else {<text>fa-star-o</text>}"></i>
+                                                            <ul class="rating-star-ul">
+                                                                <li class="rating-star-li">
+                                                                    <i class="star-fifth fa @if (Model.RateNumber > 4.5.ToDecimal()) {<text>fa-star</text>} else if (Model.RateNumber > 4) {<text>fa-star-half-o</text>} else {<text>fa-star-o</text>}"></i>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="rate-users"><i class="fa fa-user"></i> <span id="UserCount">@Model.RateUsers</span></span>
+                    </div >
+                    <div class="rating-form">
+                        <span>@Admin.RateIt</span>
+                        <input id="MyRate" type="hidden" value="@Model.CurrentUserRate" />
+                        <a href="@if (User.Identity.IsAuthenticated) {<text>javascript:void(0)</text>} else {<text>@Url.Action(MVC.Account.Login())</text>}" class="rating-stars-wrapper left-stars big-stars @if (Model.CurrentUserRate != 0) {<text>current-rate</text>}">
+                            <ul class="rating-star-ul">
+                                <li class="rating-star-li">
+                                    <i class="constant-star star-first fa @if (Model.CurrentUserRate > 0) {<text>fa-star</text>} else {<text>fa-star-o</text>}"></i>
+                                    <i class="dynamic-star fa fa-star" @if (User.Identity.IsAuthenticated) {<text>data-on-click="ajaxRateProduct" data-rate="1"</text>}></i>
+                                    <ul class="rating-star-ul">
+                                        <li class="rating-star-li">
+                                            <i class="constant-star star-second fa @if (Model.CurrentUserRate > 1) {<text>fa-star</text>} else {<text>fa-star-o</text>}"></i>
+                                            <i class="dynamic-star fa fa-star" @if (User.Identity.IsAuthenticated) {<text>data-on-click="ajaxRateProduct" data-rate="2"</text>}></i>
+                                            <ul class="rating-star-ul">
+                                                <li class="rating-star-li">
+                                                    <i class="constant-star star-third fa @if (Model.CurrentUserRate > 2) {<text>fa-star</text>} else {<text>fa-star-o</text>}"></i>
+                                                    <i class="dynamic-star fa fa-star" @if (User.Identity.IsAuthenticated) {<text>data-on-click="ajaxRateProduct" data-rate="3"</text>}></i>
+                                                    <ul class="rating-star-ul">
+                                                        <li class="rating-star-li">
+                                                            <i class="constant-star star-fourth fa @if (Model.CurrentUserRate > 3) {<text>fa-star</text>} else {<text>fa-star-o</text>}"></i>
+                                                            <i class="dynamic-star fa fa-star" @if (User.Identity.IsAuthenticated) {<text>data-on-click="ajaxRateProduct" data-rate="4"</text>}></i>
+                                                            <ul class="rating-star-ul">
+                                                                <li class="rating-star-li">
+                                                                    <i class="constant-star star-fifth fa @if (Model.CurrentUserRate > 4) {<text>fa-star</text>} else {<text>fa-star-o</text>}"></i>
+                                                                    <i class="dynamic-star fa fa-star" @if (User.Identity.IsAuthenticated) {<text>data-on-click="ajaxRateProduct" data-rate="5"</text>}></i>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </a>
+                    </div>
+                </div>
+                <div class="tags-wrapper">
+                    <hr class="line-separator-spec">
+                    <hr class="line-separator-spec-second">
+                    <div class="tags-title-wrapper">
+                        <p>@Admin.Tags</p>
+                    </div>
+                    @if (Model.Tags.Any())
+                    {
+                        foreach (var tag in Model.Tags)
+                        {
+                            <div class="tag-container">
+                                <span class="prod-detail-tag tag-@tag.TagColor">@tag.TagTitle</span>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="top-middle-content">
+                <div class="img-slider-wrapper">
+                    <input type="hidden" id="imgCount" data-param="@Model.Images.Count()" data-number="">
+                    <div id="zoomContainer" class="img-holder easyzoom easyzoom--adjacent easyzoom--with-thumbnails" data-on-load="productZoom">
+                        <a>
+                            <input type="hidden" id="previewCheck" data-param="@if (Model.ImageFileName == null && Model.Images.Any()) {<text>0</text>} else {<text>1</text>}">
+                            <img id="slideBgImg" src="@if (Model.ImageFileName == null && Model.Images.Any() != true) {@FileConst.NoPreview} else {@ViewBag.Thumbnail}" />
+                        </a>
+                    </div>
+                    <div class="sliders-wrapper" data-on-load="slideSize" >
+                        <div class="sliders-container">
+                            @if (Model.Images.Any() != true || (Model.Images.Any() && Model.ImageFileName != null))
+                            {
+                                <div class="slide-holder">
+                                    <div class="slide-centered">
+                                        <img src="@if (Model.ImageFileName == null) {<text>@FileConst.NoPreview</text>} else if (Model.IsCatalog != true) {<text>@FileConst.ImagesWebPath.PlusWord(Model.ImageFileName)</text>} else {<text>@FileConst.ImagesCatalogWebPath.PlusWord(Model.ImageFileName)</text>}" data-on-click="resizeSlide" alt="">
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Images.Any())
+                            {
+                                foreach (var img in Model.Images)
+                                            {
+                                    <div class="slide-holder">
+                                        <div class="slide-centered">
+                                            <img src="@if (Model.IsCatalog != true) {<text>@FileConst.ImagesWebPath</text>} else {<text>@FileConst.ImagesCatalogWebPath</text>}@img.FileName" data-on-click="resizeSlide" alt="">
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="slide-controller-left">
+                        <i class="fa fa-angle-left" data-on-click="prevSlideImg" ></i>
+                    </div>
+                    <div class="slide-controller-right">
+                        <i class="fa fa-angle-right" data-on-click="nextSlideImg"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="top-left-content">
+                <div class="prod-title-wrapper">
+                    <h1 class="prod-title">@Model.Title</h1>
+                </div>
+                <div class="prod-info-wrapper">
+                    <hr class="line-separator">
+                    <div class="information-layout">
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.Group.PlusWord(": ")</p>
+                            <a href="@Url.Action(MVC.Category.Detail(Model.CategoryAlias)).AddSlug(Model.CategoryTitle)">
+                                <p class="category-text">@Model.CategoryTitle</p>
+                            </a>
+                        </div>
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.CreationDate.PlusWord(": ")</p>
+                            <p class="date-time">@Model.CreatedOn.CastToRegularDate()</p>
+                        </div>
+                        <div class="information-layout-item">
+                            <p class="text-header">@Admin.ModificationDate.PlusWord(": ")</p>
+                            <p class="date-time">@Model.ModifiedOn.CastToRegularDate()</p>
+                        </div>
+                    </div>
+                    <hr class="line-separator">
+                </div>
+                <div class="likes-wrapper">
+                    <input type="hidden" value="@Model.Id" name="productId" id="productId" />
+                    <p class="product-detail-eh detail-eye tooltip" title="@Admin.Visitors"><i class="fa fa-eye"></i> @Model.VisitCount </p>
+                    <p class="product-detail-eh detail-bell tooltip" title="@Admin.AwarenessOfTheLatestChanges">
+                        <a @if (User.Identity.IsAuthenticated) { <text> href="javascript:void(0);" data-on-click="ajaxToggleNotifyProduct" </text>  } else { <text> href="@Url.Action(MVC.Account.Login())" </text>  }>
+                            <i class="fa @if(Model.InitNotify != true) {<text>fa-bell-slash-o</text>} else {<text>fa-bell</text>}"></i>
+                        </a>
+                    </p>
+                    <p class="product-detail-eh detail-heart tooltip" title="@Admin.Likes">
+                        <a @if (User.Identity.IsAuthenticated) { <text> href="javascript:void(0);" data-on-click="ajaxToggleLikeProduct" </text> } else { <text> href="@Url.Action(MVC.Account.Login())" </text> }>
+                            <i class="fa @if(Model.InitLike != true) {<text>fa-heart-o</text>} else {<text>fa-heart</text>}"></i>
+                            <span>@Model.LikeCount</span>
+                        </a>
+                    </p>
+                    <div class="clearfix"></div>
+                </div>
+                @if (Model.CategoryOption.HasPrice != false)
+                {
+                    <div class="prices-wrapper">
+                        @if (Model.IsCatalog != true)
+                        {
+                            if (Model.DiscountPercent != null && Model.HaveDiscount)
+                            {
+                                <div class="discount-wrapper half-detail">
+                                    <span>
+                                        <span>%@Model.DiscountPercent</span>
+                                        <span> @Admin.Discount</span>
+                                    </span>
+                                </div>
+                                <p class="product-detail p-price">
+                                    <span>@Admin.Price:</span>
+                                    <span class="spn-p-price">@Model.PreviousPrice.CastToRegularCurrency()</span>
+                                    <span>@Admin.Toman</span>
+                                </p>
+                            }
+                            <p class="product-detail o-price @if (Model.DiscountPercent == null && Model.HaveDiscount != true)
+                                                             {
+                                                                 <text>without-p-price</text>
+                                                             }">@Admin.PriceForYou:
+                                <span class="spn-o-price">@Model.Price.CastToRegularCurrency()</span>
+                                <span>@Admin.Toman</span>
+                            </p>
+                        }
+                        else if (Model.HighestPrice != 0 && Model.HighestPrice != null)
+                        {
+                            <p class="product-detail h-price">
+                                <i class="fa fa-sort-up"></i>
+                                <span class="spn-h-price">@Model.HighestPrice.CastToRegularCurrency()</span>
+                                <span>@Admin.Toman</span>
+                            </p>
+                            <p class="product-detail l-price">
+                                <i class="fa fa-sort-down"></i>
+                                <span class="spn-l-price">@Model.LowestPrice.CastToRegularCurrency()</span>
+                                <span>@Admin.Toman</span>
+                            </p>
+                        }
+                        else
+                        {
+                            <div class="cart-top-wrapper">
+                                <div class="product-detail btn-toggle-cart-wrapper half-detail">
+                                    <div class="product-detail btn-toggle-cart">
+                                        <div class="product-detail btn-noaction tog-c">
+                                            <i class="product-detail btn-cart fa fa-times-circle-o"></i>
+                                            <span class="product-detail btn-cart">@Admin.ProductStateUnavailabel</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="content full">
+            <article class="product-detail-article">
+                <div class="product-details-container">
+                    @if (!Model.Description.IsNullOrEmpty())
+                    {
+                        <h6 class="product-detail-title">@L(Model.CategoryOption.ProductDescription)</h6>
+                        <hr class="line-separator">
+                        <div class="product-detail-description">
+                            @Html.Raw(Server.HtmlDecode(Model.Description))
+                        </div>
+                    }
+                    @if (Model.ProductSpecifications.Any() && Model.ProductSpecifications.First() != null)
+                    {
+                        <h6 class="product-detail-title">@Admin.Specifications</h6>
+                        <div class="spec-table">
+                            @foreach (var spec in Model.ProductSpecifications)
+                            {
+                                <div class="clearboth"></div>
+                                <div class="spec-table-title-wrapper">
+                                    <span class="spec-table-title">@spec.SpecificationTitle</span>
+                                </div>
+                                <div class="spec-table-option-wrapper">
+                                    @foreach (var specO in spec.SpecificationValues)
+                                    {
+                                        if (specO == spec.SpecificationValues.Last())
+                                        {
+                                            <span class="spec-table-option">@specO</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="spec-table-option">@specO.PlusWord(" - ")</span>
+                                        }
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                    @if (Model.Features.Any() && Model.Features.First().Title != null)
+                    {
+                        <h6 class="product-detail-title">@Admin.Features</h6>
+                        foreach (var feature in Model.Features)
+                        {
+                            <div class="feature-title-wrapper">
+                                <span class="feature-title">@feature.Title</span>
+                            </div>
+                        }
+                    }
+                </div>
+            </article>
+            <div class="product-details-companies">
+                <ul class="product-companies titles-wrapper">
+                    <li class="company-col">
+                        <span class="companies-col-title">@L(Model.CategoryOption.Companies)</span>
+                    </li>
+                    <li class="info-col">
+                        <ul class="info-cols">
+                            <li class="colors-col">
+                                <span class="companies-col-title">@Admin.Color</span>
+                            </li>
+                            <li class="guarantee-col">
+                                <span class="companies-col-title">@Admin.Guarantee</span>
+                            </li>
+                            <li class="modify-col">
+                                <span class="companies-col-title">بروز رسانی</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="price-col">
+                        <span class="companies-col-title">@Admin.Price</span>
+                    </li>
+                </ul>
+                @if (Model.IsCatalog == true)
+                {
+                foreach (var product in Model.CatalogProducts)
+                {
+                        <ul class="product-companies">
+                            <li class="company-col">
+                                <a class="companies-logo" href="@Url.Action(MVC.Company.Detail(product.CompanyAlias, product.CompanyTitle.CastToSlug()))">
+                                    <figure>
+                                        <img src="@if (product.CompanyLogoFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(product.CompanyLogoFileName)</text>} else {<text>@FileConst.NoLogo</text>}" alt="@Admin.Company @product.CompanyTitle" />
+                                    </figure>
+                                </a>
+                                <a class="companies-title" href="@Url.Action(MVC.Company.Detail(product.CompanyAlias, product.CompanyTitle.CastToSlug()))">
+                                    <span>@product.CompanyTitle</span>
+                                </a>
+                            </li>
+                            <li class="info-col">
+                                <ul class="info-cols">
+                                    <li class="colors-col">
+                                        <span class="companies-col-text">@Admin.Color:</span>
+                                        <div class="color-box-wrapper tag-@product.ProductColor tooltip" title="@product.ProductColor"></div>
+                                    </li>
+                                    <li class="guarantee-col">
+                                        <span class="companies-col-text">@Admin.Guarantee:</span>
+                                        <span class="companies-col-value">@product.ProductGuaranteeTitle</span>
+                                    </li>
+                                    <li class="modify-col">
+                                        <span class="companies-col-text">بروز رسانی:</span>
+                                        <span class="companies-col-value">@product.ProductModifiedOn.CastToRegularDate()</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="price-col">
+                            @if (Model.CategoryOption.HasPrice != false)
+                            {
+                                <span class="companies-col-value">@product.ProductPrice.CastToRegularCurrency().PlusWord(" ").PlusWord(Admin.Toman)</span>
+                                <div class="cart-top-wrapper">
+                                    <div class="product-detail btn-toggle-cart-wrapper half-detail">
+                                        <div class="product-detail btn-toggle-cart @if (User.Identity.IsAuthenticated && product.ProductIsExist)
+                                                                                   {
+                                                                                       <text>item-carts-buy</text>
+                                                                                   }">
+                                            @switch (product.ProductSell)
+                                            {
+                                                case SellType.Available:
+                                                    <div class="product-detail btn-toggle tog-a" @if (User.Identity.IsAuthenticated)
+                                                                                                 {
+                                                                                                     <text>data-on-click="ajaxBagCreate" data-param="@product.ProductId" data-state="unbuy"</text>
+                                                                                                 }>
+                                                        <i class="product-detail btn-cart fa fa-shopping-cart"></i>
+                                                        <span class="product-detail btn-cart">@Admin.AddToCart</span>
+                                                    </div>
+                                                    if (User.Identity.IsAuthenticated)
+                                                    {
+                                                        <div class="product-detail btn-toggle tog-b" data-on-click="ajaxBagDelete" data-param="@product.ProductId" data-state="buy">
+                                                            <i class="product-detail btn-cart fa fa-shopping-bag"></i>
+                                                            <span class="product-detail btn-cart">@Admin.RemoveFromCart</span>
+                                                        </div>
+                                                    }
+                                                    break;
+                                                case SellType.Unavailable:
+                                                    <div class="product-detail btn-noaction tog-c">
+                                                        <i class="product-detail btn-cart fa fa-times-circle-o"></i>
+                                                        <span class="product-detail btn-cart">@Admin.ProductStateUnavailabel</span>
+                                                    </div>
+                                                    break;
+                                                case SellType.Soon:
+                                                    <div class="product-detail btn-noaction tog-d">
+                                                        <i class="product-detail btn-cart fa fa-clock-o"></i>
+                                                        <span class="product-detail btn-cart">@Admin.ProductStateSoon</span>
+                                                    </div>
+                                                    break;
+                                                case SellType.Hidden:
+                                                    <div class="product-detail btn-noaction tog-e">
+                                                        <i class="product-detail btn-cart fa fa-ban"></i>
+                                                        <span class="product-detail btn-cart">@Admin.ProductStateUnsell</span>
+                                                    </div>
+                                                    break;
+                                            }
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            }
+                            </li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="product-companies">
+                        <li class="company-col">
+                            <a class="companies-logo" href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.CastToSlug()))">
+                                <figure>
+                                    <img src="@if (Model.CompanyLogoFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.CompanyLogoFileName)</text>} else {<text>@FileConst.NoLogo</text>}" alt="@Admin.Company @Model.CompanyTitle" />
+                                </figure>
+                            </a>
+                            <a class="companies-title" href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.CastToSlug()))">
+                                <span>@Model.CompanyTitle</span>
+                            </a>
+                        </li>
+                        <li class="info-col">
+                            <ul class="info-cols">
+                                <li class="colors-col">
+                                    <span class="companies-col-text">@Admin.Color:</span>
+                                    <div class="color-box-wrapper tag-@Model.Color tooltip" title="@Model.Color"></div>
+                                </li>
+                                <li class="guarantee-col">
+                                    <span class="companies-col-text">@Admin.Guarantee:</span>
+                                    <span class="companies-col-value">@Model.GuaranteeTitle</span>
+                                </li>
+                                <li class="modify-col">
+                                    <span class="companies-col-text">بروز رسانی:</span>
+                                    <span class="companies-col-value">@Model.ModifiedOn.CastToRegularDate()</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="price-col">
+                        @if (Model.CategoryOption.HasPrice != false)
+                        {
+                            <span class="companies-col-value">@Model.Price.CastToRegularCurrency().PlusWord(" ").PlusWord(Admin.Toman)</span>
+                            <div class="cart-top-wrapper">
+                                <div class="product-detail btn-toggle-cart-wrapper half-detail">
+                                    <div class="product-detail btn-toggle-cart @if (User.Identity.IsAuthenticated && Model.IsExist)
+                                                                               {
+                                                                                   <text>item-carts-buy</text>
+                                                                               }">
+                                        @switch (Model.Sell)
+                                        {
+                                            case SellType.Available:
+                                                <div class="product-detail btn-toggle tog-a" @if (User.Identity.IsAuthenticated)
+                                                                                             {
+                                                                                                 <text> data-on-click="ajaxBagCreate" data-param="@Model.Id" data-state="unbuy" </text>
+                                                                                             }>
+                                                    <i class="product-detail btn-cart fa fa-shopping-cart"></i>
+                                                    <span class="product-detail btn-cart">@Admin.AddToCart</span>
+                                                </div>
+                                                if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <div class="product-detail btn-toggle tog-b" data-on-click="ajaxBagDelete" data-param="@Model.Id" data-state="buy">
+                                                        <i class="product-detail btn-cart fa fa-shopping-bag"></i>
+                                                        <span class="product-detail btn-cart">@Admin.RemoveFromCart</span>
+                                                    </div>
+                                                }
+                                                break;
+                                            case SellType.Unavailable:
+                                                <div class="product-detail btn-noaction tog-c">
+                                                    <i class="product-detail btn-cart fa fa-times-circle-o"></i>
+                                                    <span class="product-detail btn-cart">@Admin.ProductStateUnavailabel</span>
+                                                </div>
+                                                break;
+                                            case SellType.Soon:
+                                                <div class="product-detail btn-noaction tog-d">
+                                                    <i class="product-detail btn-cart fa fa-clock-o"></i>
+                                                    <span class="product-detail btn-cart">@Admin.ProductStateSoon</span>
+                                                </div>
+                                                break;
+                                            case SellType.Hidden:
+                                                <div class="product-detail btn-noaction tog-e">
+                                                    <i class="product-detail btn-cart fa fa-ban"></i>
+                                                    <span class="product-detail btn-cart">@Admin.ProductStateUnsell</span>
+                                                </div>
+                                                break;
+                                        }
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        }
+                        </li>
+                    </ul>
+                }
+            </div>
+            <div class="post-tab">
+                <div class="tab-header primary">
+                    <div class="tab-item selected">
+                        <p class="text-header">@Admin.Comments (@Model.ProductCommentList.SearchRequest.TotalCount)</p>
+                    </div>
+                    <div class="tab-item">
+                        <p class="text-header">@Admin.Review</p>
+                    </div>
+                </div>
+                <div class="tab-content void">
+                    <div class="comment-list">
+                        @Html.Partial(MVC.ProductComment.Views._DetailListMore, Model.ProductCommentList)
+                        <div class="clearfix"></div>
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <h3>
+                                @Admin.ForLeaveAComment
+                                <a href="@Url.Action(MVC.Account.Login())">@Admin.Enter</a>
+                                @Admin.FirstShavid
+                            </h3>
+                        }
+                        else
+                        {
+                            @Html.Partial(MVC.ProductComment.Views._Create)
+                        }
+                    </div>
+                </div>
+                <div class="tab-content void">
+                    <div class="comment-list updating-section">
+                        <p>
+                            <i class="fa fa-gear fa-spin fa-fw"></i>
+                            @Admin.MessageSectionUpdating
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

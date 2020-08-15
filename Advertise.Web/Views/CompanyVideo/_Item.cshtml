@@ -1,0 +1,119 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+@using Auth = Advertise.Service.Services.Permissions.PermissionConst;
+@model Advertise.Core.Models.CompanyVideo.CompanyVideoViewModel
+<div class="landing-items @(Model.IsMine != true ? "nov-item-height-031" : "nov-item-height-030")">
+    <div class="product-item column landing-column">
+        <div class="nov-item-header">
+            <div class="action-section without-share">
+                @if (User.IsInRole(Auth.CanCompanyVideoEdit) || User.IsInRole(Auth.CanCompanyVideoMyEdit) || User.IsInRole(Auth.CanCompanyVideoDeleteAjax) || User.IsInRole(Auth.CanCompanyVideoMyDeleteAjax) || User.IsInRole(Auth.CanCompanyVideoEditApprove) || User.IsInRole(Auth.CanCompanyVideoEditReject))
+                {
+                    <div class="item-edit-wrapper">
+                        <i class="fa fa-pencil-square"></i>
+                        <ul class="item-edit-list">
+                            @if (User.IsInRole(Auth.CanCompanyVideoMyEdit) || User.IsInRole(Auth.CanCompanyVideoEdit))
+                            {
+                                <li>
+                                    <a href="@(Model.IsMine ? Url.Action(MVC.CompanyVideo.MyEdit(Model.Id)) : Url.Action(MVC.CompanyVideo.Edit(Model.Id)))">
+                                        <span>@Admin.Edit</span>
+                                        <i class="fa fa-pencil fa-flip-horizontal"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(Auth.CanCompanyVideoDeleteAjax) || User.IsInRole(Auth.CanCompanyVideoMyDeleteAjax))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="removeConfirm" data-param="@(Model.IsMine ? Url.Action(MVC.CompanyVideo.MyDeleteAjax(Model.Id)) : Url.Action(MVC.CompanyVideo.DeleteAjax(Model.Id)))">
+                                        <span>@Admin.Delete</span>
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(Auth.CanCompanyVideoEditApprove))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.CompanyVideo.ApproveAjax(Model.Id))">
+                                        <span>@Admin.Approve</span>
+                                        <i class="fa fa-check-circle"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(Auth.CanCompanyVideoEditReject))
+                            {
+                                <li>
+                                    <a href="javascript:void(0)" data-on-click="ajaxSimple" data-param="@Url.Action(MVC.CompanyVideo.RejectAjax(Model.Id))">
+                                        <span>@Admin.Ignore</span>
+                                        <i class="fa fa-times-circle"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="rectangle-section">
+                <span>
+                    <span>@Model.VideoFiles.Count</span>
+                    @Admin.Video2
+                </span>
+            </div>
+        </div>
+        <div class="nov-item-body">
+            <div class="image-section">
+                <div class="product-preview-actions">
+                    <figure class="product-preview-image">
+                        <a href="@Url.Action(MVC.CompanyVideo.Detail(Model.Id,Model.Title.Replace(" ","-")))">
+                            <div class="item-preview-image">
+                                <img src="@FileConst.Video" alt="@Model.Title.PlusWord(" ").PlusWord(Admin.GalleryVideos)">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="caption-section">
+                <a class="novinak-title-link" href="@Url.Action(MVC.CompanyVideo.Detail(Model.Id,Model.Title.Replace(" ","-")))">
+                    <p class="novinak-title text-header">@Model.Title</p>
+                </a>
+            </div>
+            <div class="info-section">
+                <div class="top-part">
+                    <a>
+                        <p>@Admin.Priority.PlusWord(": ").PlusWord(Model.Order.ToString())</p>
+                    </a>
+                </div>
+                <div class="middle-part">
+                    <p class="small-state"><i class="fa fa-calendar-check-o"></i> 
+                        <span>@Admin.InsertDate.PlusWord(":")</span>
+                    </p>
+                </div>
+                <div class="bottom-part">
+                    <p>@Model.CreatedOn.CastToRegularDate()</p>
+                </div>
+            </div>
+        </div>
+        <div class="nov-item-footer">
+            @if (Model.IsMine != true)
+            {
+                <hr class="line-separator item-footer">
+                <div class="overview-section">
+                    <div class="image-part">
+                        <figure class="user-avatar small">
+                            <a @if (Model.CompanyLogoFileName != null) { <text> href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.Replace(" ","-")))" </text>  }>
+                                <div class="novinak-image">
+                                    <img src="@if (Model.CompanyLogoFileName != null) {<text>@FileConst.ImagesWebPath.PlusWord(Model.CompanyLogoFileName)</text>} else {<text>@FileConst.NoLogo</text>}" alt="@Model.Title.PlusWord(" ").PlusWord(Model.CompanyTitle)">
+                                </div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="caption-part">
+                        <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias, Model.CompanyTitle.Replace(" ","-")))" class="tooltipster" title="@Model.CompanyTitle">
+                            <p class="text-header tiny">@Model.CompanyTitle</p>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="clearboth"></div>
+</div>

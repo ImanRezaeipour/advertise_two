@@ -1,0 +1,10 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+<div class="input-container fixed-height">
+    <label for="Question" class="rl-label">
+        <span>سوال خود را مطرح نمایید:</span>
+    </label>
+    <textarea type="text" id="Question" name="Question" placeholder="@Admin.QuestionText"></textarea>
+</div>
+<div class="input-container half">
+    <button type="button" class="button primary" data-on-click="ajaxSendQuestion">@Admin.Send</button>
+</div>

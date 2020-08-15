@@ -1,0 +1,34 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.User.UserHeaderViewModel
+@using Advertise.Core.Extensions
+@using Advertise.Service.Managers.File
+<div class="sidebar-item author-bio">
+    @if (Model.AvatarFileName != null)
+    {
+        <a href="javascript:void(0)">
+            <div class="product-detail company-logo">
+                <img src="@FileConst.ImagesWebPath.PlusWord(Model.AvatarFileName)" alt="User Avatar Image @Model.AvatarFileName">
+            </div>
+        </a>
+    }
+    else
+    {
+        <div class="product-detail company-logo">
+            <img src="@FileConst.NoAvatarPth" alt="user without avatar image">
+        </div>
+    }
+    <a href="javascript:void(0)">
+        <p class="text-header">@Model.DisplayName</p>
+    </a>
+    <p class="text-oneline">@Model.Email</p>
+    <h6><br></h6>
+    @if (Model.CompanyTitle != null)
+    {
+        <p class="text-oneline">
+            @Admin.Company.PlusWord(": ")
+            <a href="@Url.Action(MVC.Company.Detail(Model.CompanyAlias))" class="user-meta-company-title">
+                <span href="#" class="primary">@Model.CompanyTitle</span>
+            </a>
+        </p>
+    }
+</div>

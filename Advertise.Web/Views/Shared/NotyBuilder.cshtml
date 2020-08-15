@@ -1,0 +1,46 @@
+﻿@* Generator: MvcHelper GeneratePrettyNames: true *@
+@using Advertise.Web.Framework.Noty
+@helper ShowNotyMessages(NotyAlert notyInput)
+{
+    if (notyInput == null)
+    {
+        return;
+    }
+    <script>
+        $(function () {
+            @foreach (var message in notyInput.NotyMessages)
+            {
+                if (message.Type == NotyAlertType.Alert)
+                {
+                    <text>
+                        messageInfo('@message.Message', true);
+                    </text>
+                }
+                if (message.Type == NotyAlertType.Error)
+                {
+                    <text>
+                        messageError('@message.Message');
+                    </text>
+                }
+                if (message.Type == NotyAlertType.Information)
+                {
+                    <text>
+                        messageInfo('@message.Message');
+                    </text>
+                }
+                if (message.Type == NotyAlertType.Success)
+                {
+                    <text>
+                        messageSuccess('@message.Message');
+                    </text>
+                }
+                if (message.Type == NotyAlertType.Warning)
+                {
+                    <text>
+                        messageWarning('@message.Message');
+                    </text>
+                }
+            }
+        });
+    </script>
+}

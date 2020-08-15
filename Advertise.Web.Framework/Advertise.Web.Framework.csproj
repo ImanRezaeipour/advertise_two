@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BAE4C4DF-133F-418C-A190-ADA8CCC2859C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Advertise.Web.Framework</RootNamespace>
+    <AssemblyName>Advertise.Web.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\DependentDLL\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\DependentDLL\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\DependentDLL\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\DependentDLL\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender">
+      <HintPath>..\DependentDLL\HibernatingRhinos.Profiler.Appender.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\DependentDLL\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\DependentDLL\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\DependentDLL\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\DependentDLL\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\DependentDLL\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\DependentDLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\DependentDLL\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorGenerator.Mvc">
+      <HintPath>..\DependentDLL\RazorGenerator.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=4.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DependentDLL\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.DynamicInterception">
+      <HintPath>..\DependentDLL\StructureMap.DynamicInterception.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Web">
+      <HintPath>..\DependentDLL\StructureMap.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Common">
+      <HintPath>..\DependentDLL\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient">
+      <HintPath>..\DependentDLL\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\DependentDLL\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\DependentDLL\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\DependentDLL\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+    <Reference Include="T4MVCExtensions">
+      <HintPath>..\DependentDLL\T4MVCExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\DependentDLL\WebActivatorEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\ControllerExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Filters\ActivityAttribute.cs" />
+    <Compile Include="Filters\AjaxOnlyAttribute.cs" />
+    <Compile Include="Filters\AllowUploadSafeFilesAttribute.cs" />
+    <Compile Include="Filters\AllowUploadSpecialFilesAttribute.cs" />
+    <Compile Include="Filters\AuditLogAttribute.cs" />
+    <Compile Include="Filters\AutoAjaxAttribute.cs" />
+    <Compile Include="Filters\CheckReferrerAttribute.cs" />
+    <Compile Include="Filters\AllowCrossSiteAttribute.cs" />
+    <Compile Include="Filters\CustomRequireHttpsFilter.cs" />
+    <Compile Include="Filters\ClearModelDataAttribute.cs" />
+    <Compile Include="Filters\CompressAttribute.cs" />
+    <Compile Include="Filters\ContentSecurityPolicyFilterAttribute.cs" />
+    <Compile Include="Filters\CustomAttribute.cs" />
+    <Compile Include="Filters\DosFilterAttribute.cs" />
+    <Compile Include="Filters\ExceptionHandledErrorLoggerFilter.cs" />
+    <Compile Include="Filters\ExceptionRequestValidationErrorFilter.cs" />
+    <Compile Include="Filters\ForceWwwAttribute.cs" />
+    <Compile Include="Filters\InternationalizationAttribute.cs" />
+    <Compile Include="Filters\Mvc5ClaimAccessAuthorizeAttribute.cs" />
+    <Compile Include="Filters\MvcAuthorizeAttribute.cs" />
+    <Compile Include="Filters\NoBrowserCacheAttribute.cs" />
+    <Compile Include="Filters\NoCacheAttribute.cs" />
+    <Compile Include="Filters\NoLowercaseQueryStringAttribute.cs" />
+    <Compile Include="Filters\NoTrailingSlashAttribute.cs" />
+    <Compile Include="Filters\NoWhiteSpaceAttribute.cs" />
+    <Compile Include="Filters\RedirectToCanonicalUrlAttribute.cs" />
+    <Compile Include="Filters\RedirectToHttpsAttribute.cs" />
+    <Compile Include="Filters\RemoveServerHeaderFilterAttribute.cs" />
+    <Compile Include="Filters\RemoveWhiteSpacesAttribute.cs" />
+    <Compile Include="Filters\SetIfModifiedSinceAttribute.cs" />
+    <Compile Include="Filters\SkipRemoveWhiteSpacesAttribute.cs" />
+    <Compile Include="Filters\StatisticAttribute.cs" />
+    <Compile Include="Filters\ImportModelDataAttribute.cs" />
+    <Compile Include="Filters\ThrottleAttribute.cs" />
+    <Compile Include="Filters\ValidateCaptchaAttribute.cs" />
+    <Compile Include="Filters\ValidateHeaderAntiForgeryTokenAttribute.cs" />
+    <Compile Include="HtmlHelpers\MvcHtmlHelper.cs" />
+    <Compile Include="HtmlHelpers\T4SecureHtmlHelper.cs" />
+    <Compile Include="HtmlHelpers\TreeViewHtmlHelper.cs" />
+    <Compile Include="Utilities\HiddenField\ActionKey.cs" />
+    <Compile Include="Utilities\HiddenField\ActionKeyService.cs" />
+    <Compile Include="Utilities\HiddenField\EncryptSettingsProvider.cs" />
+    <Compile Include="Utilities\HiddenField\IActionKeyService.cs" />
+    <Compile Include="Utilities\HiddenField\IEncryptSettingsProvider.cs" />
+    <Compile Include="Utilities\HiddenField\InputExtension.cs" />
+    <Compile Include="Utilities\HiddenField\IRijndaelStringEncrypter.cs" />
+    <Compile Include="Utilities\HiddenField\MvcHtmlHelperExtention.cs" />
+    <Compile Include="Utilities\HiddenField\RijndaelStringEncrypter.cs" />
+    <Compile Include="Utilities\HttpCompress\CompressingFilter.cs" />
+    <Compile Include="Utilities\HttpCompress\DeflateFilter.cs" />
+    <Compile Include="Utilities\HttpCompress\Enums.cs" />
+    <Compile Include="Utilities\HttpCompress\GZipFilter.cs" />
+    <Compile Include="Utilities\HttpCompress\HttpModule.cs" />
+    <Compile Include="Utilities\HttpCompress\HttpOutputFilter.cs" />
+    <Compile Include="Utilities\HttpCompress\SectionHandler.cs" />
+    <Compile Include="Utilities\HttpCompress\Settings.cs" />
+    <Compile Include="HttpModules\AntiXssModule.cs" />
+    <Compile Include="HttpModules\DosAttackModule.cs" />
+    <Compile Include="HttpModules\IpBlockModule.cs" />
+    <Compile Include="ModelBinders\CheckBoxModelBinder.cs" />
+    <Compile Include="ModelBinders\DecimalModelBinder.cs" />
+    <Compile Include="ModelBinders\PersianDateModelBinder.cs" />
+    <Compile Include="ModelBinders\PersianIntModelBinder.cs" />
+    <Compile Include="ModelBinders\StringToDateModelBinder.cs" />
+    <Compile Include="Utilities\MvcPaging\IPagedList.cs" />
+    <Compile Include="Utilities\MvcPaging\PagedList.cs" />
+    <Compile Include="Utilities\MvcPaging\Pager.cs" />
+    <Compile Include="Utilities\MvcPaging\PagerOptions.cs" />
+    <Compile Include="Utilities\MvcPaging\PagerOptionsBuilder.cs" />
+    <Compile Include="Utilities\MvcPaging\PagerOptionsBuilderExtensions.cs" />
+    <Compile Include="Utilities\MvcPaging\PaginationModel.cs" />
+    <Compile Include="Utilities\MvcPaging\PagingExtensions.cs" />
+    <Compile Include="Utilities\MvcPaging\RouteValueDictionaryExtensions.cs" />
+    <Compile Include="Utilities\Noty\NotyAlert.cs" />
+    <Compile Include="Utilities\Noty\NotyAlertType.cs" />
+    <Compile Include="Utilities\Noty\NotyAnimationType.cs" />
+    <Compile Include="Utilities\Noty\NotyMessage.cs" />
+    <Compile Include="Utilities\Noty\NotyMessageCloseType.cs" />
+    <Compile Include="Utilities\Noty\NotyMessageLocationType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\SessionProvider\BaseSessionProvider.cs" />
+    <Compile Include="Providers\SessionProvider\ISessionProvider.cs" />
+    <Compile Include="Providers\TempDataProvider\CookieTempDataProvider.cs" />
+    <Compile Include="Providers\TempDataProvider\SecureTempDataProvider.cs" />
+    <Compile Include="Providers\ValueProvider\JsonNetValueProviderFactory.cs" />
+    <Compile Include="Results\AjaxResult.cs" />
+    <Compile Include="Results\CaptchaImageResult.cs" />
+    <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Results\ElmahResult.cs" />
+    <Compile Include="Results\FineUploaderResult.cs" />
+    <Compile Include="Results\JsonNetResult.cs" />
+    <Compile Include="Results\NegotiatedResult.cs" />
+    <Compile Include="Routes\LegacyUrlRoute.cs" />
+    <Compile Include="Routes\DefaultCultureRouteHandler.cs" />
+    <Compile Include="Routes\SubdomainRoute.cs" />
+    <Compile Include="StructureMap\Registeries\AspNetIdentityRegistery.cs" />
+    <Compile Include="StructureMap\Registeries\AutoMapperRegistery.cs" />
+    <Compile Include="StructureMap\Registeries\ServiceLayerRegistery.cs" />
+    <Compile Include="StructureMap\Registeries\TaskRegistry.cs" />
+    <Compile Include="StructureMap\StructureMapControllerFactory.cs" />
+    <Compile Include="StructureMap\StructureMapFilterProvider.cs" />
+    <Compile Include="StructureMap\StructureMapObjectFactory.cs" />
+    <Compile Include="ViewEngines\Razor\WebViewPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Advertise.Core.Domain\Advertise.Core.Domain.csproj">
+      <Project>{eb51b3be-3b54-44e3-96c0-de73adf044bf}</Project>
+      <Name>Advertise.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Core.Model\Advertise.Core.Model.csproj">
+      <Project>{0c321638-91a4-4298-8a24-c63146d20884}</Project>
+      <Name>Advertise.Core.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Core.Profile\Advertise.Core.Profile.csproj">
+      <Project>{2e65d7c3-c6b8-4982-87f1-fa0c8f9ec7df}</Project>
+      <Name>Advertise.Core.Profile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Core\Advertise.Core.csproj">
+      <Project>{b4666778-7fbb-4682-abe8-b90a72ba60c1}</Project>
+      <Name>Advertise.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Data.Mapping\Advertise.Data.Mapping.csproj">
+      <Project>{58ff0ccd-ef76-491e-8ddc-df9df0b311b7}</Project>
+      <Name>Advertise.Data.Mapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Data\Advertise.Data.csproj">
+      <Project>{02339557-e292-480b-8f02-2d1c582473ed}</Project>
+      <Name>Advertise.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Service.Aspect\Advertise.Service.Aspect.csproj">
+      <Project>{597f9a96-9c30-4ed7-abb0-ffd6dbfe830d}</Project>
+      <Name>Advertise.Service.Aspect</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Service.Event\Advertise.Service.Event.csproj">
+      <Project>{582382b3-89d3-4d9a-a9f8-394b60de785e}</Project>
+      <Name>Advertise.Service.Event</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Service.Factory\Advertise.Service.Factory.csproj">
+      <Project>{622820d1-3828-4d5d-80ea-ed8206696416}</Project>
+      <Name>Advertise.Service.Factory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Service.Initializer\Advertise.Service.Initializer.csproj">
+      <Project>{7656ec14-1199-4fee-add5-c5a55c3504d8}</Project>
+      <Name>Advertise.Service.Initializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Service.Manager\Advertise.Service.Manager.csproj">
+      <Project>{e14757dd-130a-423b-adb7-7f9fd3c36734}</Project>
+      <Name>Advertise.Service.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Service.Validator\Advertise.Service.Validator.csproj">
+      <Project>{4c94fb08-45d3-4e27-a82b-bc3e92721071}</Project>
+      <Name>Advertise.Service.Validator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertise.Service\Advertise.Service.csproj">
+      <Project>{95f7230c-d695-42ba-9a70-d89f60c58261}</Project>
+      <Name>Advertise.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

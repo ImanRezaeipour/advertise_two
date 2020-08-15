@@ -1,0 +1,54 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.Complaint.ComplaintCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Public._PublicLayout;
+    ViewBag.Title = Admin.Complaints;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.Complaints</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newComplaint" action="@Url.Action(MVC.Complaint.Create())"  method="Post" data-on-load="validateComplaint">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+                
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Title" class="rl-label tooltipster" title="@Admin.ItShowsComplaintTitle">@Admin.Title</label>
+                    <input type="text" id="Title" name="Title"></>
+                </div>
+                
+                <div class="msg-container">
+                    <div class="msg-box regular round-corners-five">
+                        <p>
+                            <i class="fa fa-quote-right"></i>
+                            <span> هرگونه شکایت مرتبط با سامانه را در این قسمت مطرح نمایید. 
+                                تیم نویناک تصمین می‌نماید که به این شکایات رسیدگی نموده و پاسخ آن را در اولین فرصت به آگاهی شما برساند.</span>
+                            <i class="fa fa-quote-left"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Body" class="rl-label tooltipster" title="@Admin.ItShowsComplaintText">@Admin.ComplaintExplanation</label>
+                    <textarea id="Body" name="Body" class="complaint-textarea" rows="10" cols="30"></textarea>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+        
+        <div class="form-button-container">
+            <button form="newComplaint" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>
+

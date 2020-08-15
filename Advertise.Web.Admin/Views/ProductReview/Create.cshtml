@@ -1,0 +1,52 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@model Advertise.Core.Models.ProductReview.ProductReviewCreateViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = Admin.CreateReview;
+}
+<div class="dashboard-content">
+    <div class="headline buttons primary">
+        <h4>@Admin.CreateReview</h4>
+    </div>
+    <div class="form-box-item profile-form">
+        <form id="newProductReview" action="@Url.Action(MVC.ProductReview.Create())" method="Post" data-on-load="validateProductReview">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="input-form">
+                <div class="vertical-dashed"></div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="ProductId" class="rl-label">@Admin.BrandName</label>
+                    <select name="ProductId" id="ProductId">
+                        <option disabled="disabled">@Admin.Title</option>
+                        @foreach (var productlist in Model.ProductList)
+                        {
+                            <option value="@productlist.Value">@productlist.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="msg-container">
+                    <p class="msg-box regular round-corners-five"></p>
+                </div>
+                <div class="input-container fixed-height">
+                    <label for="Body" class="rl-label tooltipster" title="@Admin.ItShowsReviewText">@Admin.FullExplanation</label>
+                    <textarea id="Body" name="Body" data-on-load="editorProductReview"></textarea>
+                </div>
+
+                <div class="input-container"></div>
+            </div>
+        </form>
+
+        <div class="form-button-container">
+            <button form="newProductReview" type="submit" class="form-button right-form-btn ok-button round-corners-five disabled-btn-link" disabled="disabled">
+                <i class="fa fa-save"></i>
+                <span>@Admin.Save</span>
+            </button>
+        </div>
+    </div>
+</div>

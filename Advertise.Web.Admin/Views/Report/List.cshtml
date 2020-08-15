@@ -1,0 +1,48 @@
+﻿@* Generator: MvcView GeneratePrettyNames: true *@
+@using Advertise.Service.Services.Permissions
+@model Advertise.Core.Models.Report.ReportListViewModel
+@{
+    Layout = MVC.Shared.Views.SiteLayout.Panel._PanelLayout;
+    ViewBag.Title = "لیست گزارشات";
+    ViewBag.PageName = "ReportList";
+    ViewBag.HasSearchbar = true;
+}
+<div class="@(Model.IsMine != true ? "dashboard-content" : "profile-content")">
+    <div id="search" class="list-searchbar">
+        @SearchItem.Term(Model.SearchRequest.Term)
+        @SearchItem.SortDirection(Model.SortDirectionList, Model.SearchRequest.SortDirection)
+        @SearchItem.PageSize(Model.PageSizeList, Model.SearchRequest.PageSize)
+        @SearchItem.GridView()
+    </div>
+
+    <div class="headline buttons primary">
+        <h1>@if (Model.IsMine != true)
+        {@("لیست گزارشات")}
+        else
+        {@("لیست گزارشات")}</h1>
+    </div>
+
+    <div class="landing-grids-wrapper">
+        <div class="product-list grid">
+            <div class="landing-column-wrapper">
+                @if (User.IsInRole(PermissionConst.CanReportCreate))
+                {
+                    @Html.Partial(MVC.Report.Views._AddItem)
+                }
+                @* @Html.Partial(MVC.Report.Views._MoreItem, Model.Reports)*@
+                <div class="input-container half">
+                    <label for="Id" class="rl-label tooltipster" title="@Admin.CategoryIncludingNewCategory">@Admin.Category</label>
+                    <div id="CategoryTree" style="direction: rtl" class="tree" data-on-load="treeReport"></div>
+                    <input type="hidden" id="Id" name="Id" />
+                </div>
+                <div class="input-container half">
+                    <div id="dialog" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pager">
+        @Html.Partial(MVC.Shared.Views.SiteLayout._Paging, Model.SearchRequest)
+    </div>
+</div>
